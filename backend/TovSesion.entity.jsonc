@@ -1,0 +1,18 @@
+{
+  "name": "TovSesion",
+  "type": "object",
+  "description": "Cache interno del token de sesión activo para la API externa de telemetría (dbcommapi0099.php). No editar manualmente — lo administra la función tovLive.",
+  "properties": {
+    "token": {
+      "type": "string",
+      "title": "Token"
+    },
+    "expira": {
+      "type": "string",
+      "title": "Expira"
+    }
+  },
+  "required": [
+    "token"
+  ]
+}
