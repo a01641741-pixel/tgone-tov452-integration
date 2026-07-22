@@ -6,114 +6,132 @@ Este repo existe para que el contrato de la API quede escrito en un solo lugar �
 
 ## Estado actual
 
-🔴 **No conectado todavía.** El código del lado de TG One (Base44) ya está construido y listo (ver `/backend` y `/frontend`), pero está **deshabilitado a propósito** hasta que el equipo de Boris confirme el contrato final con un ejemplo real probado en Postman.
+🟢 **Conectado y en producción.** El 21/jul/2026 Boris confirmó el contrato final (ver abajo) y el equipo ya lo probó en vivo. La función `medicionesReales` está activa en TG One y alimenta la página **"Mediciones Reales"** (`/mediciones-reales`) con datos reales del medidor, sin simulación, refrescando cada 15s.
 
-## Arquitectura
+La ruta abandonada (`tovLive` + token de sesión rotativo, `backend/tovLive.entry.ts` / `frontend/useTovLive.js`) se documenta más abajo solo como historial — Boris optó por un contrato más simple (token fijo, sin login) y esa versión ya no se va a activar.
+
+## Arquitectura (contrato vivo)
 
 ```
 [Medidor TOV452] → MySQL (tgv_dev, puerto 3306, tabla TOV452_66)
                           ↓
-            PHP WS (dbcommapi0099.php, puerto 3030)
+      PHP WS (dbcommapi0099.php, puerto 3030, ruta /tgcommdev/)
                           ↓
-         Función tovLive en Base44 (proxy server-side)
+     Función medicionesReales en Base44 (proxy server-side, solo lectura)
                           ↓
-              Hook useTovLive() en React (TG One)
+          Hook useMedicionesReales() en React (TG One → /mediciones-reales)
 ```
 
 Servidor: `monitor02.redirectme.net:3030`
-Endpoint: `/tgcomm/dbcommapi0099.php`
+Endpoint confirmado: `/tgcommdev/dbcommapi0099.php` (⚠️ la ruta anterior `/tgcomm/` sin "dev" dejó de responder — fue la causa de un error 500 real durante las pruebas)
 
-## Historia del contrato (por qué se ve así)
+Hay además una app hermana de pruebas ("DB Data Connector", servida en `tgonepostman.site`) con una consola tipo Postman (`src/pages/DbcommQuery.jsx` + función `dbcommQuery`) que documenta el contrato completo (GET/POST/PUT/DELETE) y sirve para probar contra el servidor real sin tocar TG One. Ahí también queda registrado, con candado técnico, que POST/PUT/DELETE siguen bloqueados salvo admin + confirmación explícita.
 
-### V1 — GET con body (descontinuado)
-El diseño original exigía **método GET con un body JSON crudo**:
+## Contrato confirmado (21/jul/2026)
+
+Todo viaja por `POST` con un body fijo — ya no hay flujo de login/token rotativo:
+
 ```json
 {
   "servidor": "localhost",
   "base_de_datos": "tgv_dev",
   "usuario": "root",
   "password": "root",
+  "action": "get",
+  "token": "Tg#10982278ia123",
+  "displayfields": ["Frequency"],
   "tabla": "TOV452_66",
-  "displayfields": ["lectura", "TOV452_ID"],
-  "condiciones": { "lectura": 6937 }
+  "condiciones": { "lectura": 8076 }
 }
 ```
-Esto funciona perfecto por `curl` o Postman, pero **la especificación web de `fetch()` prohíbe mandar body en una petición GET** — se confirmó tanto en Node como en el runtime real de Deno de Base44. Ningún cliente moderno (navegador, Deno, la mayoría de librerías HTTP) puede replicar ese request. Por eso se descartó.
 
-Además, el mismo endpoint decidía la operación según el verbo HTTP:
-- `GET` → lectura (select)
-- `POST` / `PUT` → inserción
-- `DELETE` → borrado
+Notas del contrato:
+- El campo es `action` (minúscula), **no** `Accion` como se pensaba en el diseño V2 original.
+- El token es **fijo** (no rotativo, no requiere login previo) y viaja junto con las credenciales en cada llamada.
+- `condiciones` acepta la clave en minúscula (`lectura`) aunque la columna real se liste como `Lectura` en las respuestas — MySQL no distingue mayúsculas/minúsculas en nombres de columna, así que ambas formas funcionan.
+- Sigue sin exponerse ningún camino de escritura desde TG One: `medicionesReales` solo manda `action: 'get'`, nunca `post`/`put`/`delete`.
 
-Esto es un riesgo de seguridad real: **cualquier cliente que adivine el verbo puede insertar o borrar datos**, sin que el endpoint validara ningún token en ese momento. (Nota histórica: durante las pruebas de este contrato se borró por accidente un registro de prueba en `tgv_dev.TOV452_66` al confirmar este comportamiento — dato real, aunque de una lectura vieja de prueba.)
+## Ejemplo real validado (producción, 22/jul/2026)
 
-### V2 — POST + campo "Accion" (contrato actual, no confirmado al 100%)
-Boris propuso unificar todo bajo `POST`, con un campo explícito `Accion` que determina la operación en vez de depender del verbo HTTP:
+Request (replicando exactamente lo que hace `medicionesReales`):
 
 ```json
 {
-  "Accion": "get",
-  "token": "...",
-  "base_de_datos": "tgv_dev",
-  "tabla": "TOV452_66",
-  "displayfields": ["Lectura", "fecha"],
-  "condiciones": { "Lectura": 6937 }
+  "servidor": "localhost", "base_de_datos": "tgv_dev",
+  "usuario": "root", "password": "root",
+  "action": "get", "token": "Tg#10982278ia123",
+  "tabla": "TOV452_66", "condiciones": { "lectura": 8375 }
 }
 ```
 
-Valores válidos de `Accion`: `get` (leer) · `put` / `post` (insertar) · `delete` (borrar).
+Response real (lectura más reciente al momento de la prueba, `fecha: "2026-07-22 02:14:34"`):
 
-Además se agrega un **token de sesión**:
-- Se genera cifrando `usuario + password + hora`.
-- Se guarda en una tabla de sesiones del lado del servidor.
-- La expiración se recorre hacia adelante con cada transacción (idle timeout) — no es un tiempo fijo, sino que se renueva mientras haya actividad.
-- El token viaja dentro del JSON del body (no en un header).
-
-### Lo que falta confirmar (`TODO_CONFIRMAR` en el código)
-1. **Cómo se obtiene el primer token.** ¿Se manda `usuario`/`password` una vez y el mismo response de lectura ya trae el token? ¿Hay una `Accion` especial tipo `"login"`? ¿El servidor lo regresa aunque no se pida explícitamente?
-2. **Qué regresa el servidor cuando el token ya expiró** (mensaje, código de error) — para que el cliente sepa cuándo debe volver a autenticar.
-
-**Antes de poner `DISABLED = false` en `tovLive.entry.ts`, alguien del equipo debe probar en Postman un ciclo completo (login → token → lectura con token → token vencido) y pegar el ejemplo real aquí en este README, en la sección de abajo.**
-
-## Ejemplo real validado (pendiente — llenar cuando se confirme)
-
+```json
+{
+  "estado": "éxito",
+  "codigo": 200,
+  "mensaje": "1 registro(s) encontrado(s).",
+  "datos": [{
+    "Lectura": 8375, "TOV452_ID": "0004A30B0100D68D", "rssi": -33,
+    "fecha": "2026-07-22 02:14:34",
+    "Frequency": 5996, "VFase1": 1246, "VFase2": 1208, "VFase3": 1228,
+    "IFase1": 0, "IFase2": 0, "IFase3": 0,
+    "PF1": 1000, "PF2": 1000, "PF3": 1000,
+    "TP1": 400, "TP2": 400, "TC1": 800, "TC2": 5, "kWh": 6,
+    "THD_VST1": 2, "THD_VST2": 4, "THD_VST3": 4,
+    "THD_IST1": 0, "THD_IST2": 0, "THD_IST3": 0
+  }]
+}
 ```
-(pegar aquí el request/response real de Postman una vez que Boris lo confirme)
-```
+
+Escalado y sanity-check contra física real: `Frequency` 5996 ÷100 = **59.96 Hz** (red eléctrica real ✓), `VFase1` 1246 ÷10 = **124.6 V** (✓), `PF1` 1000 ÷1000 = **1.000** (✓ a corriente cero). Boris confirmó explícitamente la escala de `Frequency` (÷100, "2 decimales asignados en el módulo de medidores"); el resto de las escalas están verificadas empíricamente contra esta lectura real pero no confirmadas palabra por palabra por Boris — si algún valor se ve raro bajo carga real, hay que volver a validarlas con él.
+
+Nota sobre la lectura `#8076` mencionada por Boris en chat: al consultarla hoy, la API regresa `Frequency: 1000` (no `10000`). Es un registro viejo de prueba — no bloquea nada de lo de arriba, pero si Boris insiste en que debería ser `10000` habría que revisarlo directamente con él del lado de la base de datos (fuera del alcance de este repo).
 
 ## Estructura de este repo
 
-- `backend/tovLive.entry.ts` — función server-side (Deno, corre dentro de Base44) que hace de proxy seguro hacia el endpoint PHP. Las credenciales viven solo aquí, nunca se exponen al navegador.
-- `backend/TovSesion.entity.jsonc` — esquema de la entidad usada para cachear el token de sesión entre invocaciones de la función (las funciones de Base44 son stateless, así que el token se persiste en esta tabla).
-- `frontend/useTovLive.js` — hook de React que consume la función `tovLive`, hace polling de nuevas lecturas, y escala los campos crudos del TOV452 a unidades reales (voltaje, corriente, factor de potencia, THD).
+**Contrato vivo (usar esto):**
+- `backend/medicionesReales.entry.ts` — función server-side (Deno, Base44) activa en TG One. Solo lectura: nunca manda `action` distinto de `'get'`.
+- `frontend/useMedicionesReales.js` — hook de React que consume `medicionesReales`, hace polling cada 15s, y escala los campos crudos a unidades reales (voltaje, corriente, factor de potencia, THD por fase, frecuencia).
 
-## Campos de la tabla `TOV452_66` (confirmados por inspección real)
+**Historial (abandonado, no activar):**
+- `backend/tovLive.entry.ts` — intento V2 con token de sesión rotativo y flujo de login. Se dejó `DISABLED = true` a propósito y ya no se va a completar: Boris optó por el contrato más simple de arriba.
+- `backend/TovSesion.entity.jsonc` — esquema de caché de sesión para el intento V2. Sigue existiendo como entidad en Base44 pero sin uso activo.
+- `frontend/useTovLive.js` — hook que consumía la función anterior; reemplazado por `useMedicionesReales.js`.
 
-| Campo | Significado | Escala aplicada (⚠️ sin confirmar bajo carga real) |
+### V1 — GET con body (descontinuado, contexto histórico)
+El diseño original exigía **método GET con un body JSON crudo**, lo cual viola la especificación de `fetch()` (ningún cliente moderno puede replicarlo) y además el endpoint decidía la operación según el verbo HTTP (`GET`=lectura, `POST`/`PUT`=inserción, `DELETE`=borrado) — un riesgo real, ya que cualquier cliente que adivinara el verbo podía escribir o borrar sin token verificado. Durante esas pruebas se borró por accidente un registro de prueba en `tgv_dev.TOV452_66`. Por eso se descartó, y por lo que ninguna escritura real se expone desde TG One hasta la fecha.
+
+## Campos de la tabla `TOV452_66` (confirmados por inspección de una lectura real en producción)
+
+| Campo | Significado | Escala aplicada |
 |---|---|---|
 | `Lectura` | Consecutivo de la medición | — |
 | `fecha` | Timestamp de la lectura | — |
+| `TOV452_ID` | Identificador físico del medidor | — |
 | `VFase1/2/3` | Voltaje por fase | ÷10 |
 | `IFase1/2/3` | Corriente por fase | ÷10 |
 | `PF1/2/3` | Factor de potencia por fase | ÷1000 |
-| `Frequency` | Frecuencia | ÷100 |
-| `THD_V` / `THD_I` | Distorsión armónica | ÷10 |
+| `Frequency` | Frecuencia | ÷100 (✅ confirmado por Boris) |
+| `THD_VST1/2/3` | THD de voltaje, total por fase | ÷10 |
+| `THD_IST1/2/3` | THD de corriente, total por fase | ÷10 |
+| `THD_V{h}{fase}` / `THD_I{h}{fase}` | THD por armónico individual (ej. `THD_V13` = fase 1, armónico 3) | sin usar en el dashboard, disponibles si se necesita detalle fino |
 | `kWh` | Energía acumulada | sin escala |
-| `rssi` | Señal del dispositivo | sin escala (dBm) |
-| `TOV452_ID` | Identificador físico del medidor | — |
+| `rssi` | Señal del dispositivo (dBm) | sin escala |
+| `TP1/TP2/TC1/TC2` | Relación de transformadores de potencial/corriente (calibración del medidor, no telemetría en vivo) | sin usar en el dashboard |
 
-⚠️ Estas escalas se dedujeron con el dispositivo en reposo (sin carga, corrientes en 0). Hay que confirmarlas con una lectura bajo carga real antes de mostrarlas en una demo a inversionistas o clientes.
+## Checklist (actualizado)
 
-## Cómo activar la integración (checklist)
-
-1. [ ] Boris confirma el mecanismo exacto de login/token (ver TODO_CONFIRMAR arriba)
-2. [ ] Se prueba un ciclo completo en Postman y se documenta aquí
-3. [ ] Se sube el código de `backend/tovLive.entry.ts` a la función `tovLive` en Base44
-4. [ ] Se sube el esquema `backend/TovSesion.entity.jsonc` como entidad en Base44
-5. [ ] Se cambia `DISABLED = true` → `DISABLED = false` en `tovLive.entry.ts`
-6. [ ] En TG One, en la ficha del dispositivo correspondiente, se llena el campo "Tabla en BD externa" con el nombre de la tabla (ej. `TOV452_66`)
-7. [ ] Se verifica en Consulta en tiempo real que el panel de Monitoreo Eléctrico muestre "EN VIVO" con datos reales
+1. [x] Boris confirma el contrato final (`action` + token fijo + ruta `/tgcommdev/`)
+2. [x] Se probó un ciclo completo contra el servidor real y se documentó arriba
+3. [x] El código está subido y activo como función `medicionesReales` en Base44
+4. [x] La página "Mediciones Reales" muestra el panel completo (frecuencia, voltaje/corriente/PF/THD por fase, kWh, rssi) con datos reales
+5. [ ] Si se necesita telemetría en el resto de TG One (más allá de la página dedicada), extender `Dispositivo.tabla_bd_externa` para que otros paneles usen `medicionesReales` en vez de datos simulados
+6. [ ] Confirmar con Boris si las escalas de voltaje/corriente/PF/THD (verificadas empíricamente, no palabra por palabra) aplican igual bajo carga real, antes de una demo con inversionistas
 
 ## Nota de seguridad
 
-El endpoint actual no valida ningún token real (se confirmó durante las pruebas — cualquier request con el verbo correcto pasaba sin credenciales verificadas). El nuevo diseño con token de sesión resuelve esto, pero **debe probarse que el token realmente se exige y se valida** antes de considerar esta integración lista para producción.
+El endpoint real sigue sin distinguir lectura de escritura por intención, solo por verbo HTTP, y ya hubo un incidente real de borrado accidental. Por eso:
+- `medicionesReales` (usada por TG One) nunca manda nada distinto de `action: 'get'` — no hay forma de escribir desde ahí.
+- La consola de pruebas (`dbcommQuery`, en la app "DB Data Connector") bloquea cualquier payload con la clave `campos` (la que dispara un INSERT/UPDATE reales) salvo que quien la ejecute tenga rol `admin` **y** mande `confirmarEscritura: true` explícitamente.
+- `PUT`/`DELETE` contra el servidor real siguen sin exponerse desde ninguna de las dos apps.
