@@ -93,12 +93,15 @@ Deno.serve(async (req) => {
     //    punto — el medidor físico manda lecturas nuevas de forma irregular
     //    (a veces cada ~15-20s, a veces con huecos de más de un minuto), así
     //    que esperar a que lleguen solas deja la gráfica "atorada" mucho
-    //    rato. Confirmado que 8 lecturas individuales en paralelo tardan bien
-    //    por debajo de 1s en total (ver README), así que esto no bloquea la
-    //    carga de forma perceptible. En los refrescos normales (polling) NO
-    //    se pide esto — solo se trae la lectura más nueva, como antes.
+    //    rato. Confirmado en vivo que 20 lecturas individuales en paralelo
+    //    (con los 19 campos completos cada una) tardan ~1.2s en total — no
+    //    bloquea la carga de forma perceptible, y da suficiente profundidad
+    //    real para que picos y valles genuinos se vean desde el primer
+    //    render (antes con solo 8 lecturas la variación real casi no se
+    //    notaba). En los refrescos normales (polling) NO se pide esto —
+    //    solo se trae la lectura más nueva, como antes.
     if (incluirHistorial) {
-      const NUM_HISTORIAL = 8;
+      const NUM_HISTORIAL = 20;
       const recientes = valores.slice(-NUM_HISTORIAL);
       const resultados = await Promise.all(
         recientes.map((v) => consultarTabla(tabla, { [campoFiltro]: v }, [campoFiltro, ...camposDeseados]))
