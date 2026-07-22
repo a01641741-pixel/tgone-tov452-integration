@@ -126,8 +126,12 @@ El diseño original exigía **método GET con un body JSON crudo**, lo cual viol
 2. [x] Se probó un ciclo completo contra el servidor real y se documentó arriba
 3. [x] El código está subido y activo como función `medicionesReales` en Base44
 4. [x] La página "Mediciones Reales" muestra el panel completo (frecuencia, voltaje/corriente/PF/THD por fase, kWh, rssi) con datos reales
-5. [ ] Si se necesita telemetría en el resto de TG One (más allá de la página dedicada), extender `Dispositivo.tabla_bd_externa` para que otros paneles usen `medicionesReales` en vez de datos simulados
+5. [x] Se creó el registro `Dispositivo` "Total View TOV452" (`tabla_bd_externa = "TOV452_66"`) y se reconectó la página **"Consulta en tiempo real"** (panel "Monitoreo eléctrico") de `useTovLive` (abandonado, siempre deshabilitado) a `useMedicionesReales` (activo) — antes mostraba "datos de ejemplo" aunque la conexión real ya funcionaba en otro lado
 6. [ ] Confirmar con Boris si las escalas de voltaje/corriente/PF/THD (verificadas empíricamente, no palabra por palabra) aplican igual bajo carga real, antes de una demo con inversionistas
+
+### Verificación previa a revisión (22/jul/2026)
+
+Antes de entregar se corrió, sobre el código ya desplegado: `npm run lint` (limpio en los archivos tocados) y `npm run build` (compila sin errores). `useTovLive.js` queda sin ninguna página que lo importe — es código muerto, no rompe nada, se deja documentado como historial.
 
 ## Nota de seguridad
 
