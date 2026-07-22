@@ -130,7 +130,7 @@ El diseño original exigía **método GET con un body JSON crudo**, lo cual viol
 6. [x] Se sacó "Consulta en tiempo real" del grupo "Archivo (uso futuro)" del menú lateral (estaba escondida y etiquetada "(legado)" desde que se escribió, cuando todavía no había conexión real) y se movió a la navegación principal, junto a "Mediciones Reales"
 7. [x] Se reorganizó el menú lateral para separar sin ambigüedad lo real de lo simulado: grupo **"Telemetría en vivo (real)"** arriba (Mediciones Reales + Consulta en tiempo real), grupo **"Demos de producto (simulado)"** hasta abajo y colapsado — mismas pantallas de antes, ningún dato se perdió, solo se re-etiquetaron y reordenaron para que cualquiera entienda de un vistazo qué es real y qué es mockup
 8. [ ] Confirmar con Boris si las escalas de voltaje/corriente/PF/THD (verificadas empíricamente, no palabra por palabra) aplican igual bajo carga real, antes de una demo con inversionistas
-9. [ ] Rediseño visual del sidebar (colores/layout) — lo de arriba es reorganización de contenido, no un rediseño visual; eso requiere verificarse en navegador antes de tocarlo, para no arriesgar bugs justo antes de una revisión
+9. [x] Rediseño visual del sidebar: el grupo "Telemetría en vivo (real)" ahora tiene una tarjeta con borde/tinte verde y un punto pulsante en el encabezado; el grupo "Demos de producto (simulado)" tiene borde punteado y se ve atenuado; cada item real muestra una píldora "EN VIVO" (en vez de un puntito), cada item demo muestra una etiqueta "SIM"; los íconos ahora viven en chips redondeados para más peso visual. Cero cambios de datos o rutas, solo estilo — verificado con build/lint, no con navegador (no hay acceso a uno en este entorno), así que vale la pena un vistazo rápido en persona antes de la demo.
 
 ### Verificación previa a revisión (22/jul/2026)
 
@@ -138,6 +138,7 @@ Antes de entregar se corrió, sobre el código ya desplegado:
 - `npm run lint` en todo el proyecto — 0 errores (se corrigieron también ~12 imports sin usar preexistentes en archivos no relacionados, para dejar el proyecto completo en cero).
 - `npm run build` — compila sin errores.
 - `npm run typecheck` tiene ~543 errores preexistentes en todo el proyecto (tipado laxo de componentes UI compartidos, de antes de esta integración) — no son nuevos ni bloquean el build; no se tocaron por estar fuera del alcance de esta integración.
+- Se confirmó en el código fuente de `react-router-dom` que `NavLink` soporta `children` como función (usado en el rediseño del sidebar para pintar el ícono según el estado activo) — no es una suposición.
 
 `useTovLive.js` queda sin ninguna página que lo importe — es código muerto, no rompe nada, se deja documentado como historial.
 
