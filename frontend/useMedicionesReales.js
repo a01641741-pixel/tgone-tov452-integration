@@ -12,7 +12,9 @@ const HISTORY_LEN = 30;
 // Escala los campos crudos del TOV452 a unidades reales. Confirmado con una
 // lectura real en producción (lectura #8375, 22/jul/2026): Frequency 5996 →
 // 59.96 Hz, VFase1 1246 → 124.6 V, PF1 1000 → 1.000 — cuadra con valores
-// físicos esperados, así que estas escalas ya están validadas.
+// físicos esperados. La escala de corriente (IFase1/2/3) se corrigió de ÷10
+// a ÷1000 el 22/jul/2026 a petición explícita de Manuel Vega (Total Ground),
+// quien confirmó que con ÷1000 el valor ya cuadra con la lectura real.
 function escalarRegistro(raw) {
   if (!raw) return null;
   return {
@@ -24,9 +26,9 @@ function escalarRegistro(raw) {
     v1: raw.VFase1 != null ? raw.VFase1 / 10 : null,
     v2: raw.VFase2 != null ? raw.VFase2 / 10 : null,
     v3: raw.VFase3 != null ? raw.VFase3 / 10 : null,
-    i1: raw.IFase1 != null ? raw.IFase1 / 10 : null,
-    i2: raw.IFase2 != null ? raw.IFase2 / 10 : null,
-    i3: raw.IFase3 != null ? raw.IFase3 / 10 : null,
+    i1: raw.IFase1 != null ? raw.IFase1 / 1000 : null,
+    i2: raw.IFase2 != null ? raw.IFase2 / 1000 : null,
+    i3: raw.IFase3 != null ? raw.IFase3 / 1000 : null,
     pf1: raw.PF1 != null ? raw.PF1 / 1000 : null,
     pf2: raw.PF2 != null ? raw.PF2 / 1000 : null,
     pf3: raw.PF3 != null ? raw.PF3 / 1000 : null,

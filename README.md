@@ -112,7 +112,7 @@ El diseño original exigía **método GET con un body JSON crudo**, lo cual viol
 | `fecha` | Timestamp de la lectura | — |
 | `TOV452_ID` | Identificador físico del medidor | — |
 | `VFase1/2/3` | Voltaje por fase | ÷10 |
-| `IFase1/2/3` | Corriente por fase | ÷10 |
+| `IFase1/2/3` | Corriente por fase | ÷1000 (✅ corregido y confirmado por Manuel Vega, Total Ground, 22/jul/2026 — antes se usaba ÷10 por error) |
 | `PF1/2/3` | Factor de potencia por fase | ÷1000 |
 | `Frequency` | Frecuencia | ÷100 (✅ confirmado por Boris) |
 | `THD_VST1/2/3` | THD de voltaje, total por fase | ÷10 |
@@ -153,6 +153,8 @@ El diseño original exigía **método GET con un body JSON crudo**, lo cual viol
     - Medido en vivo contra el servidor real: 8 fetches en paralelo tardan **~0.3s en total** (vs. ~28s si se pidieran todos los campos de las ~1560+ filas de la tabla de una sola vez) — no añade demora perceptible a la carga de la página.
     - `useMedicionesReales.js` manda `incluirHistorial: true` únicamente en su primera llamada (`primeraCargaRef`) y, si el servidor regresa `historial`, siembra el arreglo `history` completo con esos registros reales (nunca inventados/interpolados) en vez de esperar a que lleguen uno por uno.
     - El mensaje de respaldo ("Tenemos 1 lectura real…") se deja intacto como lo que ahora es: un caso de borde genuino (tabla con muy pocas filas reales), no el camino común.
+
+23. [x] **Corregida la escala de corriente (IFase1/2/3)**: Manuel Vega (Total Ground) confirmó por chat el 22/jul/2026 que el valor de corriente estaba mal — se le aplicaba ÷10 y debía ser ÷1000. Se corrigió en `escalarRegistro()` (`useMedicionesReales.js`) y Manuel confirmó que con ÷1000 el valor ya está bien. El resto de las escalas (voltaje ÷10, PF ÷1000, frecuencia ÷100, THD ÷10) no cambian.
 
 Nota: `AiCopilot.jsx`, `Soporte.jsx`, `DispositivoDetalle.jsx` y `guestSupportRequest` son componentes/funciones de TG One en general, no exclusivos de la integración TOV452 — por eso no se mirroan como archivos en `backend/`/`frontend/` de este repo (que documenta específicamente el contrato de telemetría), pero se registran aquí porque todos los cambios de esta sesión de trabajo tocaron la misma app en vivo. `pruebaCrud.entry.ts` y `PruebaRegistros.jsx` sí se mirroan porque ejercitan directamente el contrato de escritura (POST/PUT/DELETE) que es el tema central de este repo.
 
