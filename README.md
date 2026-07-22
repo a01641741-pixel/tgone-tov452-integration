@@ -127,11 +127,19 @@ El diseño original exigía **método GET con un body JSON crudo**, lo cual viol
 3. [x] El código está subido y activo como función `medicionesReales` en Base44
 4. [x] La página "Mediciones Reales" muestra el panel completo (frecuencia, voltaje/corriente/PF/THD por fase, kWh, rssi) con datos reales
 5. [x] Se creó el registro `Dispositivo` "Total View TOV452" (`tabla_bd_externa = "TOV452_66"`) y se reconectó la página **"Consulta en tiempo real"** (panel "Monitoreo eléctrico") de `useTovLive` (abandonado, siempre deshabilitado) a `useMedicionesReales` (activo) — antes mostraba "datos de ejemplo" aunque la conexión real ya funcionaba en otro lado
-6. [ ] Confirmar con Boris si las escalas de voltaje/corriente/PF/THD (verificadas empíricamente, no palabra por palabra) aplican igual bajo carga real, antes de una demo con inversionistas
+6. [x] Se sacó "Consulta en tiempo real" del grupo "Archivo (uso futuro)" del menú lateral (estaba escondida y etiquetada "(legado)" desde que se escribió, cuando todavía no había conexión real) y se movió a la navegación principal, junto a "Mediciones Reales"
+7. [x] Se reorganizó el menú lateral para separar sin ambigüedad lo real de lo simulado: grupo **"Telemetría en vivo (real)"** arriba (Mediciones Reales + Consulta en tiempo real), grupo **"Demos de producto (simulado)"** hasta abajo y colapsado — mismas pantallas de antes, ningún dato se perdió, solo se re-etiquetaron y reordenaron para que cualquiera entienda de un vistazo qué es real y qué es mockup
+8. [ ] Confirmar con Boris si las escalas de voltaje/corriente/PF/THD (verificadas empíricamente, no palabra por palabra) aplican igual bajo carga real, antes de una demo con inversionistas
+9. [ ] Rediseño visual del sidebar (colores/layout) — lo de arriba es reorganización de contenido, no un rediseño visual; eso requiere verificarse en navegador antes de tocarlo, para no arriesgar bugs justo antes de una revisión
 
 ### Verificación previa a revisión (22/jul/2026)
 
-Antes de entregar se corrió, sobre el código ya desplegado: `npm run lint` (limpio en los archivos tocados) y `npm run build` (compila sin errores). `useTovLive.js` queda sin ninguna página que lo importe — es código muerto, no rompe nada, se deja documentado como historial.
+Antes de entregar se corrió, sobre el código ya desplegado:
+- `npm run lint` en todo el proyecto — 0 errores (se corrigieron también ~12 imports sin usar preexistentes en archivos no relacionados, para dejar el proyecto completo en cero).
+- `npm run build` — compila sin errores.
+- `npm run typecheck` tiene ~543 errores preexistentes en todo el proyecto (tipado laxo de componentes UI compartidos, de antes de esta integración) — no son nuevos ni bloquean el build; no se tocaron por estar fuera del alcance de esta integración.
+
+`useTovLive.js` queda sin ninguna página que lo importe — es código muerto, no rompe nada, se deja documentado como historial.
 
 ## Nota de seguridad
 
