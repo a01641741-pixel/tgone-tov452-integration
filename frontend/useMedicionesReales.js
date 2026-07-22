@@ -7,6 +7,8 @@ const CAMPOS_COMPLETOS = [
   'THD_IST1', 'THD_IST2', 'THD_IST3', 'kWh', 'rssi', 'TOV452_ID', 'fecha',
 ];
 
+const HISTORY_LEN = 30;
+
 // Escala los campos crudos del TOV452 a unidades reales. Confirmado con una
 // lectura real en producción (lectura #8375, 22/jul/2026): Frequency 5996 →
 // 59.96 Hz, VFase1 1246 → 124.6 V, PF1 1000 → 1.000 — cuadra con valores
@@ -50,16 +52,22 @@ function escalarRegistro(raw) {
 export function useMedicionesReales({ tabla, campos = CAMPOS_COMPLETOS, filtro = 'lectura', intervalMs = 15000 } = {}) {
   const [datos, setDatos] = useState(null);
   const [reading, setReading] = useState(null);
+  const [history, setHistory] = useState([]);
   const [ultimaLectura, setUltimaLectura] = useState(null);
   const [status, setStatus] = useState('cargando'); // cargando | ok | vacio | error
   const [mensaje, setMensaje] = useState(null);
   const [lastUpdate, setLastUpdate] = useState(null);
   const timerRef = useRef(null);
+  const lecturaVistaRef = useRef(null);
+  const primeraCargaRef = useRef(true);
 
   const consultar = useCallback(async () => {
     if (!tabla) return;
+    const esPrimeraCarga = primeraCargaRef.current;
     try {
-      const res = await base44.functions.invoke('medicionesReales', { tabla, campos, filtro });
+      const res = await base44.functions.invoke('medicionesReales', {
+        tabla, campos, filtro, incluirHistorial: esPrimeraCarga,
+      });
       const body = res?.data ?? res;
       if (body.error) {
         setStatus('error');
@@ -71,12 +79,29 @@ export function useMedicionesReales({ tabla, campos = CAMPOS_COMPLETOS, filtro =
         setMensaje(body.mensaje);
         return;
       }
+      const escalado = escalarRegistro(body.datos);
       setDatos(body.datos);
-      setReading(escalarRegistro(body.datos));
+      setReading(escalado);
       setUltimaLectura(body.ultima_lectura);
       setStatus('ok');
       setMensaje(null);
       setLastUpdate(new Date());
+
+      if (esPrimeraCarga && Array.isArray(body.historial) && body.historial.length) {
+        // Sembramos el historial con lecturas reales ya existentes en el
+        // servidor (nunca inventadas), para que la gráfica no dependa de
+        // esperar a que el medidor físico mande algo nuevo desde cero.
+        const historialEscalado = body.historial.map(escalarRegistro).filter(Boolean);
+        setHistory(historialEscalado.slice(-HISTORY_LEN));
+        lecturaVistaRef.current = body.ultima_lectura;
+        primeraCargaRef.current = false;
+      } else if (escalado && body.ultima_lectura !== lecturaVistaRef.current) {
+        lecturaVistaRef.current = body.ultima_lectura;
+        setHistory((prev) => [...prev, escalado].slice(-HISTORY_LEN));
+        primeraCargaRef.current = false;
+      } else {
+        primeraCargaRef.current = false;
+      }
     } catch (err) {
       setStatus('error');
       setMensaje(err.message);
@@ -90,5 +115,5 @@ export function useMedicionesReales({ tabla, campos = CAMPOS_COMPLETOS, filtro =
     return () => clearInterval(timerRef.current);
   }, [consultar, intervalMs, tabla]);
 
-  return { datos, reading, ultimaLectura, status, mensaje, lastUpdate, refrescar: consultar };
+  return { datos, reading, history, ultimaLectura, status, mensaje, lastUpdate, refrescar: consultar };
 }

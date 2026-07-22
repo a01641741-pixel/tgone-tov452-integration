@@ -53,7 +53,7 @@ Deno.serve(async (req) => {
     // no usa datos del usuario, por lo que se permite acceso sin autenticación
     // para que invitados y usuarios autenticados puedan ver las mediciones reales.
     const body = await req.json().catch(() => ({}));
-    const { tabla, campos, filtro } = body;
+    const { tabla, campos, filtro, incluirHistorial } = body;
 
     if (!tabla || typeof tabla !== 'string') {
       return Response.json({ error: "Falta 'tabla'" }, { status: 400 });
@@ -67,7 +67,9 @@ Deno.serve(async (req) => {
     const campoFiltro = filtro || 'lectura';
 
     // 1) Traemos solo el campo de filtro de todos los registros disponibles,
-    //    para ubicar la lectura más reciente (el mayor valor).
+    //    para ubicar la lectura más reciente (el mayor valor). Confirmado que
+    //    esto toma ~0.3-1.7s incluso con miles de filas (a diferencia de pedir
+    //    todos los campos de todas las filas, que tarda ~28s).
     const idsRes = await consultarTabla(tabla, undefined, [campoFiltro]);
     if (idsRes.error) {
       return Response.json({ estado: 'error', tabla, mensaje: idsRes.error }, { status: 502 });
@@ -76,15 +78,52 @@ Deno.serve(async (req) => {
     const filasIds = filasDe(idsRes);
     const valores = filasIds
       .map((r) => r[campoFiltro] ?? r[campoFiltro.charAt(0).toUpperCase() + campoFiltro.slice(1)])
-      .filter((v) => typeof v === 'number');
+      .filter((v) => typeof v === 'number')
+      .sort((a, b) => a - b);
 
     if (!valores.length) {
       return Response.json({ estado: 'vacio', tabla, mensaje: 'Sin registros para esta tabla' });
     }
 
-    const ultimaLectura = Math.max(...valores);
+    const ultimaLectura = valores[valores.length - 1];
 
-    // 2) Con esa lectura máxima, pedimos los campos reales que queremos mostrar.
+    // 2) En la carga inicial de la página (incluirHistorial=true) traemos
+    //    varias lecturas reales recientes en paralelo, para que "Curvas en
+    //    tiempo real" arranque con contexto real de verdad en vez de un solo
+    //    punto — el medidor físico manda lecturas nuevas de forma irregular
+    //    (a veces cada ~15-20s, a veces con huecos de más de un minuto), así
+    //    que esperar a que lleguen solas deja la gráfica "atorada" mucho
+    //    rato. Confirmado que 8 lecturas individuales en paralelo tardan bien
+    //    por debajo de 1s en total (ver README), así que esto no bloquea la
+    //    carga de forma perceptible. En los refrescos normales (polling) NO
+    //    se pide esto — solo se trae la lectura más nueva, como antes.
+    if (incluirHistorial) {
+      const NUM_HISTORIAL = 8;
+      const recientes = valores.slice(-NUM_HISTORIAL);
+      const resultados = await Promise.all(
+        recientes.map((v) => consultarTabla(tabla, { [campoFiltro]: v }, [campoFiltro, ...camposDeseados]))
+      );
+      const historial = resultados
+        .map((r) => filasDe(r)[0])
+        .filter(Boolean)
+        .sort((a, b) => {
+          const av = a[campoFiltro] ?? a[campoFiltro.charAt(0).toUpperCase() + campoFiltro.slice(1)];
+          const bv = b[campoFiltro] ?? b[campoFiltro.charAt(0).toUpperCase() + campoFiltro.slice(1)];
+          return av - bv;
+        });
+      const registro = historial[historial.length - 1] || null;
+
+      return Response.json({
+        estado: 'ok',
+        tabla,
+        ultima_lectura: ultimaLectura,
+        datos: registro,
+        historial,
+        consultado: new Date().toISOString(),
+      });
+    }
+
+    // Refresco normal: solo la lectura más nueva.
     const condiciones = { [campoFiltro]: ultimaLectura };
     const full = await consultarTabla(tabla, condiciones, [campoFiltro, ...camposDeseados]);
     if (full.error) {
