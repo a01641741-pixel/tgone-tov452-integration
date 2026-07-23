@@ -15,7 +15,7 @@ const HISTORY_LEN = 30;
 // físicos esperados. La escala de corriente (IFase1/2/3) se corrigió de ÷10
 // a ÷1000 el 22/jul/2026 a petición explícita de Manuel Vega (Total Ground),
 // quien confirmó que con ÷1000 el valor ya cuadra con la lectura real.
-function escalarRegistro(raw) {
+export function escalarRegistro(raw) {
   if (!raw) return null;
   return {
     lectura: raw.Lectura,
@@ -41,6 +41,17 @@ function escalarRegistro(raw) {
     kWh: raw.kWh,
     raw,
   };
+}
+
+// Guarda un snapshot real en LecturaHistorica para tener tendencias
+// históricas persistentes (no solo lo que cabe en la cola de la tabla
+// externa). Es fire-and-forget a propósito: la función del servidor vuelve
+// a consultar la fuente real por su cuenta (nunca confía en datos del
+// navegador) y ya trae su propia deduplicación, así que aquí no hace falta
+// esperar la respuesta ni reintentar si falla.
+function guardarLecturaHistoricaEnSegundoPlano(tabla) {
+  if (!tabla) return;
+  base44.functions.invoke('guardarLecturaHistorica', { tabla }).catch(() => {});
 }
 
 /**
@@ -97,10 +108,12 @@ export function useMedicionesReales({ tabla, campos = CAMPOS_COMPLETOS, filtro =
         setHistory(historialEscalado.slice(-HISTORY_LEN));
         lecturaVistaRef.current = body.ultima_lectura;
         primeraCargaRef.current = false;
+        guardarLecturaHistoricaEnSegundoPlano(tabla);
       } else if (escalado && body.ultima_lectura !== lecturaVistaRef.current) {
         lecturaVistaRef.current = body.ultima_lectura;
         setHistory((prev) => [...prev, escalado].slice(-HISTORY_LEN));
         primeraCargaRef.current = false;
+        guardarLecturaHistoricaEnSegundoPlano(tabla);
       } else {
         primeraCargaRef.current = false;
       }
