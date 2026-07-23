@@ -7,9 +7,10 @@ import { createClientFromRequest } from 'npm:@base44/sdk@0.8.38';
 //   - Alta:     action:'post'   + campos
 //   - Cambio:   action:'put'    + condiciones (id) + campos
 //   - Baja:     action:'delete' + condiciones (id)
-// Los 4 requieren 'token'. El servidor NO pagina/ordena (ya lo confirmamos con
-// TOV452_66), así que la paginación se hace aquí, en memoria, sobre la tabla
-// completa — aceptable porque "prueba" es chica a propósito.
+// Los 4 requieren 'token'. El servidor NO pagina/ordena/busca (ya lo
+// confirmamos con TOV452_66), así que paginación, orden y búsqueda se hacen
+// aquí, en memoria, sobre la tabla completa — aceptable porque "prueba" es
+// chica a propósito.
 //
 // Solo usuarios con sesión real de TG One (no invitados) pueden usar esta
 // función — no expone nada a un visitante anónimo.
@@ -24,6 +25,9 @@ const DB_CONFIG = {
   password: 'root',
   token: 'Tg#10982278ia123',
 };
+
+const COLUMNAS_ORDENABLES = ['id', 'Nombre', 'Descripcion', 'Status', 'nivel', 'boleano', 'numerico', 'fecha', 'doble'];
+const COLUMNAS_BUSCABLES = ['Nombre', 'Descripcion', 'Status', 'nivel'];
 
 // Reglas reales de la tabla `prueba` (ver CREATE TABLE de Boris):
 //   Nombre char(30) NOT NULL · Descripcion char(30) · Status char(10) ·
@@ -104,19 +108,42 @@ Deno.serve(async (req) => {
 
     if (action === 'list') {
       const page = Math.max(1, parseInt(body.page, 10) || 1);
-      const pageSize = Math.min(100, Math.max(1, parseInt(body.pageSize, 10) || 10));
+      const pageSize = Math.min(1000, Math.max(1, parseInt(body.pageSize, 10) || 10));
+      const search = String(body.search || '').trim().toLowerCase();
+      const sortBy = COLUMNAS_ORDENABLES.includes(body.sortBy) ? body.sortBy : 'id';
+      const sortDir = body.sortDir === 'asc' ? 'asc' : 'desc';
 
       const res = await callDb({ ...DB_CONFIG, action: 'get', tabla: TABLA });
       if (res.estado === 'error') {
         return Response.json({ error: res.mensaje || 'No se pudo consultar la tabla.' }, { status: 502 });
       }
-      const filas = filasDe(res).sort((a, b) => (b.id || 0) - (a.id || 0));
+      const todas = filasDe(res);
+      const totalGeneral = todas.length;
+      const totalBoleanoTrue = todas.filter((f) => f.boleano === 1 || f.boleano === true).length;
+
+      let filas = todas;
+      if (search) {
+        filas = filas.filter((f) => COLUMNAS_BUSCABLES.some((k) => String(f[k] ?? '').toLowerCase().includes(search)));
+      }
+
+      filas = filas.slice().sort((a, b) => {
+        const av = a[sortBy];
+        const bv = b[sortBy];
+        let cmp;
+        if (typeof av === 'number' || typeof bv === 'number') cmp = (av ?? -Infinity) - (bv ?? -Infinity);
+        else cmp = String(av ?? '').localeCompare(String(bv ?? ''));
+        return sortDir === 'asc' ? cmp : -cmp;
+      });
+
       const total = filas.length;
       const totalPages = Math.max(1, Math.ceil(total / pageSize));
       const start = (page - 1) * pageSize;
       const datos = filas.slice(start, start + pageSize);
 
-      return Response.json({ estado: 'ok', datos, total, page, pageSize, totalPages });
+      return Response.json({
+        estado: 'ok', datos, total, page, pageSize, totalPages,
+        totalGeneral, totalBoleanoTrue, sortBy, sortDir, search,
+      });
     }
 
     if (action === 'create') {
@@ -149,7 +176,18 @@ Deno.serve(async (req) => {
       return Response.json({ estado: 'ok', datos: res.datos });
     }
 
-    return Response.json({ error: "Acción inválida (usa 'list' | 'create' | 'update' | 'delete')." }, { status: 400 });
+    if (action === 'bulkDelete') {
+      const ids = Array.isArray(body.ids) ? body.ids.map((v) => parseInt(v, 10)).filter(Number.isInteger) : [];
+      if (!ids.length) return Response.json({ error: "Falta 'ids' (arreglo de enteros)." }, { status: 400 });
+
+      const resultados = await Promise.all(
+        ids.map((id) => callDb({ ...DB_CONFIG, action: 'delete', tabla: TABLA, condiciones: { id } }))
+      );
+      const fallidos = resultados.filter((r) => r.estado === 'error').length;
+      return Response.json({ estado: 'ok', borrados: ids.length - fallidos, fallidos, total: ids.length });
+    }
+
+    return Response.json({ error: "Acción inválida (usa 'list' | 'create' | 'update' | 'delete' | 'bulkDelete')." }, { status: 400 });
   } catch (error) {
     return Response.json({ error: error.message }, { status: 500 });
   }
