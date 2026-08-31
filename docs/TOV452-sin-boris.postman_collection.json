@@ -1,0 +1,70 @@
+{
+  "info": {
+    "name": "TOV452 — Confirmar contrato (sin Boris)",
+    "description": "Colección para que el equipo (Manuel Vega + Adán) confirme por su cuenta, con acceso directo al servidor, los dos puntos que quedaron como TODO_CONFIRMAR en el README del repo tgone-tov452-integration:\n\n1. Cómo se obtiene el primer token de sesión.\n2. Qué regresa el servidor cuando el token ya expiró.\n\nREGLA DE SEGURIDAD: todas las requests de esta colección usan \"Accion\": \"get\" (solo lectura). NO correr manualmente ninguna request con Accion \"put\", \"post\" o \"delete\" contra la tabla TOV452_66 real — ya hubo un borrado accidental de un registro antes por esto. Si se necesita probar escritura, usar una tabla/registro de prueba desechable, nunca la tabla en producción.\n\nCómo usar:\n1. Correr las requests en orden (1 a 4).\n2. Pegar el request/response real de cada una en README.md, sección 'Ejemplo real validado'.\n3. Avisar cuál hipótesis de login funcionó y actualizar tovLive.entry.ts para que coincida (quitar las otras rutas especulativas).",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    { "key": "base_url", "value": "http://monitor02.redirectme.net:3030/tgcomm/dbcommapi0099.php" },
+    { "key": "servidor", "value": "localhost" },
+    { "key": "base_de_datos", "value": "tgv_dev" },
+    { "key": "usuario", "value": "root" },
+    { "key": "password", "value": "root" },
+    { "key": "tabla", "value": "TOV452_66" },
+    { "key": "token", "value": "" }
+  ],
+  "item": [
+    {
+      "name": "1 - Hipotesis A: Accion login explicito",
+      "request": {
+        "method": "POST",
+        "header": [{ "key": "Content-Type", "value": "application/json" }],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"Accion\": \"login\",\n  \"servidor\": \"{{servidor}}\",\n  \"base_de_datos\": \"{{base_de_datos}}\",\n  \"usuario\": \"{{usuario}}\",\n  \"password\": \"{{password}}\"\n}"
+        },
+        "url": "{{base_url}}",
+        "description": "Prueba si existe una Accion especial 'login' que regrese el token sin pedir datos. Si el servidor responde con error de Accion invalida, esta hipotesis se descarta y pasamos a la B."
+      }
+    },
+    {
+      "name": "2 - Hipotesis B: Get con credenciales directas (sin token)",
+      "request": {
+        "method": "POST",
+        "header": [{ "key": "Content-Type", "value": "application/json" }],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"Accion\": \"get\",\n  \"servidor\": \"{{servidor}}\",\n  \"base_de_datos\": \"{{base_de_datos}}\",\n  \"usuario\": \"{{usuario}}\",\n  \"password\": \"{{password}}\",\n  \"tabla\": \"{{tabla}}\",\n  \"displayfields\": [\"Lectura\", \"fecha\"]\n}"
+        },
+        "url": "{{base_url}}",
+        "description": "Es la hipotesis que YA asume el codigo actual de tovLive.entry.ts (DB_CONFIG). Confirmar: (a) si funciona sin token la primera vez, y (b) si la respuesta trae un campo 'token' / 'expira' que debamos guardar para las siguientes llamadas."
+      }
+    },
+    {
+      "name": "3 - Get reusando el token guardado",
+      "request": {
+        "method": "POST",
+        "header": [{ "key": "Content-Type", "value": "application/json" }],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"Accion\": \"get\",\n  \"token\": \"{{token}}\",\n  \"tabla\": \"{{tabla}}\",\n  \"displayfields\": [\"Lectura\", \"fecha\"]\n}"
+        },
+        "url": "{{base_url}}",
+        "description": "Pegar aqui el token que regreso la request 1 o 2 (variable {{token}}) y confirmar que el servidor lo acepta SIN volver a mandar usuario/password. Esto valida el flujo normal de uso (login una vez, luego solo token)."
+      }
+    },
+    {
+      "name": "4 - Get con token invalido/vencido (a proposito)",
+      "request": {
+        "method": "POST",
+        "header": [{ "key": "Content-Type", "value": "application/json" }],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"Accion\": \"get\",\n  \"token\": \"token-invalido-a-proposito-000\",\n  \"tabla\": \"{{tabla}}\",\n  \"displayfields\": [\"Lectura\", \"fecha\"]\n}"
+        },
+        "url": "{{base_url}}",
+        "description": "Manda un token invalido/inventado para ver EXACTAMENTE que codigo/mensaje regresa el servidor. Esto es lo que necesitamos para el TODO_CONFIRMAR #2 (como detectar 'token vencido' y disparar re-login). Pegar el 'estado'/'mensaje' real de la respuesta en el README y ajustar el regex en tovLive.entry.ts (linea ~93) si no coincide con /token|sesion|expirad/i."
+      }
+    }
+  ]
+}

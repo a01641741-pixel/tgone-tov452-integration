@@ -75,6 +75,18 @@ Además se agrega un **token de sesión**:
 
 **Antes de poner `DISABLED = false` en `tovLive.entry.ts`, alguien del equipo debe probar en Postman un ciclo completo (login → token → lectura con token → token vencido) y pegar el ejemplo real aquí en este README, en la sección de abajo.**
 
+## Plan para avanzar sin esperar a Boris
+
+Adán y Manuel Vega tienen acceso directo al servidor (`monitor02.redirectme.net:3030`), así que no hace falta esperar a que el equipo de Boris confirme el contrato — lo podemos confirmar nosotros mismos y documentarlo aquí.
+
+Colección de Postman lista para correr: [`docs/TOV452-sin-boris.postman_collection.json`](docs/TOV452-sin-boris.postman_collection.json). Cubre las 4 pruebas necesarias para resolver los dos `TODO_CONFIRMAR` (mecanismo de login/token y señal de token vencido). **Solo usa `Accion: "get"` (lectura) — no correr `put`/`post`/`delete` contra la tabla real**, ya hubo un borrado accidental antes por esto.
+
+Pasos:
+1. Correr las 4 requests de la colección contra el servidor real.
+2. Pegar los resultados reales en la sección "Ejemplo real validado" de abajo.
+3. Con eso, se actualiza `backend/tovLive.entry.ts` para que coincida exactamente con el comportamiento observado (se quitan las rutas especulativas que ya no aplican).
+4. Se sigue el checklist de activación normal (subir función + entidad a Base44, `DISABLED = false`, etc.) — nada de esto se activa con datos simulados; el objetivo es que lo que vea Sergio sea 100% real.
+
 ## Ejemplo real validado (pendiente — llenar cuando se confirme)
 
 ```
