@@ -18,6 +18,26 @@ function avg(nums) {
   return vals.length ? vals.reduce((a, b) => a + b, 0) / vals.length : null;
 }
 
+// Marcador pulsante en el último punto real (mismo patrón que ya usan
+// DashboardEjecutivo.jsx y MedicionesReales.jsx): decoración pura, nunca
+// mueve ni inventa un valor, solo transmite "esto sigue vivo" en el último
+// dato real ya graficado.
+function makeLiveDot(color, lastIndex) {
+  return function LiveDot(props) {
+    const { cx, cy, index, value } = props;
+    if (index !== lastIndex || cx == null || cy == null || value == null) return null;
+    return (
+      <g key="live-dot">
+        <circle cx={cx} cy={cy} r={2.5} fill={color} stroke="hsl(var(--card))" strokeWidth={1} />
+        <circle cx={cx} cy={cy} r={2.5} fill="none" stroke={color} strokeWidth={1}>
+          <animate attributeName="r" values="2.5;7;2.5" dur="1.8s" repeatCount="indefinite" />
+          <animate attributeName="opacity" values="0.9;0;0.9" dur="1.8s" repeatCount="indefinite" />
+        </circle>
+      </g>
+    );
+  };
+}
+
 function StatMinAvgMax({ label, unit, min, avgVal, max, decimals = 1 }) {
   const fmt = (v) => (typeof v === 'number' ? v.toFixed(decimals) : '—');
   return (
@@ -45,9 +65,12 @@ export default function TendenciasHistoricas({ tabla }) {
   const [rango, setRango] = useState('7d');
 
   useEffect(() => {
-    (async () => {
+    if (!tabla) return;
+    let activo = true;
+    const cargar = async () => {
       try {
         const lista = await fetchList('LecturaHistorica');
+        if (!activo) return;
         const delDispositivo = (lista || [])
           .filter((r) => r.tabla_bd_externa === tabla && r.fecha)
           .map((r) => ({ raw: r, fechaObj: new Date(r.fecha), ...escalarRegistro(r) }))
@@ -55,9 +78,18 @@ export default function TendenciasHistoricas({ tabla }) {
           .sort((a, b) => a.fechaObj - b.fechaObj);
         setRegistros(delDispositivo);
       } catch {
-        setRegistros([]);
+        if (activo) setRegistros((prev) => prev ?? []);
       }
-    })();
+    };
+    cargar();
+    // El hook de telemetría en vivo (useMedicionesReales) guarda un snapshot
+    // real en LecturaHistorica cada vez que llega una lectura nueva del
+    // medidor mientras esta pantalla está abierta. Sin este refresco periodódico
+    // ese punto real nuevo no aparecía hasta recargar la página a mano — con
+    // esto la curva realmente se mueve sola cuando hay un dato real nuevo que
+    // guardar, sin inventar ningún punto de relleno.
+    const t = setInterval(cargar, 60000);
+    return () => { activo = false; clearInterval(t); };
   }, [tabla]);
 
   const rangoActivo = RANGOS.find((r) => r.key === rango) || RANGOS[1];
@@ -127,20 +159,26 @@ export default function TendenciasHistoricas({ tabla }) {
             <StatMinAvgMax label="Corriente total (A)" unit="Amperes" min={min(corrientesTodas)} avgVal={avg(corrientesTodas)} max={max(corrientesTodas)} decimals={2} />
           </div>
 
-          <div className="h-56">
-            <ResponsiveContainer width="100%" height="100%">
-              <LineChart data={chartData} margin={{ top: 10, right: 10, bottom: 0, left: 0 }}>
-                <CartesianGrid strokeDasharray="3 3" opacity={0.15} />
-                <XAxis dataKey="fechaLabel" tick={{ fontSize: 9 }} interval="preserveStartEnd" />
-                <YAxis yAxisId="v" tick={{ fontSize: 10 }} width={36} domain={['auto', 'auto']} />
-                <YAxis yAxisId="hz" orientation="right" tick={{ fontSize: 10 }} width={36} domain={['auto', 'auto']} />
-                <Tooltip contentStyle={{ fontSize: 11 }} />
-                <Legend wrapperStyle={{ fontSize: 11 }} />
-                <Line yAxisId="v" type="monotone" dataKey="voltajeProm" name="Voltaje prom. (V)" stroke="#f59e0b" strokeWidth={2} dot={{ r: 2 }} isAnimationActive={false} connectNulls />
-                <Line yAxisId="hz" type="monotone" dataKey="frequency" name="Frecuencia (Hz)" stroke="hsl(var(--success))" strokeWidth={2} dot={{ r: 2 }} isAnimationActive={false} connectNulls />
-              </LineChart>
-            </ResponsiveContainer>
-          </div>
+          {chartData.length >= 2 ? (
+            <div className="h-56">
+              <ResponsiveContainer width="100%" height="100%">
+                <LineChart data={chartData} margin={{ top: 10, right: 10, bottom: 0, left: 0 }}>
+                  <CartesianGrid strokeDasharray="3 3" opacity={0.15} />
+                  <XAxis dataKey="fechaLabel" tick={{ fontSize: 9 }} interval="preserveStartEnd" />
+                  <YAxis yAxisId="v" tick={{ fontSize: 10 }} width={36} domain={['auto', 'auto']} />
+                  <YAxis yAxisId="hz" orientation="right" tick={{ fontSize: 10 }} width={36} domain={['auto', 'auto']} />
+                  <Tooltip contentStyle={{ fontSize: 11 }} />
+                  <Legend wrapperStyle={{ fontSize: 11 }} />
+                  <Line yAxisId="v" type="monotone" dataKey="voltajeProm" name="Voltaje prom. (V)" stroke="#f59e0b" strokeWidth={2} dot={makeLiveDot('#f59e0b', chartData.length - 1)} isAnimationActive={false} connectNulls />
+                  <Line yAxisId="hz" type="monotone" dataKey="frequency" name="Frecuencia (Hz)" stroke="hsl(var(--success))" strokeWidth={2} dot={makeLiveDot('hsl(var(--success))', chartData.length - 1)} isAnimationActive={false} connectNulls />
+                </LineChart>
+              </ResponsiveContainer>
+            </div>
+          ) : (
+            <p className="text-xs text-muted-foreground py-8 text-center">
+              Solo hay 1 lectura real guardada en este rango todavía — hace falta al menos 2 para dibujar una curva. Se actualiza sola en cuanto se guarde la siguiente lectura real.
+            </p>
+          )}
         </>
       )}
     </Card>
