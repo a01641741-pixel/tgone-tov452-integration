@@ -8,6 +8,11 @@
 
 const VOLT_MIN = 114;
 const VOLT_MAX = 127;
+// Banda "revisar" alrededor de la normal (114–127V) para no saltar directo a
+// alerta por una lectura apenas fuera de línea (ej. 111.6V) — mismo criterio
+// de gradualidad que ya tenían frecuencia/PF/THD.
+const VOLT_REVISAR_MIN = 108;
+const VOLT_REVISAR_MAX = 133;
 const FREQ_NORMAL_MIN = 59.5;
 const FREQ_NORMAL_MAX = 60.5;
 const FREQ_ALERTA_MIN = 55;
@@ -35,14 +40,23 @@ export function evaluarLectura(reading) {
   let estado = 'normal';
 
   [['Fase 1', reading.v1], ['Fase 2', reading.v2], ['Fase 3', reading.v3]].forEach(([nombre, v]) => {
-    if (typeof v !== 'number') return;
-    if (v < VOLT_MIN || v > VOLT_MAX) {
+    // 0V exacto en un sistema energizado no es una lectura real de bajo
+    // voltaje — es el patrón con el que este medidor reporta un canal sin
+    // conectar (ej. un tablero monofásico monitoreado con un medidor de 3
+    // fases). Tratarlo como alerta real generaba falsas alarmas de
+    // "intervención" en fases que simplemente no aplican. Se omite en vez de
+    // inventar qué significa.
+    if (typeof v !== 'number' || v === 0) return;
+    if (v < VOLT_REVISAR_MIN || v > VOLT_REVISAR_MAX) {
       motivos.push({ campo: `Voltaje ${nombre}`, mensaje: `Voltaje ${nombre} fuera de rango normal (114–127V): ${v.toFixed(1)}V` });
       estado = peor(estado, 'alerta');
+    } else if (v < VOLT_MIN || v > VOLT_MAX) {
+      motivos.push({ campo: `Voltaje ${nombre}`, mensaje: `Voltaje ${nombre} conviene revisarlo (fuera de 114–127V, pero dentro de un margen tolerable): ${v.toFixed(1)}V` });
+      estado = peor(estado, 'revisar');
     }
   });
 
-  if (typeof reading.frequency === 'number') {
+  if (typeof reading.frequency === 'number' && reading.frequency !== 0) {
     const f = reading.frequency;
     if (f < FREQ_ALERTA_MIN || f > FREQ_ALERTA_MAX) {
       motivos.push({ campo: 'Frecuencia', mensaje: `Frecuencia fuera de rango seguro: ${f.toFixed(2)}Hz` });
