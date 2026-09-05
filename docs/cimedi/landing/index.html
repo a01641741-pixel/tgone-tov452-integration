@@ -1,0 +1,902 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Una plataforma que alberga a las demás — CIMEDI</title>
+<meta name="description" content="CIMEDI · Centro Inteligente de Medición Digital. Identidad, permisos y auditoría del ecosistema, resueltos una sola vez.">
+
+<style>
+/* ══════════════════════════════════════════════════════════════════════════
+   TIPOGRAFÍA
+   Los alias 'SG' y 'JB' son los del diseño original. Se resuelven contra las
+   familias reales cargadas más abajo; si la fuente local no existe (lo normal),
+   la cara falla al instante y la pila cae a la familia web, ya cargada.
+   ══════════════════════════════════════════════════════════════════════════ */
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Space+Grotesk:wght@300;400;500;700&display=block');
+
+@font-face{
+  font-family:'SG';
+  src:local('Space Grotesk Light'),local('SpaceGrotesk-Light'),local('Space Grotesk');
+  font-display:block;
+}
+@font-face{
+  font-family:'JB';
+  src:local('JetBrains Mono'),local('JetBrainsMono-Regular');
+  font-display:block;
+}
+
+*,*::before,*::after{box-sizing:border-box}
+html,body{height:100%;background:#000;overflow:hidden;margin:0}
+body{
+  -webkit-font-smoothing:antialiased;
+  -moz-osx-font-smoothing:grayscale;
+  text-rendering:geometricPrecision;
+  color:#fff;
+}
+
+/* ══════════════════════════════════════════════════════════════════════════
+   ESCALADOR — todo el layout es calc(N * var(--s)) sobre un lienzo fijo.
+   ══════════════════════════════════════════════════════════════════════════ */
+:root{
+  --s: min(100vw / 1505, 100vh / 700);
+
+  --red:#c81b1c;
+  --red-dk:#b01617;
+  --ink:#fff;
+  --sub:#e6e6e6;
+  --lab:#949494;
+
+  --bx:60; --by:36; --bs:44;
+
+  --h1y:-12.5;
+  --suby:167.5;
+  --numy:19;
+  --laby:74;
+
+  /* Geometría de bloque. El brief fija las Y; estas cierran el sistema para
+     que las tres pantallas se compongan con el mismo calc(). */
+  --headh:90;
+  --heroh:306;
+  --statsh:102;
+  --ctay:248;
+
+  --h1s:68.7; --h1l:76;  --h1t:-2.4;
+  --subs:18.7; --subl:26;
+  --nums:33.45; --labs:21.9;
+
+  --sg:'SG','Space Grotesk',system-ui,-apple-system,sans-serif;
+  --jb:'JB','JetBrains Mono',ui-monospace,SFMono-Regular,Menlo,monospace;
+}
+
+/* Tablet vertical — lienzo 900×1200 */
+@media (max-width:1023px) and (max-aspect-ratio:1/1){
+  :root{
+    --s: clamp(0.82px, min(100vw / 900, 100vh / 1200), 1.25px);
+    --bx:56; --by:33; --bs:40;
+    --h1y:-10.25; --suby:137.4; --numy:15.6; --laby:60.7;
+    --headh:80; --heroh:251; --statsh:90; --ctay:203.4;
+    --h1s:64; --h1l:71; --h1t:-2.2;
+    --subs:17.4; --subl:24.2;
+  }
+}
+
+/* Teléfono — lienzo 430×620 */
+@media (max-width:599px){
+  :root{
+    --s: min(100vw / 430, 100vh / 620, 1.02px);
+    --bx:26; --by:21; --bs:34;
+    --h1y:-7.1; --suby:108; --numy:13; --laby:50;
+    --headh:64; --heroh:210; --statsh:78; --ctay:160;
+    /* 35 y no 38: a 38 la línea larga del titular llega justo al borde con la
+       fuente de reserva, y cualquier teléfono más angosto la recortaría. */
+    --h1s:35; --h1l:39.5; --h1t:-1.1;
+    --subs:15; --subl:21;
+    --nums:27; --labs:17.5;
+  }
+}
+
+/* ══════════════════════════════════════════════════════════════════════════
+   ESCENARIO
+   ══════════════════════════════════════════════════════════════════════════ */
+.screen{position:fixed;inset:0;overflow:hidden;background:#000}
+.svgdefs{position:absolute;width:0;height:0;overflow:hidden}
+
+.bg,.bg2{position:absolute;inset:0;overflow:hidden;pointer-events:none}
+.bg{filter:url(#grade)}
+.bg video,.bg2 video{
+  position:absolute;inset:0;width:100%;height:100%;
+  object-fit:cover;object-position:center top;display:block;
+}
+.bg2{
+  filter:url(#grade2);
+  mix-blend-mode:plus-lighter;
+  opacity:.35;
+  -webkit-mask-image:linear-gradient(180deg,transparent 21.5%,#000 100%);
+  mask-image:linear-gradient(180deg,transparent 21.5%,#000 100%);
+}
+
+.scrim{position:absolute;inset:0;pointer-events:none;display:none}
+
+@media (max-width:1023px) and (max-aspect-ratio:1/1){
+  .bg2{display:none}
+  .bg video{object-position:right top;transform:scale(1.18);transform-origin:right top}
+  .bg{
+    -webkit-mask-image:linear-gradient(180deg,#000 0 40%,transparent 64%);
+    mask-image:linear-gradient(180deg,#000 0 40%,transparent 64%);
+  }
+  .scrim{
+    display:block;
+    background:linear-gradient(100deg,#000 26%,rgba(0,0,0,.74) 50%,rgba(0,0,0,.18) 76%,transparent 92%);
+  }
+}
+
+@media (max-width:599px){
+  .bg video,.bg2 video{object-position:78% top;transform:none}
+  .bg{-webkit-mask-image:none;mask-image:none}
+  .bg2{
+    display:block;
+    -webkit-mask-image:linear-gradient(180deg,transparent 10%,#000 60%);
+    mask-image:linear-gradient(180deg,transparent 10%,#000 60%);
+  }
+  .scrim{
+    display:block;
+    background:linear-gradient(180deg,rgba(0,0,0,.10) 0%,rgba(0,0,0,.50) 24%,rgba(0,0,0,.86) 42%,#000 66%);
+  }
+}
+
+/* ══════════════════════════════════════════════════════════════════════════
+   MARCO
+   ══════════════════════════════════════════════════════════════════════════ */
+.frame{
+  position:absolute;inset:0;z-index:3;
+  display:flex;flex-direction:column;
+}
+.sp{flex-shrink:0;flex-basis:0}
+.sp-a{flex-grow:239}
+.sp-b{flex-grow:194}
+.sp-c{flex-grow:115}
+
+/* ─────────────────────────── Cabecera ─────────────────────────── */
+header{position:relative;flex:none;height:calc(var(--headh) * var(--s))}
+
+/* Logotipo oficial de CIMEDI. El PNG trae el fondo blanco incrustado, así que
+   se presenta en su insignia blanca — igual que en la aplicación. No se
+   recorta, no se separa el isotipo del texto, no se reinterpreta. */
+.logo{
+  position:absolute;
+  left:calc(60 * var(--s));
+  top:calc(30 * var(--s));
+  display:inline-flex;align-items:center;
+  background:#fff;
+  border-radius:calc(5 * var(--s));
+  padding:calc(4 * var(--s)) calc(8 * var(--s));
+  box-shadow:0 calc(1 * var(--s)) calc(3 * var(--s)) rgba(0,0,0,.18);
+  text-decoration:none;
+  transform-origin:left center;
+}
+/* El lockup es horizontal y largo. `contain` + max-width dejan que se reduzca
+   proporcionalmente si el ancho aprieta: nunca se recorta ni se deforma, que es
+   la regla de uso del logotipo. */
+.logo img{height:calc(37 * var(--s));width:auto;max-width:100%;object-fit:contain;display:block}
+
+@media (max-width:1023px){
+  /* Tope duro para que jamás invada la hamburguesa. */
+  .logo{max-width:calc(100% - (var(--bx) + var(--bs) + 78) * var(--s))}
+}
+@media (max-width:599px){
+  .logo{left:calc(22 * var(--s));top:calc(20 * var(--s));
+        max-width:calc(100% - (var(--bx) + var(--bs) + 40) * var(--s))}
+  .logo img{height:calc(28 * var(--s))}
+}
+
+nav{
+  position:absolute;
+  left:calc(482 * var(--s));
+  top:calc(32 * var(--s));
+  height:calc(58 * var(--s));
+  display:flex;align-items:center;
+}
+nav a{
+  font-family:var(--jb);font-weight:400;
+  font-size:calc(19.9 * var(--s));
+  line-height:1;
+  color:var(--ink);
+  text-decoration:none;
+  display:inline-flex;align-items:center;
+  gap:calc(7 * var(--s));
+  transition:color .22s ease;
+}
+nav a + a{margin-left:calc(40 * var(--s))}
+nav a:nth-child(2){margin-left:calc(53 * var(--s))}
+nav a:nth-child(4){margin-left:calc(37 * var(--s))}
+nav a svg{
+  width:calc(11.6 * var(--s));
+  height:calc(7.2 * var(--s));
+  margin-top:calc(-2.6 * var(--s));
+  flex:none;
+}
+
+.burger{
+  position:absolute;
+  right:calc(var(--bx) * var(--s));
+  top:calc(var(--by) * var(--s));
+  width:calc(var(--bs) * var(--s));
+  height:calc(var(--bs) * var(--s));
+  display:none;
+  background:none;border:0;padding:0;cursor:pointer;
+  align-items:center;justify-content:center;
+  z-index:60;
+}
+.burger i{
+  position:absolute;left:calc(var(--bs) * var(--s) * .16);
+  width:calc(var(--bs) * var(--s) * .68);
+  height:calc(2 * var(--s));
+  background:#fff;display:block;
+  transition:transform .42s cubic-bezier(.2,.7,.2,1),opacity .2s ease,width .42s cubic-bezier(.2,.7,.2,1);
+}
+.burger i:nth-child(1){transform:translateY(calc(-7 * var(--s)))}
+.burger i:nth-child(2){transform:translateY(0)}
+.burger i:nth-child(3){transform:translateY(calc(7 * var(--s)));width:calc(var(--bs) * var(--s) * .47)}
+body.nav-open .burger i:nth-child(1){transform:rotate(45deg)}
+body.nav-open .burger i:nth-child(2){opacity:0}
+body.nav-open .burger i:nth-child(3){transform:rotate(-45deg);width:calc(var(--bs) * var(--s) * .68)}
+
+/* ─────────────────────────── Botones ─────────────────────────── */
+.btn{
+  display:inline-flex;align-items:center;justify-content:space-between;
+  width:calc(212 * var(--s));
+  height:calc(58 * var(--s));
+  padding-left:calc(18 * var(--s));
+  padding-right:calc(22 * var(--s));
+  gap:calc(11 * var(--s));
+  background:var(--red);
+  border:0;border-radius:0;
+  color:#fff;text-decoration:none;cursor:pointer;
+  transition:background .24s ease;
+}
+.btn span{
+  font-family:var(--sg);font-weight:480;
+  font-size:calc(20.85 * var(--s));
+  letter-spacing:calc(-0.62 * var(--s));
+  line-height:1;
+  transform:translateY(calc(1.5 * var(--s)));
+  white-space:nowrap;
+}
+.btn svg{
+  width:calc(21.5 * var(--s));
+  height:calc(18 * var(--s));
+  flex:none;
+  transition:transform .28s cubic-bezier(.22,1,.36,1);
+}
+.btn-top{position:absolute;left:calc(1232 * var(--s));top:calc(30 * var(--s))}
+
+@media (hover:hover){
+  .btn:hover{background:var(--red-dk)}
+  .btn:hover svg{transform:translateX(calc(3 * var(--s)))}
+  nav a:hover{color:var(--red)}
+}
+
+@media (max-width:1023px) and (max-aspect-ratio:1/1){
+  .btn{
+    width:calc(174 * var(--s));height:calc(47.6 * var(--s));
+    padding-left:calc(14.8 * var(--s));padding-right:calc(18 * var(--s));
+    gap:calc(9 * var(--s));
+  }
+  .btn span{font-size:calc(17.1 * var(--s))}
+}
+@media (max-width:599px){
+  .btn{
+    width:calc(185 * var(--s));height:calc(50 * var(--s));
+    padding-left:calc(15.7 * var(--s));padding-right:calc(19.1 * var(--s));
+    gap:calc(9.6 * var(--s));
+  }
+  .btn span{font-size:calc(17.5 * var(--s))}
+}
+
+@media (max-width:1023px){
+  nav,.btn-top{display:none}
+  .burger{display:flex}
+}
+
+/* ─────────────────────────── Hero ─────────────────────────── */
+.hero{position:relative;flex:none;height:calc(var(--heroh) * var(--s))}
+
+h1{
+  position:absolute;
+  left:calc(73 * var(--s));
+  top:calc(var(--h1y) * var(--s));
+  margin:0;
+  font-family:var(--sg);font-weight:700;
+  font-size:calc(var(--h1s) * var(--s));
+  line-height:calc(var(--h1l) * var(--s));
+  letter-spacing:calc(var(--h1t) * var(--s));
+  color:var(--ink);
+}
+h1 .ln{display:block}
+h1 .ln > span{display:block}
+
+.sub{
+  position:absolute;
+  left:calc(73 * var(--s));
+  top:calc(var(--suby) * var(--s));
+  margin:0;
+  font-family:var(--jb);font-weight:400;
+  font-size:calc(var(--subs) * var(--s));
+  line-height:calc(var(--subl) * var(--s));
+  letter-spacing:calc(-0.87 * var(--s));
+  color:var(--sub);
+}
+.btn-cta{position:absolute;left:calc(73 * var(--s));top:calc(var(--ctay) * var(--s))}
+
+@media (max-width:599px){
+  h1,.sub,.btn-cta{left:calc(26 * var(--s))}
+}
+
+/* ─────────────────────────── Cifras ─────────────────────────── */
+.stats{position:relative;flex:none;height:calc(var(--statsh) * var(--s))}
+.num{
+  position:absolute;
+  top:calc(var(--numy) * var(--s));
+  font-family:var(--jb);font-weight:480;
+  font-size:calc(var(--nums) * var(--s));
+  line-height:1;
+  color:var(--ink);
+  white-space:nowrap;
+}
+.lab{
+  position:absolute;
+  top:calc(var(--laby) * var(--s));
+  font-family:var(--sg);font-weight:400;
+  font-size:calc(var(--labs) * var(--s));
+  letter-spacing:calc(-0.62 * var(--s));
+  line-height:1;
+  color:var(--lab);
+  white-space:nowrap;
+}
+.n1,.l1{left:calc(70.4 * var(--s))}
+.n2,.l2{left:calc(213.1 * var(--s))}
+.l3{left:calc(392.6 * var(--s))}
+.n3{left:calc(388.2 * var(--s))}
+
+.rule{
+  position:absolute;
+  top:calc(var(--numy) * var(--s));
+  width:calc(1.5 * var(--s));
+  height:calc((var(--laby) + var(--labs) + 4 - var(--numy)) * var(--s));
+  background:linear-gradient(180deg,rgba(255,255,255,.085),rgba(255,255,255,.21) 50%,rgba(255,255,255,.085));
+}
+.r1{left:calc(181 * var(--s))}
+.r2{left:calc(356 * var(--s))}
+
+@media (max-width:599px){
+  .n1,.l1{left:calc(26 * var(--s))}
+  .n2,.l2{left:calc(168 * var(--s))}
+  .n3,.l3{left:calc(312 * var(--s))}
+  .r1{left:calc(146 * var(--s))}
+  .r2{left:calc(290 * var(--s))}
+}
+
+/* ══════════════════════════════════════════════════════════════════════════
+   MENÚ MÓVIL
+   ══════════════════════════════════════════════════════════════════════════ */
+.menu{
+  position:fixed;inset:0;z-index:50;
+  background:#000;
+  display:flex;flex-direction:column;
+  opacity:0;visibility:hidden;pointer-events:none;
+  transition:opacity .38s ease,visibility 0s linear .38s;
+}
+body.nav-open .menu{
+  opacity:1;visibility:visible;pointer-events:auto;
+  transition:opacity .38s ease,visibility 0s;
+}
+.menu-tex{position:absolute;inset:0;overflow:hidden;pointer-events:none;opacity:.4}
+.menu-tex video{
+  position:absolute;inset:0;width:100%;height:100%;
+  object-fit:cover;object-position:center top;display:block;
+}
+.menu-tex{
+  -webkit-mask-image:linear-gradient(180deg,transparent 0%,#000 46%);
+  mask-image:linear-gradient(180deg,transparent 0%,#000 46%);
+}
+.menu-rule{
+  position:absolute;left:0;right:0;top:0;
+  height:calc(2 * var(--s));
+  background:var(--red);
+  transform:scaleX(0);transform-origin:left center;
+  transition:transform .55s cubic-bezier(.2,.7,.2,1) .04s;
+}
+body.nav-open .menu-rule{transform:scaleX(1)}
+
+.menu-in{
+  position:relative;z-index:2;
+  display:flex;flex-direction:column;
+  height:100%;
+  padding:calc(var(--by) * var(--s) + calc(var(--bs) * var(--s)) + calc(26 * var(--s))) calc(26 * var(--s)) calc(26 * var(--s));
+}
+.eyebrow{
+  font-family:var(--jb);font-weight:400;
+  font-size:calc(11.5 * var(--s));
+  letter-spacing:.22em;
+  text-transform:uppercase;
+  color:var(--lab);
+  margin:0 0 calc(18 * var(--s));
+}
+.mlist{list-style:none;margin:0;padding:0;flex:1}
+.mitem{
+  border-bottom:1px solid rgba(255,255,255,.12);
+  opacity:0;transform:translateY(calc(12 * var(--s)));
+}
+body.nav-open .mitem{
+  opacity:1;transform:none;
+  transition:opacity .5s cubic-bezier(.22,1,.36,1),transform .5s cubic-bezier(.22,1,.36,1);
+}
+body.nav-open .mitem:nth-child(1){transition-delay:.08s}
+body.nav-open .mitem:nth-child(2){transition-delay:.14s}
+body.nav-open .mitem:nth-child(3){transition-delay:.20s}
+body.nav-open .mitem:nth-child(4){transition-delay:.26s}
+
+.mrow{
+  display:flex;align-items:center;justify-content:space-between;
+  width:100%;
+  padding:calc(15 * var(--s)) 0;
+  background:none;border:0;
+  font-family:var(--sg);font-weight:700;
+  font-size:calc(26 * var(--s));
+  letter-spacing:calc(-0.8 * var(--s));
+  color:var(--ink);
+  text-decoration:none;text-align:left;
+  cursor:pointer;
+  transition:color .22s ease;
+}
+.mrow svg{
+  width:calc(13 * var(--s));height:calc(8 * var(--s));flex:none;
+  transition:transform .34s cubic-bezier(.2,.7,.2,1);
+}
+.mrow[aria-expanded="true"] svg{transform:rotate(180deg)}
+@media (hover:hover){ .mrow:hover{color:var(--red)} .msub a:hover{color:var(--ink)} }
+
+.mpanel{overflow:hidden;height:0;transition:height .38s cubic-bezier(.2,.7,.2,1)}
+.msub{list-style:none;margin:0;padding:0 0 calc(12 * var(--s))}
+.msub a{
+  display:block;
+  padding:calc(7 * var(--s)) 0;
+  font-family:var(--jb);font-weight:400;
+  font-size:calc(14.5 * var(--s));
+  letter-spacing:calc(-0.4 * var(--s));
+  color:var(--lab);
+  text-decoration:none;
+  transition:color .22s ease;
+}
+
+.menu-foot{padding-top:calc(20 * var(--s))}
+.btn-menu{width:100%;justify-content:space-between}
+.menu-note{
+  margin:calc(14 * var(--s)) 0 0;
+  font-family:var(--jb);font-weight:400;
+  font-size:calc(12.5 * var(--s));
+  letter-spacing:.04em;
+  color:var(--lab);
+}
+
+/* ══════════════════════════════════════════════════════════════════════════
+   ACCESIBILIDAD
+   ══════════════════════════════════════════════════════════════════════════ */
+:focus-visible{outline:calc(2 * var(--s)) solid #fff;outline-offset:calc(3 * var(--s))}
+
+@media (prefers-reduced-motion:reduce){
+  *{transition:none !important;animation:none !important}
+}
+
+/* ══════════════════════════════════════════════════════════════════════════
+   ESTADO INICIAL DE LA ENTRADA (html.intro)
+   Se arma antes del primer pintado para que la página terminada no parpadee.
+   ══════════════════════════════════════════════════════════════════════════ */
+html.intro .logo{opacity:0;transform:scale(.9)}
+html.intro nav a{opacity:0;transform:translateY(calc(7 * var(--s)))}
+html.intro .burger{opacity:0}
+html.intro .sub{opacity:0;transform:translateY(calc(14 * var(--s)))}
+html.intro .num{opacity:0;transform:translateY(calc(12 * var(--s)))}
+html.intro .lab{opacity:0;transform:translateY(calc(10 * var(--s)))}
+html.intro .rule{transform:scaleY(0);transform-origin:center}
+html.intro .btn-top,
+html.intro .btn-cta{clip-path:inset(0 100% 0 0)}
+
+/* La máscara protege los descendentes de SG: el recorte se hace con relleno
+   compensado, no cortando la caja de texto. */
+html.intro h1 .ln{
+  overflow:hidden;
+  padding-bottom:calc(6 * var(--s));
+  margin-bottom:calc(-6 * var(--s));
+}
+html.intro h1 .ln > span{transform:translateY(120%)}
+</style>
+
+<script>
+/* Se arma la entrada antes de pintar: si no hay WAAPI o el usuario pidió menos
+   movimiento, la página aparece completa y estática, nunca a medias. */
+(function(){
+  try{
+    var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if(!reduce && typeof Element !== 'undefined' && Element.prototype.animate){
+      document.documentElement.classList.add('intro');
+    }
+  }catch(e){}
+})();
+</script>
+</head>
+
+<body>
+
+<svg class="svgdefs" aria-hidden="true" focusable="false">
+  <defs>
+    <filter id="grade" color-interpolation-filters="sRGB">
+      <feComponentTransfer>
+        <feFuncR type="table" tableValues="0.0018 0.0105 0.0154 0.0228 0.0307 0.0404 0.0485 0.0585 0.0719 0.0923 0.1205 0.1466 0.1657 0.1866 0.2197 0.2405 0.2485 0.2921 0.3362 0.3465 0.3472 0.3781 0.3781 0.4078 0.4199 0.4391 0.4604 0.4763 0.4798 0.5197 0.5473 0.5720 0.5995 0.6048 0.6232 0.6322 0.6483 0.6734 0.7201 0.7201 0.7410 0.7707 0.7707 0.7790 0.8084 0.8084 0.8390 0.8595 0.8707 0.8870 0.8993 0.9085 0.9132 0.9132 0.9162 0.9162 0.9162 0.9162 0.9162 0.9162 0.9162 0.9162 0.9162 0.9238 0.9300"/>
+        <feFuncG type="table" tableValues="0.0023 0.0106 0.0159 0.0250 0.0333 0.0445 0.0535 0.0620 0.0707 0.0827 0.0936 0.1063 0.1214 0.1402 0.1678 0.1727 0.2029 0.2176 0.2461 0.2757 0.2814 0.3050 0.3415 0.3692 0.3826 0.3884 0.4617 0.4617 0.4617 0.4643 0.4643 0.4808 0.5706 0.6005 0.6005 0.6390 0.6390 0.6390 0.6390 0.6390 0.6390 0.6390 0.6390 0.6390 0.6524 0.6664 0.6805 0.6945 0.7086 0.7227 0.7367 0.7508 0.7648 0.7789 0.7929 0.8070 0.8211 0.8351 0.8492 0.8632 0.8773 0.8913 0.9054 0.9195 0.9300"/>
+        <feFuncB type="table" tableValues="0.0021 0.0110 0.0187 0.0311 0.0377 0.0466 0.0584 0.0706 0.0791 0.0924 0.1039 0.1145 0.1316 0.1464 0.1614 0.1719 0.1887 0.2014 0.2247 0.2458 0.2954 0.2954 0.3089 0.3938 0.3938 0.3988 0.3988 0.4581 0.4581 0.4762 0.4762 0.4763 0.5374 0.5560 0.5813 0.5813 0.5813 0.5813 0.5835 0.5969 0.6104 0.6238 0.6373 0.6507 0.6642 0.6777 0.6911 0.7046 0.7181 0.7315 0.7449 0.7584 0.7719 0.7853 0.7988 0.8123 0.8257 0.8391 0.8526 0.8661 0.8795 0.8930 0.9065 0.9199 0.9300"/>
+      </feComponentTransfer>
+    </filter>
+
+    <filter id="grade2" color-interpolation-filters="sRGB">
+      <feComponentTransfer>
+        <feFuncR type="table" tableValues="0.0016 0.0092 0.0136 0.0201 0.0270 0.0356 0.0427 0.0515 0.0633 0.0812 0.1060 0.1290 0.1458 0.1642 0.1933 0.2116 0.2187 0.2570 0.2959 0.3049 0.3055 0.3327 0.3327 0.3589 0.3695 0.3864 0.4052 0.4191 0.4222 0.4573 0.4816 0.5034 0.5276 0.5322 0.5484 0.5563 0.5705 0.5926 0.6337 0.6337 0.6521 0.6782 0.6782 0.6855 0.7114 0.7114 0.7383 0.7564 0.7662 0.7806 0.7914 0.7995 0.8036 0.8036 0.8063 0.8063 0.8063 0.8063 0.8063 0.8063 0.8063 0.8063 0.8063 0.8129 0.8184"/>
+        <feFuncG type="table" tableValues="0.0015 0.0069 0.0103 0.0163 0.0216 0.0289 0.0348 0.0403 0.0460 0.0538 0.0608 0.0691 0.0789 0.0911 0.1091 0.1123 0.1319 0.1414 0.1600 0.1792 0.1829 0.1983 0.2220 0.2400 0.2487 0.2525 0.3001 0.3001 0.3001 0.3018 0.3018 0.3125 0.3709 0.3903 0.3903 0.4153 0.4153 0.4153 0.4153 0.4153 0.4153 0.4153 0.4153 0.4153 0.4241 0.4332 0.4423 0.4514 0.4606 0.4698 0.4789 0.4880 0.4971 0.5063 0.5154 0.5246 0.5337 0.5428 0.5520 0.5611 0.5702 0.5793 0.5885 0.5977 0.6045"/>
+        <feFuncB type="table" tableValues="0.0013 0.0066 0.0112 0.0187 0.0226 0.0280 0.0350 0.0424 0.0475 0.0554 0.0623 0.0687 0.0790 0.0878 0.0968 0.1031 0.1132 0.1208 0.1348 0.1475 0.1772 0.1772 0.1853 0.2363 0.2363 0.2393 0.2393 0.2749 0.2749 0.2857 0.2857 0.2858 0.3224 0.3336 0.3488 0.3488 0.3488 0.3488 0.3501 0.3581 0.3662 0.3743 0.3824 0.3904 0.3985 0.4066 0.4147 0.4228 0.4309 0.4389 0.4469 0.4550 0.4631 0.4712 0.4793 0.4874 0.4954 0.5035 0.5116 0.5197 0.5277 0.5358 0.5439 0.5519 0.5580"/>
+      </feComponentTransfer>
+    </filter>
+  </defs>
+</svg>
+
+<div class="screen">
+
+  <div class="bg">
+    <video autoplay muted loop playsinline preload="auto"
+      src="https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260809_132544_b6ef0174-ed95-45ad-9a2f-ccb8acfbdce8.mp4"></video>
+  </div>
+
+  <div class="bg2">
+    <video autoplay muted loop playsinline preload="auto"
+      src="https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260809_132544_b6ef0174-ed95-45ad-9a2f-ccb8acfbdce8.mp4"></video>
+  </div>
+
+  <div class="scrim"></div>
+
+  <div class="frame">
+
+    <header>
+      <a class="logo" href="/" aria-label="CIMEDI — Centro Inteligente de Medición Digital, inicio">
+        <img src="https://media.base44.com/images/public/6a735807590e7614f7fcdca7/c8bc9df76_image.png"
+             alt="CIMEDI — Centro Inteligente de Medición Digital" draggable="false">
+      </a>
+
+      <nav aria-label="Navegación principal">
+        <a href="/">Inicio</a>
+        <a href="/plataformas">Universo
+          <svg viewBox="0 0 11 6" fill="none" aria-hidden="true"><path d="M1 1L5.5 5L10 1" stroke="currentColor" stroke-width="1.7"/></svg>
+        </a>
+        <a href="/app">Módulos
+          <svg viewBox="0 0 11 6" fill="none" aria-hidden="true"><path d="M1 1L5.5 5L10 1" stroke="currentColor" stroke-width="1.7"/></svg>
+        </a>
+        <a href="/#contacto">Contacto</a>
+      </nav>
+
+      <a class="btn btn-top" href="/login">
+        <span>Acceder</span>
+        <svg viewBox="0 0 21.5 18" fill="none" aria-hidden="true">
+          <path d="M0 9H20.1" stroke="#fff" stroke-width="2"/>
+          <path d="M12.1 1L20.1 9L12.1 17" stroke="#fff" stroke-width="2"/>
+        </svg>
+      </a>
+
+      <button class="burger" id="burger" type="button" aria-label="Abrir menú" aria-expanded="false" aria-controls="menu">
+        <i></i><i></i><i></i>
+      </button>
+    </header>
+
+    <div class="sp sp-a"></div>
+
+    <section class="hero">
+      <h1>
+        <span class="ln"><span>Una plataforma que</span></span>
+        <span class="ln"><span>alberga a las demás</span></span>
+      </h1>
+
+      <p class="sub">Identidad, permisos y auditoría<br>resueltos una sola vez.</p>
+
+      <a class="btn btn-cta" href="/login">
+        <span>Acceder</span>
+        <svg viewBox="0 0 21.5 18" fill="none" aria-hidden="true">
+          <path d="M0 9H20.1" stroke="#fff" stroke-width="2"/>
+          <path d="M12.1 1L20.1 9L12.1 17" stroke="#fff" stroke-width="2"/>
+        </svg>
+      </a>
+    </section>
+
+    <div class="sp sp-b"></div>
+
+    <section class="stats" aria-label="Estado del universo CIMEDI">
+      <span class="num n1">8</span><span class="lab l1">Módulos</span>
+      <span class="rule r1" aria-hidden="true"></span>
+      <span class="num n2">2</span><span class="lab l2">En operación</span>
+      <span class="rule r2" aria-hidden="true"></span>
+      <span class="num n3">100%</span><span class="lab l3">Auditado</span>
+    </section>
+
+    <div class="sp sp-c"></div>
+  </div>
+
+  <!-- ─────────────────────────── Menú móvil ─────────────────────────── -->
+  <div class="menu" id="menu" role="dialog" aria-modal="true" aria-label="Menú">
+    <div class="menu-tex">
+      <video autoplay muted loop playsinline preload="auto"
+        src="https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260809_132544_b6ef0174-ed95-45ad-9a2f-ccb8acfbdce8.mp4"></video>
+    </div>
+    <div class="menu-rule" aria-hidden="true"></div>
+
+    <div class="menu-in">
+      <p class="eyebrow">Menú</p>
+
+      <ul class="mlist">
+        <li class="mitem"><a class="mrow" href="/">Inicio</a></li>
+
+        <li class="mitem">
+          <button class="mrow" type="button" aria-expanded="false" aria-controls="p-universo">
+            Universo
+            <svg viewBox="0 0 11 6" fill="none" aria-hidden="true"><path d="M1 1L5.5 5L10 1" stroke="currentColor" stroke-width="1.7"/></svg>
+          </button>
+          <div class="mpanel" id="p-universo">
+            <ul class="msub">
+              <li><a href="https://tgonex.com" target="_blank" rel="noopener noreferrer">TG One+</a></li>
+              <li><a href="/sai">SAI Jalisco</a></li>
+              <li><a href="/hydrion">HYDRION</a></li>
+            </ul>
+          </div>
+        </li>
+
+        <li class="mitem">
+          <button class="mrow" type="button" aria-expanded="false" aria-controls="p-modulos">
+            Módulos
+            <svg viewBox="0 0 11 6" fill="none" aria-hidden="true"><path d="M1 1L5.5 5L10 1" stroke="currentColor" stroke-width="1.7"/></svg>
+          </button>
+          <div class="mpanel" id="p-modulos">
+            <ul class="msub">
+              <li><a href="/app/monitoreo">Monitoreo IoT</a></li>
+              <li><a href="/app/calendario">Mantenimiento</a></li>
+              <li><a href="/app/auditoria">Alertas y auditoría</a></li>
+            </ul>
+          </div>
+        </li>
+
+        <li class="mitem"><a class="mrow" href="/#contacto">Contacto</a></li>
+      </ul>
+
+      <div class="menu-foot">
+        <a class="btn btn-menu" href="/login">
+          <span>Acceder</span>
+          <svg viewBox="0 0 21.5 18" fill="none" aria-hidden="true">
+            <path d="M0 9H20.1" stroke="#fff" stroke-width="2"/>
+            <path d="M12.1 1L20.1 9L12.1 17" stroke="#fff" stroke-width="2"/>
+          </svg>
+        </a>
+        <p class="menu-note">8 módulos &nbsp;/&nbsp; 2 en operación</p>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<script>
+(function(){
+  'use strict';
+
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  /* ════════════════════════════════════════════════════════════════════
+     VÍDEO — tres instancias del mismo plano, sincronizadas contra la
+     primera. Se corrige solo cuando la deriva se nota (>0.12 s); ajustar
+     en cada tick provocaría micro-saltos visibles.
+     ════════════════════════════════════════════════════════════════════ */
+  var videos = Array.prototype.slice.call(document.querySelectorAll('video'));
+
+  if(reduce){
+    videos.forEach(function(v){ v.removeAttribute('autoplay'); try{ v.pause(); }catch(e){} });
+  }else{
+    var master = videos[0];
+    videos.forEach(function(v){
+      var p = v.play();
+      if(p && p.catch) p.catch(function(){});
+    });
+    if(master){
+      master.addEventListener('timeupdate', function(){
+        for(var i=1;i<videos.length;i++){
+          var v = videos[i];
+          if(!v.duration) continue;
+          if(Math.abs(v.currentTime - master.currentTime) > 0.12){
+            try{ v.currentTime = master.currentTime; }catch(e){}
+          }
+        }
+      });
+    }
+  }
+
+  /* ════════════════════════════════════════════════════════════════════
+     MENÚ MÓVIL
+     ════════════════════════════════════════════════════════════════════ */
+  var burger = document.getElementById('burger');
+  var menu   = document.getElementById('menu');
+  var rows   = Array.prototype.slice.call(menu.querySelectorAll('.mrow[aria-controls]'));
+
+  function closeAccordions(except){
+    rows.forEach(function(r){
+      if(r === except) return;
+      r.setAttribute('aria-expanded','false');
+      document.getElementById(r.getAttribute('aria-controls')).style.height = '0px';
+    });
+  }
+
+  function setMenu(open){
+    document.body.classList.toggle('nav-open', open);
+    burger.setAttribute('aria-expanded', open ? 'true' : 'false');
+    burger.setAttribute('aria-label', open ? 'Cerrar menú' : 'Abrir menú');
+    if(!open) closeAccordions(null);
+  }
+
+  burger.addEventListener('click', function(){
+    setMenu(!document.body.classList.contains('nav-open'));
+  });
+
+  rows.forEach(function(r){
+    r.addEventListener('click', function(){
+      var panel = document.getElementById(r.getAttribute('aria-controls'));
+      var open  = r.getAttribute('aria-expanded') === 'true';
+      closeAccordions(r);                       // solo uno abierto a la vez
+      r.setAttribute('aria-expanded', open ? 'false' : 'true');
+      panel.style.height = open ? '0px' : panel.scrollHeight + 'px';
+    });
+  });
+
+  menu.addEventListener('click', function(e){
+    if(e.target.closest('a')) setMenu(false);
+  });
+
+  document.addEventListener('keydown', function(e){
+    if(e.key === 'Escape' && document.body.classList.contains('nav-open')) setMenu(false);
+  });
+
+  window.addEventListener('resize', function(){
+    if(window.innerWidth > 1023 && document.body.classList.contains('nav-open')) setMenu(false);
+  });
+
+  /* ════════════════════════════════════════════════════════════════════
+     ENTRADA — una sola vez, con WAAPI y tiempos absolutos.
+     El vídeo NUNCA entra en la coreografía: ya está en escena.
+     ════════════════════════════════════════════════════════════════════ */
+  var root = document.documentElement;
+  if(!root.classList.contains('intro')) return;
+
+  var EXPO  = 'cubic-bezier(.16,1,.3,1)';
+  var QUINT = 'cubic-bezier(.22,1,.36,1)';
+  var QUART = 'cubic-bezier(.25,1,.5,1)';
+  var TYPE  = 'cubic-bezier(.22,.85,.24,1)';
+
+  var started = false, finished = false;
+
+  /* Las custom properties sin @property no se resuelven en getComputedStyle,
+     así que --s se mide con una sonda real. */
+  function measureS(){
+    var probe = document.createElement('div');
+    probe.style.cssText = 'position:absolute;visibility:hidden;pointer-events:none;width:calc(100 * var(--s))';
+    document.body.appendChild(probe);
+    var s = probe.getBoundingClientRect().width / 100;
+    probe.remove();
+    return s > 0 ? s : 1;
+  }
+
+  function finish(){
+    if(finished) return;
+    finished = true;
+    root.classList.remove('intro');
+    // Se cancelan para no dejar estilos en línea residuales sobre el layout.
+    try{
+      document.getAnimations().forEach(function(a){ try{ a.cancel(); }catch(e){} });
+    }catch(e){}
+  }
+
+  function run(){
+    if(started) return;
+    started = true;
+
+    var s = measureS();
+    var K = window.matchMedia('(max-width:599px)').matches ? 0.86 : 1;
+    var px = function(n){ return (n * s) + 'px'; };
+
+    function play(el, keyframes, dur, delay, ease){
+      if(!el) return;
+      el.animate(keyframes, {
+        duration: dur * 1000 * K,
+        delay: delay * 1000 * K,
+        easing: ease,
+        fill: 'both'
+      });
+    }
+
+    function each(sel, kf, dur, t0, stagger, ease){
+      Array.prototype.forEach.call(document.querySelectorAll(sel), function(el, i){
+        play(el, kf, dur, t0 + i * stagger * K, ease);
+      });
+    }
+
+    // 0.00 · logotipo
+    play(document.querySelector('.logo'),
+      [{opacity:0, transform:'scale(.9)'},{opacity:1, transform:'scale(1)'}],
+      .70, 0, EXPO);
+
+    // 0.12 · enlaces de navegación
+    each('nav a',
+      [{opacity:0, transform:'translateY(' + px(7) + ')'},{opacity:1, transform:'none'}],
+      .62, .12, .055, QUINT);
+
+    // 0.18 · hamburguesa
+    play(document.querySelector('.burger'),
+      [{opacity:0},{opacity:1}], .55, .18, QUART);
+
+    // 0.28 · botón superior (barrido, no desvanecido)
+    play(document.querySelector('.btn-top'),
+      [{clipPath:'inset(0 100% 0 0)'},{clipPath:'inset(0 0% 0 0)'}],
+      .66, .28, EXPO);
+
+    // 0.34 · titular
+    each('h1 .ln > span',
+      [{transform:'translateY(120%)'},{transform:'translateY(0)'}],
+      .98, .34, .09, TYPE);
+
+    // 0.74 · subcopia
+    play(document.querySelector('.sub'),
+      [{opacity:0, transform:'translateY(' + px(14) + ')'},{opacity:1, transform:'none'}],
+      .72, .74, QUINT);
+
+    // 0.90 · botón del hero
+    play(document.querySelector('.btn-cta'),
+      [{clipPath:'inset(0 100% 0 0)'},{clipPath:'inset(0 0% 0 0)'}],
+      .70, .90, EXPO);
+
+    // 0.98 · reglas verticales
+    each('.rule',
+      [{transform:'scaleY(0)'},{transform:'scaleY(1)'}],
+      .60, .98, .07, QUART);
+
+    // 1.04 · cifras
+    each('.num',
+      [{opacity:0, transform:'translateY(' + px(12) + ')'},{opacity:1, transform:'none'}],
+      .66, 1.04, .085, QUINT);
+
+    // 1.10 · etiquetas
+    each('.lab',
+      [{opacity:0, transform:'translateY(' + px(10) + ')'},{opacity:1, transform:'none'}],
+      .62, 1.10, .085, QUINT);
+
+    setTimeout(finish, 1900 * K + 120);
+  }
+
+  function start(){
+    requestAnimationFrame(function(){ requestAnimationFrame(run); });
+    setTimeout(run, 1200);
+  }
+
+  if(document.fonts && document.fonts.ready){
+    var armed = false;
+    var go = function(){ if(!armed){ armed = true; start(); } };
+    document.fonts.ready.then(go);
+    setTimeout(go, 1000);
+  }else{
+    start();
+  }
+
+  setTimeout(finish, 4000);   // plazo duro: la página nunca se queda a medias
+})();
+</script>
+
+</body>
+</html>
