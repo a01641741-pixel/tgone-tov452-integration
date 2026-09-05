@@ -15,7 +15,9 @@ replicó su funcionalidad y se resolvieron sus limitaciones conocidas con implem
 |---|---|
 | Aplicación | Base44 · app **CIMEDI** (`6a735807590e7614f7fcdca7`) |
 | Sitio público | `/` — portada institucional y módulos smart-city (preexistente, intacta) |
+| Universo | `/plataformas` — las 8 plataformas del ecosistema, agrupadas por estado real |
 | Consola operativa | `/app` — 17 módulos, multi-empresa, con permisos |
+| Lanzador | `/app/universo` — acceso a cada producto, filtrado por rol |
 | Estado público | `/estado/:slug` |
 
 ## Documentos
@@ -27,6 +29,7 @@ replicó su funcionalidad y se resolvieron sus limitaciones conocidas con implem
 | [`03-roles-permisos.md`](03-roles-permisos.md) | Acciones, roles base y matriz completa |
 | [`04-plan-sprints.md`](04-plan-sprints.md) | Fases entregadas, trabajo restante y riesgos abiertos |
 | [`05-inventario-referencia.md`](05-inventario-referencia.md) | Inventario real levantado y cómo quedó modelado |
+| [`06-universo.md`](06-universo.md) | Catálogo del universo, vocabulario de estados y enlaces muertos cerrados |
 
 ## Módulos
 
