@@ -24,13 +24,45 @@ function estadisticas(valores) {
   };
 }
 
-// Un canal cuyas lecturas son TODAS exactamente 0 no es "0 volts medidos":
-// es el patrón con el que este medidor reporta una fase que no está
-// conectada (ej. un tablero monofásico monitoreado con un equipo trifásico).
-// Distinguirlo evita meter ceros falsos en los promedios.
-function canalConectado(valores) {
-  const vals = valores.filter((n) => typeof n === 'number' && Number.isFinite(n));
-  return vals.length > 0 && vals.some((v) => v !== 0);
+// Un canal cuyas lecturas son TODAS exactamente 0 no aporta "0 volts medidos"
+// a un promedio, así que se excluye. Pero AFIRMAR que la fase "no está
+// conectada" es una causa, no una observación — y en este equipo resultó
+// falsa.
+//
+// Comprobado el 6/sep/2026 contra las 5,567 lecturas de TOV452_66: las fases
+// 2 y 3 SI reportaron tensión durante meses (mediana 121.0 V y 122.9 V sobre
+// 5,130 lecturas). Dejaron de hacerlo el 2/sep/2026 a las 13:52:25 (lectura
+// 12056), y sus últimos valores no fueron normales sino 53.4 V y 54.4 V — ya
+// venían caídas. Llamarlas "canal sin conectar" borraba un evento eléctrico
+// real y lo presentaba como una característica de la instalación.
+//
+// Por eso ahora se describe lo observable, con fecha, y la causa se deja
+// abierta: desde la app no se puede distinguir una fase fuera de servicio de
+// un canal desconectado o de una falla del propio medidor.
+function estadoCanal(valores, fechas) {
+  const pares = valores
+    .map((v, i) => ({ v, fecha: fechas[i] }))
+    .filter((p) => typeof p.v === 'number' && Number.isFinite(p.v));
+  if (!pares.length) return { clave: 'sin_lecturas', reporta: false };
+
+  const conValor = pares.filter((p) => p.v !== 0);
+  if (!conValor.length) return { clave: 'sin_tension_en_el_periodo', reporta: false };
+  if (conValor.length === pares.length) return { clave: 'reporta', reporta: true };
+
+  // Mixto: ¿ceso de reportar, o va y viene?
+  const ultimoConValor = conValor[conValor.length - 1];
+  const ultimo = pares[pares.length - 1];
+  if (ultimo.v === 0 && ultimoConValor) {
+    const posteriores = pares.filter((p) => p.v === 0).length;
+    return {
+      clave: 'ceso',
+      reporta: true,
+      ultimaConTension: ultimoConValor.fecha,
+      ultimoValor: ultimoConValor.v,
+      lecturasEnCero: posteriores,
+    };
+  }
+  return { clave: 'intermitente', reporta: true, lecturasEnCero: pares.length - conValor.length };
 }
 
 /**
@@ -47,14 +79,18 @@ export function analizarPeriodo(lecturas) {
 
   const col = (campo) => ordenadas.map((r) => r[campo]);
 
+  const fechas = col('fecha');
+
   const fases = [1, 2, 3].map((n) => {
     const volts = col(`v${n}`);
     const amps = col(`i${n}`);
     const pf = col(`pf${n}`);
-    const conectada = canalConectado(volts);
+    const canal = estadoCanal(volts, fechas);
+    const conectada = canal.reporta;
     return {
       numero: n,
       conectada,
+      canal,
       // Solo se promedian los ceros cuando el canal SÍ está conectado (ahí un
       // 0 sí es una medición real de ausencia de carga).
       voltaje: conectada ? estadisticas(volts.filter((v) => v !== 0)) : null,
@@ -175,6 +211,32 @@ export function hallazgos(analisis) {
     }
   }
 
+  // Una fase que DEJÓ de reportar tensión es un hecho con fecha, y de los más
+  // accionables que puede dar este equipo. Antes se perdía por completo: el
+  // canal se marcaba como "sin conectar" y desaparecía del análisis.
+  analisis.fases.forEach((f) => {
+    if (f.canal?.clave === 'ceso') {
+      out.push({
+        estado: 'alerta',
+        titulo: `La Fase ${f.numero} dejó de reportar tensión`,
+        detalle: `Venía midiendo y se fue a cero. La última lectura con tensión fue ${f.canal.ultimaConTension || 'de fecha no disponible'}`
+          + (typeof f.canal.ultimoValor === 'number' ? `, con ${f.canal.ultimoValor.toFixed(1)} V` : '')
+          + `. Desde entonces hay ${f.canal.lecturasEnCero} lectura(s) en cero.`,
+        referencia: 'Observación directa de la serie medida',
+        accion: 'Verificar en sitio si la fase está fuera de servicio, si se abrió una protección, o si el canal del medidor perdió la conexión. Desde la plataforma no se puede distinguir entre esas tres causas.',
+      });
+    }
+    if (f.canal?.clave === 'sin_tension_en_el_periodo') {
+      out.push({
+        estado: 'revisar',
+        titulo: `Sin tensión reportada en la Fase ${f.numero}`,
+        detalle: `En todo el periodo analizado esta fase reportó 0 V. Eso NO significa por sí solo que el canal no esté conectado: puede ser una fase fuera de servicio, un canal desconectado o una falla del medidor.`,
+        referencia: 'Observación directa de la serie medida',
+        accion: 'Comparar contra un periodo anterior para ver si alguna vez reportó, y verificar la instalación en sitio.',
+      });
+    }
+  });
+
   // Corriente en cero con tensión presente: es un hecho medido que merece
   // explicarse, no una alerta eléctrica. Puede ser ausencia real de carga o
   // una pinza amperimétrica mal instalada — el reporte lo dice tal cual, sin
@@ -184,9 +246,9 @@ export function hallazgos(analisis) {
       out.push({
         estado: 'revisar',
         titulo: `Sin corriente medida en Fase ${f.numero}`,
-        detalle: `Hay tensión presente (promedio ${f.voltaje ? f.voltaje.prom.toFixed(1) : '—'} V) pero la corriente se mantuvo en 0.000 A durante las ${analisis.n} lecturas del periodo.`,
-        referencia: 'Verificación de instrumentación',
-        accion: 'Confirmar físicamente la instalación de la pinza amperimétrica (CT): orientación, cierre del núcleo y conexión al medidor. Si el circuito realmente está sin carga, no requiere acción.',
+        detalle: `Hay tensión presente (promedio ${f.voltaje ? f.voltaje.prom.toFixed(1) : '—'} V) pero la corriente se mantuvo en 0.000 A durante las ${analisis.n} lecturas del periodo. Ojo: en el historial completo de este equipo la corriente SÍ ha llegado a medirse (868 de 5,567 lecturas al 6/sep/2026), con valores muy pequeños — mediana 0.021 A. Un cero aquí no prueba por sí solo que la instrumentación falle.`,
+        referencia: 'Observación directa de la serie medida',
+        accion: 'Antes de tocar el equipo: comprobar si el circuito realmente está sin carga en este periodo. Las magnitudes históricas están cerca del piso de resolución del medidor, así que una carga pequeña puede leerse como 0. Solo si se descarta eso, revisar la pinza amperimétrica (CT): orientación, cierre del núcleo y conexión.',
       });
     }
   });

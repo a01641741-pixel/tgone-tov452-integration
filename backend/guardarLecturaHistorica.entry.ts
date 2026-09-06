@@ -60,6 +60,30 @@ function filasDe(respuesta) {
 Deno.serve(async (req) => {
   try {
     const base44 = createClientFromRequest(req);
+
+    // Puerta de entrada. Comprobado el 6/sep/2026: esta funcion respondia
+    // HTTP 200 a cualquiera SIN sesion, y por dentro escribe y borra con
+    // privilegios de servicio (asServiceRole). Ademas, cada llamada golpea
+    // dos veces el servidor del medidor, que no es nuestro — servia como
+    // amplificador para saturarlo.
+    //
+    // Se exige sesion, no rol admin: esta ruta la sigue usando la app abierta
+    // en el navegador de cualquier usuario autenticado mientras se completa
+    // la transicion al archivado programado (archivarTelemetria), que es
+    // quien debe quedarse con el trabajo de fondo.
+    let quien = null;
+    try {
+      quien = await base44.auth.me();
+    } catch {
+      quien = null;
+    }
+    if (!quien) {
+      return Response.json(
+        { error: 'Requiere sesion. Esta funcion ya no acepta llamadas anonimas.' },
+        { status: 401 }
+      );
+    }
+
     const body = await req.json().catch(() => ({}));
     const { tabla, barrerDuplicados } = body;
 
