@@ -61,10 +61,52 @@ Deno.serve(async (req) => {
   try {
     const base44 = createClientFromRequest(req);
     const body = await req.json().catch(() => ({}));
-    const { tabla } = body;
+    const { tabla, barrerDuplicados } = body;
 
     if (!tabla || typeof tabla !== 'string') {
       return Response.json({ error: "Falta 'tabla'" }, { status: 400 });
+    }
+
+    // Barrido de duplicados historicos.
+    //
+    // La auto-reparacion de mas abajo solo mira la lectura que acaba de
+    // guardar, asi que no puede alcanzar a los duplicados que ya estaban en
+    // la base de antes (se contaron al menos 9 pares el 6/sep/2026). Este
+    // barrido los limpia; lo pide TelemetriaProvider una sola vez al arrancar
+    // la sesion, no en cada pasada, porque recorre todo el historico de la
+    // tabla y no hay razon para repetirlo cada minuto.
+    let barridos = 0;
+    if (barrerDuplicados) {
+      try {
+        let todas;
+        try {
+          todas = await base44.asServiceRole.entities.LecturaHistorica.filter(
+            { tabla_bd_externa: tabla }, '-created_date', 1000
+          );
+        } catch {
+          // Si esta version del SDK no acepta orden/limite, se pide sin ellos.
+          todas = await base44.asServiceRole.entities.LecturaHistorica.filter({ tabla_bd_externa: tabla });
+        }
+        const porLectura = new Map();
+        for (const r of todas || []) {
+          if (r.lectura === null || r.lectura === undefined) continue;
+          const g = porLectura.get(r.lectura) || [];
+          g.push(r);
+          porLectura.set(r.lectura, g);
+        }
+        for (const grupo of porLectura.values()) {
+          if (grupo.length < 2) continue;
+          // Mismo criterio estable que la auto-reparacion: gana la mas antigua.
+          const clave = (r) => `${r.created_date || ''}|${r.id}`;
+          const ordenadas = [...grupo].sort((a, b) => clave(a).localeCompare(clave(b)));
+          for (const sobrante of ordenadas.slice(1)) {
+            await base44.asServiceRole.entities.LecturaHistorica.delete(sobrante.id);
+            barridos++;
+          }
+        }
+      } catch {
+        // Que falle el barrido no debe impedir archivar la lectura nueva.
+      }
     }
 
     // 1) ¿Cuál es la lectura real más reciente ahora mismo?
@@ -82,7 +124,7 @@ Deno.serve(async (req) => {
       lectura: ultimaLectura,
     });
     if (existentes.length) {
-      return Response.json({ estado: 'ok', guardado: false, lectura: ultimaLectura });
+      return Response.json({ estado: 'ok', guardado: false, lectura: ultimaLectura, barridos });
     }
 
     // 3) Traemos el detalle completo real y lo guardamos tal cual (crudo,
@@ -115,7 +157,49 @@ Deno.serve(async (req) => {
       kWh: registro.kWh, rssi: registro.rssi,
     });
 
-    return Response.json({ estado: 'ok', guardado: true, id: nuevo.id, lectura: ultimaLectura });
+    // Auto-reparacion contra la carrera.
+    //
+    // El `filter` de mas arriba comprueba y esta `create` escribe: entre las
+    // dos cosas cabe otra llamada. No es teorico. El 6/sep/2026 se encontro
+    // en la base la lectura 12425 guardada DOS veces, con 78 ms entre ambos
+    // registros, y al menos 9 pares duplicados entre 379 historicos.
+    //
+    // La causa principal ya se corrigio del lado del cliente: hoy solo
+    // TelemetriaProvider archiva, y recorre las tablas en serie. Pero dos
+    // navegadores distintos con la app abierta siguen pudiendo chocar, y eso
+    // no se arregla desde el cliente. Asi que despues de escribir se revisa
+    // y se deja una sola fila.
+    //
+    // Se conserva la MAS ANTIGUA: es un criterio estable, todos los que
+    // corran esta limpieza eligen la misma, asi que dos limpiezas simultaneas
+    // no se borran la fila una a la otra.
+    //
+    // El borrado es sobre LecturaHistorica, entidad NUESTRA de Base44 — nunca
+    // sobre la base del medidor. El servidor real sigue siendo de solo
+    // lectura desde aqui, como quedo establecido tras el incidente de borrado.
+    let duplicadosBorrados = 0;
+    try {
+      const todas = await base44.asServiceRole.entities.LecturaHistorica.filter({
+        tabla_bd_externa: tabla,
+        lectura: ultimaLectura,
+      });
+      if (todas.length > 1) {
+        const clave = (r) => `${r.created_date || ''}|${r.id}`;
+        const ordenadas = [...todas].sort((a, b) => clave(a).localeCompare(clave(b)));
+        for (const sobrante of ordenadas.slice(1)) {
+          await base44.asServiceRole.entities.LecturaHistorica.delete(sobrante.id);
+          duplicadosBorrados++;
+        }
+      }
+    } catch {
+      // Si la limpieza falla no se pierde nada: el snapshot ya quedo
+      // guardado. Solo sobrevive un duplicado, que la siguiente pasada
+      // volvera a intentar limpiar.
+    }
+
+    return Response.json({
+      estado: 'ok', guardado: true, id: nuevo.id, lectura: ultimaLectura, duplicadosBorrados, barridos,
+    });
   } catch (error) {
     return Response.json({ error: error.message }, { status: 500 });
   }

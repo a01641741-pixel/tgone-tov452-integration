@@ -19,10 +19,72 @@
 
 const MIN = 60 * 1000;
 
-// Umbrales de antigüedad. No son umbrales eléctricos ni configuración del
-// equipo: son sólo cuándo esta interfaz deja de llamar "reciente" a un dato.
-export const FRESCURA_RECIENTE_MS = 3 * MIN;
-export const FRESCURA_ATRASADA_MS = 30 * MIN;
+// ---------------------------------------------------------------------------
+// Cadencia y umbrales de antigüedad
+// ---------------------------------------------------------------------------
+//
+// Estos NO son umbrales eléctricos ni configuración del equipo: son sólo
+// cuándo esta interfaz deja de llamar "al día" a un dato.
+//
+// La primera versión usaba un umbral fijo de 3 min y estaba mal calibrada.
+// Medido el 6/sep/2026 sobre 60 lecturas reales consecutivas de TOV452_66
+// (6 h 16 min de cobertura): el medidor reporta con una MEDIANA de 382 s
+// (~6.4 min), y **58 de 59 intervalos superaban los 3 min**. O sea, la app
+// decía "rezagado" prácticamente siempre aunque el equipo estuviera
+// perfecto. Un umbral fijo no puede servir: cada medidor que se dé de alta
+// puede reportar a su propio ritmo.
+//
+// Por eso los umbrales se derivan de la cadencia REAL observada de ese
+// equipo, y sólo se cae al valor de abajo cuando todavía no hay historial
+// suficiente para medirla.
+export const CADENCIA_POR_OMISION_MS = 384 * 1000; // mediana medida en TOV452_66
+
+/**
+ * Cadencia real de un equipo: mediana de los intervalos entre lecturas
+ * consecutivas de su historial.
+ *
+ * Se descartan los intervalos absurdos (negativos o de más de 6 h) porque
+ * el medidor sí emite registros con la fecha desfasada — verificado: la
+ * lectura 12459 de TOV452_66 trae `2026-09-02 18:30:10` mientras sus
+ * vecinas inmediatas traen `2026-09-06 01:33` y `01:46`. Un solo registro
+ * así arrastraría el promedio; la mediana sobre intervalos filtrados no.
+ *
+ * @param lecturas Historial ya escalado (cada uno con `fecha`).
+ * @returns milisegundos, o null si no hay material para medirlo.
+ */
+export function cadenciaDe(lecturas) {
+  const fechas = (lecturas || [])
+    .map((l) => parseFecha(l?.fecha))
+    .filter(Boolean)
+    .sort((a, b) => a - b);
+  if (fechas.length < 3) return null;
+
+  const saltos = [];
+  for (let i = 1; i < fechas.length; i++) {
+    const d = fechas[i] - fechas[i - 1];
+    if (d > 0 && d < 6 * 60 * MIN) saltos.push(d);
+  }
+  if (saltos.length < 2) return null;
+
+  saltos.sort((a, b) => a - b);
+  const m = Math.floor(saltos.length / 2);
+  return saltos.length % 2 ? saltos[m] : (saltos[m - 1] + saltos[m]) / 2;
+}
+
+/**
+ * Umbrales derivados de la cadencia. Un dato está "al día" mientras no se
+ * haya saltado un ciclo completo, y "atrasado" cuando ya se perdieron
+ * varios. Los pisos existen para que un equipo muy rápido no acabe con una
+ * ventana de segundos, donde cualquier hipo de red se leería como falla.
+ */
+export function umbralesDe(cadenciaMs) {
+  const c = typeof cadenciaMs === 'number' && cadenciaMs > 0 ? cadenciaMs : CADENCIA_POR_OMISION_MS;
+  return {
+    cadencia: c,
+    reciente: Math.max(2 * c, 5 * MIN),   // aún no se salta un ciclo
+    atrasado: Math.max(5 * c, 30 * MIN),  // ya se perdieron varios
+  };
+}
 
 /**
  * Interpreta el estado de una lectura sin inventar causas.
@@ -32,6 +94,12 @@ export const FRESCURA_ATRASADA_MS = 30 * MIN;
  * @param {Date|null}   p.ultimaConsultaOk Último intento de red exitoso.
  * @param {string}      p.status    'idle' | 'cargando' | 'ok' | 'error'
  * @param {string|null} p.mensaje   Mensaje del error de consulta, si lo hubo.
+ * @param {Array}       p.historial Lecturas previas reales, para medir la
+ *                                  cadencia de ESTE equipo. Sin esto se usa
+ *                                  la cadencia por omisión, que es la medida
+ *                                  en TOV452_66 y puede no aplicar a otro.
+ * @param {number|null} p.cadenciaMs Cadencia ya calculada, si quien llama la
+ *                                  tiene a la mano (evita recalcularla).
  * @param {Date}        p.ahora     Inyectable para pruebas.
  */
 export function evaluarFrescura({
@@ -40,10 +108,19 @@ export function evaluarFrescura({
   ultimaConsultaOk = null,
   status = 'idle',
   mensaje = null,
+  historial = null,
+  cadenciaMs = null,
   ahora = new Date(),
 } = {}) {
   const medidoEn = parseFecha(reading?.fecha);
   const edadMs = medidoEn ? ahora - medidoEn : null;
+
+  // La cadencia sale del historial real cuando lo hay. `medida` distingue
+  // "esto lo observamos en este equipo" de "esto es el valor de arranque",
+  // para no presentar un supuesto como si fuera una medición.
+  const cadenciaObservada = typeof cadenciaMs === 'number' ? cadenciaMs : cadenciaDe(historial);
+  const u = umbralesDe(cadenciaObservada);
+  const cadenciaMedida = !!cadenciaObservada;
 
   const base = {
     medidoEn,
@@ -51,6 +128,9 @@ export function evaluarFrescura({
     ultimaConsultaOk,
     edadMs,
     edadTexto: medidoEn ? hace(edadMs) : null,
+    cadenciaMs: u.cadencia,
+    cadenciaMedida,
+    cadenciaTexto: `${Math.round(u.cadencia / 1000 / 60 * 10) / 10} min`,
     // Se expone por separado para que la interfaz pueda decir las dos cosas
     // sin confundirlas nunca.
     consultaTexto: ultimaConsultaOk ? hace(ahora - ultimaConsultaOk) : null,
@@ -84,13 +164,19 @@ export function evaluarFrescura({
     return { ...base, nivel: 'sin_hora', titulo: 'Sin hora de medición', descripcion: 'La lectura llegó sin una fecha que se pueda interpretar, así que no es posible saber de cuándo es.' };
   }
 
-  if (edadMs > FRESCURA_ATRASADA_MS) {
-    return { ...base, nivel: 'atrasado', titulo: 'Dato atrasado', descripcion: `La medición es de ${hace(edadMs)}. La consulta sí responde, pero el medidor no ha reportado una lectura nueva.` };
+  // El ritmo esperado se cita siempre, para que "atrasado" signifique algo
+  // comprobable y no una opinión de la interfaz.
+  const ritmo = cadenciaMedida
+    ? `Este equipo reporta cada ~${base.cadenciaTexto}.`
+    : `Aún sin historial para medir su ritmo; se asume ~${base.cadenciaTexto}.`;
+
+  if (edadMs > u.atrasado) {
+    return { ...base, nivel: 'atrasado', titulo: 'Dato atrasado', descripcion: `La medición es de ${hace(edadMs)}. La consulta sí responde, pero el medidor no ha reportado una lectura nueva. ${ritmo}` };
   }
-  if (edadMs > FRESCURA_RECIENTE_MS) {
-    return { ...base, nivel: 'rezagado', titulo: 'Dato rezagado', descripcion: `Medido ${hace(edadMs)}. Todavía no llega una lectura más nueva.` };
+  if (edadMs > u.reciente) {
+    return { ...base, nivel: 'rezagado', titulo: 'Se saltó un ciclo', descripcion: `Medido ${hace(edadMs)}, más de lo habitual. ${ritmo}` };
   }
-  return { ...base, nivel: 'reciente', titulo: 'En vivo', descripcion: `Medido ${hace(edadMs)}.` };
+  return { ...base, nivel: 'reciente', titulo: 'Al día', descripcion: `Medido ${hace(edadMs)}. ${ritmo}` };
 }
 
 // Los niveles usan los colores de estado ya definidos en el sistema visual.
