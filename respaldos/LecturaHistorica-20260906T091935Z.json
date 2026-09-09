@@ -1,0 +1,2624 @@
+{
+  "entities": [
+    {
+      "lectura": 6913,
+      "fecha": "2026-07-06 18:55:38",
+      "tabla_bd_externa": "TOV452_66",
+      "created_date": "2026-07-23T00:15:11.458000",
+      "id": "6a615d0f08cabe3e3b1b69b1"
+    },
+    {
+      "lectura": 6970,
+      "fecha": "2026-07-07 01:00:58",
+      "tabla_bd_externa": "TOV452_66",
+      "created_date": "2026-07-23T00:15:11.458000",
+      "id": "6a615d0f08cabe3e3b1b69b2"
+    },
+    {
+      "lectura": 7025,
+      "fecha": "2026-07-07 06:56:54",
+      "tabla_bd_externa": "TOV452_66",
+      "created_date": "2026-07-23T00:15:11.458000",
+      "id": "6a615d0f08cabe3e3b1b69b3"
+    },
+    {
+      "lectura": 7081,
+      "fecha": "2026-07-07 12:59:14",
+      "tabla_bd_externa": "TOV452_66",
+      "created_date": "2026-07-23T00:15:11.458000",
+      "id": "6a615d0f08cabe3e3b1b69b4"
+    },
+    {
+      "lectura": 7136,
+      "fecha": "2026-07-07 18:56:34",
+      "tabla_bd_externa": "TOV452_66",
+      "created_date": "2026-07-23T00:15:11.458000",
+      "id": "6a615d0f08cabe3e3b1b69b5"
+    },
+    {
+      "lectura": 7192,
+      "fecha": "2026-07-08 00:59:37",
+      "tabla_bd_externa": "TOV452_66",
+      "created_date": "2026-07-23T00:15:11.458000",
+      "id": "6a615d0f08cabe3e3b1b69b6"
+    },
+    {
+      "lectura": 7248,
+      "fecha": "2026-07-08 06:59:27",
+      "tabla_bd_externa": "TOV452_66",
+      "created_date": "2026-07-23T00:15:11.458000",
+      "id": "6a615d0f08cabe3e3b1b69b7"
+    },
+    {
+      "lectura": 7304,
+      "fecha": "2026-07-08 13:00:46",
+      "tabla_bd_externa": "TOV452_66",
+      "created_date": "2026-07-23T00:15:11.458000",
+      "id": "6a615d0f08cabe3e3b1b69b8"
+    },
+    {
+      "lectura": 7358,
+      "fecha": "2026-07-08 19:01:50",
+      "tabla_bd_externa": "TOV452_66",
+      "created_date": "2026-07-23T00:15:11.458000",
+      "id": "6a615d0f08cabe3e3b1b69b9"
+    },
+    {
+      "lectura": 7413,
+      "fecha": "2026-07-09 00:55:43",
+      "tabla_bd_externa": "TOV452_66",
+      "created_date": "2026-07-23T00:15:11.458000",
+      "id": "6a615d0f08cabe3e3b1b69ba"
+    },
+    {
+      "lectura": 7470,
+      "fecha": "2026-07-09 07:00:31",
+      "tabla_bd_externa": "TOV452_66",
+      "created_date": "2026-07-23T00:15:11.458000",
+      "id": "6a615d0f08cabe3e3b1b69bb"
+    },
+    {
+      "lectura": 7525,
+      "fecha": "2026-07-09 12:55:48",
+      "tabla_bd_externa": "TOV452_66",
+      "created_date": "2026-07-23T00:15:11.458000",
+      "id": "6a615d0f08cabe3e3b1b69bc"
+    },
+    {
+      "lectura": 7576,
+      "fecha": "2026-07-10 14:01:15",
+      "tabla_bd_externa": "TOV452_66",
+      "created_date": "2026-07-23T00:15:11.458000",
+      "id": "6a615d0f08cabe3e3b1b69bd"
+    },
+    {
+      "lectura": 7621,
+      "fecha": "2026-07-13 09:40:20",
+      "tabla_bd_externa": "TOV452_66",
+      "created_date": "2026-07-23T00:15:11.458000",
+      "id": "6a615d0f08cabe3e3b1b69be"
+    },
+    {
+      "lectura": 7650,
+      "fecha": "2026-07-13 13:00:23",
+      "tabla_bd_externa": "TOV452_66",
+      "created_date": "2026-07-23T00:15:11.458000",
+      "id": "6a615d0f08cabe3e3b1b69bf"
+    },
+    {
+      "lectura": 7704,
+      "fecha": "2026-07-14 16:00:58",
+      "tabla_bd_externa": "TOV452_66",
+      "created_date": "2026-07-23T00:15:11.458000",
+      "id": "6a615d0f08cabe3e3b1b69c0"
+    },
+    {
+      "lectura": 7730,
+      "fecha": "2026-07-15 10:00:04",
+      "tabla_bd_externa": "TOV452_66",
+      "created_date": "2026-07-23T00:15:11.458000",
+      "id": "6a615d0f08cabe3e3b1b69c1"
+    },
+    {
+      "lectura": 7758,
+      "fecha": "2026-07-15 13:01:57",
+      "tabla_bd_externa": "TOV452_66",
+      "created_date": "2026-07-23T00:15:11.458000",
+      "id": "6a615d0f08cabe3e3b1b69c2"
+    },
+    {
+      "lectura": 7810,
+      "fecha": "2026-07-16 11:43:23",
+      "tabla_bd_externa": "TOV452_66",
+      "created_date": "2026-07-23T00:15:11.459000",
+      "id": "6a615d0f08cabe3e3b1b69c3"
+    },
+    {
+      "lectura": 7823,
+      "fecha": "2026-07-16 13:00:42",
+      "tabla_bd_externa": "TOV452_66",
+      "created_date": "2026-07-23T00:15:11.459000",
+      "id": "6a615d0f08cabe3e3b1b69c4"
+    },
+    {
+      "lectura": 7876,
+      "fecha": "2026-07-16 18:59:23",
+      "tabla_bd_externa": "TOV452_66",
+      "created_date": "2026-07-23T00:15:11.459000",
+      "id": "6a615d0f08cabe3e3b1b69c5"
+    },
+    {
+      "lectura": 7933,
+      "fecha": "2026-07-17 01:01:57",
+      "tabla_bd_externa": "TOV452_66",
+      "created_date": "2026-07-23T00:15:11.459000",
+      "id": "6a615d0f08cabe3e3b1b69c6"
+    },
+    {
+      "lectura": 7989,
+      "fecha": "2026-07-17 06:57:07",
+      "tabla_bd_externa": "TOV452_66",
+      "created_date": "2026-07-23T00:15:11.459000",
+      "id": "6a615d0f08cabe3e3b1b69c7"
+    },
+    {
+      "lectura": 8017,
+      "fecha": "2026-07-20 12:16:18",
+      "tabla_bd_externa": "TOV452_66",
+      "created_date": "2026-07-23T00:15:11.459000",
+      "id": "6a615d0f08cabe3e3b1b69c8"
+    },
+    {
+      "lectura": 8024,
+      "fecha": "2026-07-20 12:58:15",
+      "tabla_bd_externa": "TOV452_66",
+      "created_date": "2026-07-23T00:15:11.459000",
+      "id": "6a615d0f08cabe3e3b1b69c9"
+    },
+    {
+      "lectura": 8081,
+      "fecha": "2026-07-20 19:00:14",
+      "tabla_bd_externa": "TOV452_66",
+      "created_date": "2026-07-23T00:15:11.459000",
+      "id": "6a615d0f08cabe3e3b1b69ca"
+    },
+    {
+      "lectura": 8137,
+      "fecha": "2026-07-21 00:55:55",
+      "tabla_bd_externa": "TOV452_66",
+      "created_date": "2026-07-23T00:15:11.459000",
+      "id": "6a615d0f08cabe3e3b1b69cb"
+    },
+    {
+      "lectura": 8194,
+      "fecha": "2026-07-21 06:59:14",
+      "tabla_bd_externa": "TOV452_66",
+      "created_date": "2026-07-23T00:15:11.459000",
+      "id": "6a615d0f08cabe3e3b1b69cc"
+    },
+    {
+      "lectura": 8250,
+      "fecha": "2026-07-21 12:56:59",
+      "tabla_bd_externa": "TOV452_66",
+      "created_date": "2026-07-23T00:15:11.459000",
+      "id": "6a615d0f08cabe3e3b1b69cd"
+    },
+    {
+      "lectura": 8307,
+      "fecha": "2026-07-21 19:00:31",
+      "tabla_bd_externa": "TOV452_66",
+      "created_date": "2026-07-23T00:15:11.459000",
+      "id": "6a615d0f08cabe3e3b1b69ce"
+    },
+    {
+      "lectura": 8363,
+      "fecha": "2026-07-22 00:57:41",
+      "tabla_bd_externa": "TOV452_66",
+      "created_date": "2026-07-23T00:15:11.459000",
+      "id": "6a615d0f08cabe3e3b1b69cf"
+    },
+    {
+      "lectura": 8420,
+      "fecha": "2026-07-22 07:00:51",
+      "tabla_bd_externa": "TOV452_66",
+      "created_date": "2026-07-23T00:15:11.459000",
+      "id": "6a615d0f08cabe3e3b1b69d0"
+    },
+    {
+      "lectura": 8475,
+      "fecha": "2026-07-22 12:59:22",
+      "tabla_bd_externa": "TOV452_66",
+      "created_date": "2026-07-23T00:15:11.459000",
+      "id": "6a615d0f08cabe3e3b1b69d1"
+    },
+    {
+      "lectura": 8556,
+      "fecha": "2026-07-09 18:26:53",
+      "tabla_bd_externa": "TOV452_66",
+      "created_date": "2026-07-23T03:46:25.055000",
+      "id": "6a618e9128cce4630e440b1a"
+    },
+    {
+      "lectura": 8557,
+      "fecha": "2026-07-22 21:41:12",
+      "tabla_bd_externa": "TOV452_66",
+      "created_date": "2026-07-23T03:46:55.088000",
+      "id": "6a618eafae674658265025dc"
+    },
+    {
+      "lectura": 8558,
+      "fecha": "2026-07-22 21:47:27",
+      "tabla_bd_externa": "TOV452_66",
+      "created_date": "2026-07-23T03:53:02.796000",
+      "id": "6a61901e8a60fab60343bd14"
+    },
+    {
+      "lectura": 8559,
+      "fecha": "2026-07-22 21:53:41",
+      "tabla_bd_externa": "TOV452_66",
+      "created_date": "2026-07-23T04:00:21.189000",
+      "id": "6a6191d5704516f804ef3cbe"
+    },
+    {
+      "lectura": 8731,
+      "fecha": "2026-07-23 16:38:02",
+      "tabla_bd_externa": "TOV452_66",
+      "created_date": "2026-07-23T22:50:47.118000",
+      "id": "6a629ac714eb3ff8f3812e48"
+    },
+    {
+      "lectura": 8732,
+      "fecha": "2026-07-23 16:45:03",
+      "tabla_bd_externa": "TOV452_66",
+      "created_date": "2026-07-23T22:51:33.174000",
+      "id": "6a629af5333387b798d9952a"
+    },
+    {
+      "lectura": 8743,
+      "fecha": "2026-07-23 17:59:40",
+      "tabla_bd_externa": "TOV452_66",
+      "created_date": "2026-07-24T00:11:15.530000",
+      "id": "6a62ada3f4e63bf09cfe4d4d"
+    },
+    {
+      "lectura": 8744,
+      "fecha": "2026-07-23 18:06:26",
+      "tabla_bd_externa": "TOV452_66",
+      "created_date": "2026-07-24T00:12:30.082000",
+      "id": "6a62adee8d862f4b3d64ab8f"
+    },
+    {
+      "lectura": 8892,
+      "fecha": "2026-07-24 09:54:52",
+      "tabla_bd_externa": "TOV452_66",
+      "created_date": "2026-07-24T16:04:31.092000",
+      "id": "6a638d0f3954f3701473f697"
+    },
+    {
+      "lectura": 8893,
+      "fecha": "2026-07-24 10:01:14",
+      "tabla_bd_externa": "TOV452_66",
+      "created_date": "2026-07-24T16:07:08.081000",
+      "id": "6a638dac418c23a25d8f250c"
+    },
+    {
+      "lectura": 8894,
+      "fecha": "2026-07-24 10:07:29",
+      "tabla_bd_externa": "TOV452_66",
+      "created_date": "2026-07-24T16:14:08.447000",
+      "id": "6a638f50731dacdc0715017e"
+    },
+    {
+      "lectura": 8895,
+      "fecha": "2026-07-24 10:13:58",
+      "tabla_bd_externa": "TOV452_66",
+      "created_date": "2026-07-24T16:20:08.134000",
+      "id": "6a6390b8b816ea45992e7576"
+    },
+    {
+      "lectura": 8896,
+      "fecha": "2026-07-24 10:20:14",
+      "tabla_bd_externa": "TOV452_66",
+      "created_date": "2026-07-24T16:26:07.869000",
+      "id": "6a63921f8415221fd7a07ece"
+    },
+    {
+      "lectura": 8897,
+      "fecha": "2026-07-24 10:26:29",
+      "tabla_bd_externa": "TOV452_66",
+      "created_date": "2026-07-24T16:33:08.285000",
+      "id": "6a6393c4ca9f65ab4ed1ce6b"
+    },
+    {
+      "lectura": 8898,
+      "fecha": "2026-07-24 10:33:07",
+      "tabla_bd_externa": "TOV452_66",
+      "created_date": "2026-07-24T16:39:08.599000",
+      "id": "6a63952c1228f3c24b665323"
+    },
+    {
+      "lectura": 8899,
+      "fecha": "2026-07-24 10:39:36",
+      "tabla_bd_externa": "TOV452_66",
+      "created_date": "2026-07-24T16:46:08.546000",
+      "id": "6a6396d0aac047cd9989ab39"
+    },
+    {
+      "lectura": 8900,
+      "fecha": "2026-07-24 10:45:51",
+      "tabla_bd_externa": "TOV452_66",
+      "created_date": "2026-07-24T16:52:13.891000",
+      "id": "6a63983d3d75859ceeaca639"
+    },
+    {
+      "lectura": 8901,
+      "fecha": "2026-07-24 10:52:14",
+      "tabla_bd_externa": "TOV452_66",
+      "created_date": "2026-07-24T16:58:08.546000",
+      "id": "6a6399a09a2f28cee7b4dad3"
+    },
+    {
+      "lectura": 8902,
+      "fecha": "2026-07-24 10:58:36",
+      "tabla_bd_externa": "TOV452_66",
+      "created_date": "2026-07-24T17:04:21.161000",
+      "id": "6a639b15ad0246cac9a741cd"
+    },
+    {
+      "lectura": 8903,
+      "fecha": "2026-07-24 11:04:53",
+      "tabla_bd_externa": "TOV452_66",
+      "created_date": "2026-07-24T17:11:22.544000",
+      "id": "6a639cba75f0fc28e5941891"
+    },
+    {
+      "lectura": 8904,
+      "fecha": "2026-07-24 11:11:07",
+      "tabla_bd_externa": "TOV452_66",
+      "created_date": "2026-07-24T17:17:15.745000",
+      "id": "6a639e1b248f5e38719a197f"
+    },
+    {
+      "lectura": 8905,
+      "fecha": "2026-07-24 11:17:44",
+      "tabla_bd_externa": "TOV452_66",
+      "created_date": "2026-07-24T17:24:15.315000",
+      "id": "6a639fbfb9114cb708f22643"
+    },
+    {
+      "lectura": 8906,
+      "fecha": "2026-07-24 11:23:59",
+      "tabla_bd_externa": "TOV452_66",
+      "created_date": "2026-07-24T17:30:08.820000",
+      "id": "6a63a1200867d8751d5bff38"
+    },
+    {
+      "lectura": 8907,
+      "fecha": "2026-07-24 11:30:21",
+      "tabla_bd_externa": "TOV452_66",
+      "created_date": "2026-07-24T17:37:08.140000",
+      "id": "6a63a2c486105da58fd3652a"
+    },
+    {
+      "lectura": 8908,
+      "fecha": "2026-07-24 11:36:59",
+      "tabla_bd_externa": "TOV452_66",
+      "created_date": "2026-07-24T17:43:08.563000",
+      "id": "6a63a42c49fd244ca62fed5c"
+    },
+    {
+      "lectura": 8909,
+      "fecha": "2026-07-24 11:43:21",
+      "tabla_bd_externa": "TOV452_66",
+      "created_date": "2026-07-24T17:50:08.260000",
+      "id": "6a63a5d03667d68e846fac9e"
+    },
+    {
+      "lectura": 8910,
+      "fecha": "2026-07-24 11:50:01",
+      "tabla_bd_externa": "TOV452_66",
+      "created_date": "2026-07-24T17:56:08.495000",
+      "id": "6a63a738b8f623a01d73852d"
+    },
+    {
+      "lectura": 8911,
+      "fecha": "2026-07-24 11:56:15",
+      "tabla_bd_externa": "TOV452_66",
+      "created_date": "2026-07-24T18:02:08.231000",
+      "id": "6a63a8a070e8cbfe1e50a056"
+    },
+    {
+      "lectura": 8912,
+      "fecha": "2026-07-24 12:02:46",
+      "tabla_bd_externa": "TOV452_66",
+      "created_date": "2026-07-24T18:09:07.969000",
+      "id": "6a63aa43519cdefd0227fcb7"
+    },
+    {
+      "lectura": 8913,
+      "fecha": "2026-07-24 12:09:09",
+      "tabla_bd_externa": "TOV452_66",
+      "created_date": "2026-07-24T18:15:08.384000",
+      "id": "6a63abac2e2023e9a263733f"
+    },
+    {
+      "lectura": 8914,
+      "fecha": "2026-07-24 12:15:31",
+      "tabla_bd_externa": "TOV452_66",
+      "created_date": "2026-07-24T18:22:08.140000",
+      "id": "6a63ad503d71379ec2bb64e4"
+    },
+    {
+      "lectura": 8915,
+      "fecha": "2026-07-24 12:22:09",
+      "tabla_bd_externa": "TOV452_66",
+      "created_date": "2026-07-24T18:28:07.923000",
+      "id": "6a63aeb7fdcb6d58e4772f28"
+    },
+    {
+      "lectura": 8916,
+      "fecha": "2026-07-24 12:28:31",
+      "tabla_bd_externa": "TOV452_66",
+      "created_date": "2026-07-24T18:34:08.488000",
+      "id": "6a63b020d28569a35e6128e4"
+    },
+    {
+      "lectura": 8917,
+      "fecha": "2026-07-24 12:34:46",
+      "tabla_bd_externa": "TOV452_66",
+      "created_date": "2026-07-24T18:41:08.252000",
+      "id": "6a63b1c4cbe7c3f0b82b213a"
+    },
+    {
+      "lectura": 8918,
+      "fecha": "2026-07-24 12:41:32",
+      "tabla_bd_externa": "TOV452_66",
+      "created_date": "2026-07-24T18:47:21.868000",
+      "id": "6a63b339a77280b89f6c6f2f"
+    },
+    {
+      "lectura": 8919,
+      "fecha": "2026-07-24 12:47:54",
+      "tabla_bd_externa": "TOV452_66",
+      "created_date": "2026-07-24T18:54:08.346000",
+      "id": "6a63b4d0b750ac9ef1778a45"
+    },
+    {
+      "lectura": 8920,
+      "fecha": "2026-07-24 12:54:32",
+      "tabla_bd_externa": "TOV452_66",
+      "created_date": "2026-07-24T19:00:36.337000",
+      "id": "6a63b654abf39135c42af915"
+    },
+    {
+      "lectura": 8963,
+      "fecha": "2026-07-24 17:34:07",
+      "tabla_bd_externa": "TOV452_66",
+      "created_date": "2026-07-24T23:39:48.776000",
+      "id": "6a63f7c4d2b6669b867765f1"
+    },
+    {
+      "lectura": 8964,
+      "fecha": "2026-07-24 17:40:29",
+      "tabla_bd_externa": "TOV452_66",
+      "created_date": "2026-07-24T23:46:02.610000",
+      "id": "6a63f93ae457266d839d6162"
+    },
+    {
+      "lectura": 8965,
+      "fecha": "2026-07-24 17:46:43",
+      "tabla_bd_externa": "TOV452_66",
+      "created_date": "2026-07-24T23:53:05.346000",
+      "id": "6a63fae161f8162a6ba860da"
+    },
+    {
+      "lectura": 8966,
+      "fecha": "2026-07-24 17:53:22",
+      "tabla_bd_externa": "TOV452_66",
+      "created_date": "2026-07-24T23:59:05.048000",
+      "id": "6a63fc49a2629bc139f8031c"
+    },
+    {
+      "lectura": 9003,
+      "fecha": "2026-07-24 21:47:53",
+      "tabla_bd_externa": "TOV452_66",
+      "created_date": "2026-07-25T03:55:33.176000",
+      "id": "6a6433b59598a537cd15d37b"
+    },
+    {
+      "lectura": 9014,
+      "fecha": "2026-07-24 22:57:06",
+      "tabla_bd_externa": "TOV452_66",
+      "created_date": "2026-07-25T05:03:06.617000",
+      "id": "6a64438ae5de1c8a9efc8df4"
+    },
+    {
+      "lectura": 9143,
+      "fecha": "2026-07-25 12:38:37",
+      "tabla_bd_externa": "TOV452_66",
+      "created_date": "2026-07-25T18:44:48.596000",
+      "id": "6a650420ed7e2bb83ffaf413"
+    },
+    {
+      "lectura": 9156,
+      "fecha": "2026-07-25 14:01:29",
+      "tabla_bd_externa": "TOV452_66",
+      "created_date": "2026-07-25T20:12:46.926000",
+      "id": "6a6518be40d0eb19339f6c52"
+    },
+    {
+      "lectura": 9157,
+      "fecha": "2026-07-25 14:07:44",
+      "tabla_bd_externa": "TOV452_66",
+      "created_date": "2026-07-25T20:13:26.183000",
+      "id": "6a6518e69067f38b8a4f4177"
+    },
+    {
+      "lectura": 9158,
+      "fecha": "2026-07-25 14:13:58",
+      "tabla_bd_externa": "TOV452_66",
+      "created_date": "2026-07-25T20:19:43.637000",
+      "id": "6a651a5f9d536c4441c3732d"
+    },
+    {
+      "lectura": 9159,
+      "fecha": "2026-07-25 14:20:13",
+      "tabla_bd_externa": "TOV452_66",
+      "created_date": "2026-07-25T20:27:15.964000",
+      "id": "6a651c2381c05c6007dbf1a1"
+    },
+    {
+      "lectura": 9160,
+      "fecha": "2026-07-25 14:26:35",
+      "tabla_bd_externa": "TOV452_66",
+      "created_date": "2026-07-25T20:32:43.907000",
+      "id": "6a651d6b6730c4cda1011df9"
+    },
+    {
+      "lectura": 9219,
+      "fecha": "2026-07-25 20:40:37",
+      "tabla_bd_externa": "TOV452_66",
+      "created_date": "2026-07-26T02:49:08.326000",
+      "id": "6a6575a4cdb5ae96c7f448e7"
+    },
+    {
+      "lectura": 9568,
+      "fecha": "2026-07-27 09:39:10",
+      "tabla_bd_externa": "TOV452_66",
+      "created_date": "2026-07-27T15:45:52.371000",
+      "id": "6a677d3032b4524d1ad376a5"
+    },
+    {
+      "lectura": 9569,
+      "fecha": "2026-07-27 09:45:39",
+      "tabla_bd_externa": "TOV452_66",
+      "created_date": "2026-07-27T15:52:03.400000",
+      "id": "6a677ea3b7a493300cc5e571"
+    },
+    {
+      "lectura": 9570,
+      "fecha": "2026-07-27 09:52:02",
+      "tabla_bd_externa": "TOV452_66",
+      "created_date": "2026-07-27T15:58:03.065000",
+      "id": "6a67800b844cea7667ae6d67"
+    },
+    {
+      "lectura": 9571,
+      "fecha": "2026-07-27 09:58:24",
+      "tabla_bd_externa": "TOV452_66",
+      "created_date": "2026-07-27T16:04:03.110000",
+      "id": "6a678173410a4bdebc7b8f20"
+    },
+    {
+      "lectura": 9572,
+      "fecha": "2026-07-27 10:04:39",
+      "tabla_bd_externa": "TOV452_66",
+      "created_date": "2026-07-27T16:11:02.997000",
+      "id": "6a6783167a804467fd6c7088"
+    },
+    {
+      "lectura": 9573,
+      "fecha": "2026-07-27 10:11:17",
+      "tabla_bd_externa": "TOV452_66",
+      "created_date": "2026-07-27T16:17:04.780000",
+      "id": "6a678480afad6e0ed4ad4aa8"
+    },
+    {
+      "lectura": 9574,
+      "fecha": "2026-07-27 10:17:31",
+      "tabla_bd_externa": "TOV452_66",
+      "created_date": "2026-07-27T16:24:02.753000",
+      "id": "6a67862255b6357d3651f881"
+    },
+    {
+      "lectura": 9587,
+      "fecha": "2026-07-27 11:40:32",
+      "tabla_bd_externa": "TOV452_66",
+      "created_date": "2026-07-27T17:49:03.223000",
+      "id": "6a679a0fc202f436624db21b"
+    },
+    {
+      "lectura": 9588,
+      "fecha": "2026-07-27 11:46:53",
+      "tabla_bd_externa": "TOV452_66",
+      "created_date": "2026-07-27T17:52:47.850000",
+      "id": "6a679aeff942c4c66c17e6e2"
+    },
+    {
+      "lectura": 9589,
+      "fecha": "2026-07-27 11:53:16",
+      "tabla_bd_externa": "TOV452_66",
+      "created_date": "2026-07-27T17:59:03.279000",
+      "id": "6a679c676734900474dbc8dd"
+    },
+    {
+      "lectura": 9590,
+      "fecha": "2026-07-27 11:59:30",
+      "tabla_bd_externa": "TOV452_66",
+      "created_date": "2026-07-27T18:05:17.642000",
+      "id": "6a679dddf134fbd82873414a"
+    },
+    {
+      "lectura": 9591,
+      "fecha": "2026-07-27 12:05:45",
+      "tabla_bd_externa": "TOV452_66",
+      "created_date": "2026-07-27T18:11:32.735000",
+      "id": "6a679f5415890dd8ccb75f44"
+    },
+    {
+      "lectura": 9592,
+      "fecha": "2026-07-27 12:12:08",
+      "tabla_bd_externa": "TOV452_66",
+      "created_date": "2026-07-27T18:18:02.903000",
+      "id": "6a67a0da5515d8a5d45f18bd"
+    },
+    {
+      "lectura": 9593,
+      "fecha": "2026-07-27 12:18:22",
+      "tabla_bd_externa": "TOV452_66",
+      "created_date": "2026-07-27T18:24:03.081000",
+      "id": "6a67a243709995e2963c0ea9"
+    },
+    {
+      "lectura": 9594,
+      "fecha": "2026-07-27 12:24:37",
+      "tabla_bd_externa": "TOV452_66",
+      "created_date": "2026-07-27T18:31:03.555000",
+      "id": "6a67a3e74358a74b6327e522"
+    },
+    {
+      "lectura": 9595,
+      "fecha": "2026-07-27 12:31:06",
+      "tabla_bd_externa": "TOV452_66",
+      "created_date": "2026-07-27T18:37:02.528000",
+      "id": "6a67a54e7573bf34886cf84c"
+    },
+    {
+      "lectura": 9596,
+      "fecha": "2026-07-27 12:37:21",
+      "tabla_bd_externa": "TOV452_66",
+      "created_date": "2026-07-27T18:44:03.025000",
+      "id": "6a67a6f30effbe4c0f4d641b"
+    },
+    {
+      "lectura": 9597,
+      "fecha": "2026-07-27 12:43:51",
+      "tabla_bd_externa": "TOV452_66",
+      "created_date": "2026-07-27T18:50:02.722000",
+      "id": "6a67a85a04cbac1b642b33a0"
+    },
+    {
+      "lectura": 9598,
+      "fecha": "2026-07-27 12:50:15",
+      "tabla_bd_externa": "TOV452_66",
+      "created_date": "2026-07-27T18:56:03.124000",
+      "id": "6a67a9c3b048ccdd72aeace0"
+    },
+    {
+      "lectura": 9599,
+      "fecha": "2026-07-27 12:56:37",
+      "tabla_bd_externa": "TOV452_66",
+      "created_date": "2026-07-27T19:03:02.913000",
+      "id": "6a67ab66634ec8e8ecd2b172"
+    },
+    {
+      "lectura": 9600,
+      "fecha": "2026-07-27 13:03:16",
+      "tabla_bd_externa": "TOV452_66",
+      "created_date": "2026-07-27T19:10:03.275000",
+      "id": "6a67ad0b3c47e97e0f2ec971"
+    },
+    {
+      "lectura": 9601,
+      "fecha": "2026-07-27 13:10:33",
+      "tabla_bd_externa": "TOV452_66",
+      "created_date": "2026-07-27T19:17:03.477000",
+      "id": "6a67aeaff1806fb06ec99307"
+    },
+    {
+      "lectura": 9602,
+      "fecha": "2026-07-27 13:17:10",
+      "tabla_bd_externa": "TOV452_66",
+      "created_date": "2026-07-27T19:23:03.650000",
+      "id": "6a67b017e5121b8b5cbd97ff"
+    },
+    {
+      "lectura": 9603,
+      "fecha": "2026-07-27 13:23:25",
+      "tabla_bd_externa": "TOV452_66",
+      "created_date": "2026-07-27T19:30:03.147000",
+      "id": "6a67b1bbeec46b6abff8c7db"
+    },
+    {
+      "lectura": 9604,
+      "fecha": "2026-07-27 13:30:33",
+      "tabla_bd_externa": "TOV452_66",
+      "created_date": "2026-07-27T19:37:02.853000",
+      "id": "6a67b35e3233641384575427"
+    },
+    {
+      "lectura": 9605,
+      "fecha": "2026-07-27 13:36:48",
+      "tabla_bd_externa": "TOV452_66",
+      "created_date": "2026-07-27T19:43:02.660000",
+      "id": "6a67b4c689e9d21dd82e65d3"
+    },
+    {
+      "lectura": 9606,
+      "fecha": "2026-07-27 13:43:03",
+      "tabla_bd_externa": "TOV452_66",
+      "created_date": "2026-07-27T19:49:03.159000",
+      "id": "6a67b62f3c84d33907f0b1cd"
+    },
+    {
+      "lectura": 9607,
+      "fecha": "2026-07-27 13:49:17",
+      "tabla_bd_externa": "TOV452_66",
+      "created_date": "2026-07-27T19:55:03.062000",
+      "id": "6a67b7979ceca6b9de63ac20"
+    },
+    {
+      "lectura": 9608,
+      "fecha": "2026-07-27 13:55:32",
+      "tabla_bd_externa": "TOV452_66",
+      "created_date": "2026-07-27T20:02:02.872000",
+      "id": "6a67b93a1883831ed4af4929"
+    },
+    {
+      "lectura": 9609,
+      "fecha": "2026-07-27 14:01:54",
+      "tabla_bd_externa": "TOV452_66",
+      "created_date": "2026-07-27T20:08:03.188000",
+      "id": "6a67baa3443e033233a7cfe6"
+    },
+    {
+      "lectura": 9610,
+      "fecha": "2026-07-27 14:08:24",
+      "tabla_bd_externa": "TOV452_66",
+      "created_date": "2026-07-27T20:15:04.848000",
+      "id": "6a67bc484377c2d10066a44c"
+    },
+    {
+      "lectura": 9611,
+      "fecha": "2026-07-27 14:14:46",
+      "tabla_bd_externa": "TOV452_66",
+      "created_date": "2026-07-27T20:21:03.079000",
+      "id": "6a67bdafa4fe0f8c3ce7bf34"
+    },
+    {
+      "lectura": 9612,
+      "fecha": "2026-07-27 14:21:01",
+      "tabla_bd_externa": "TOV452_66",
+      "created_date": "2026-07-27T20:27:03.198000",
+      "id": "6a67bf17fe5f214c5e22f8db"
+    },
+    {
+      "lectura": 9613,
+      "fecha": "2026-07-27 14:27:16",
+      "tabla_bd_externa": "TOV452_66",
+      "created_date": "2026-07-27T20:33:03.151000",
+      "id": "6a67c07f8dbc1b197e870857"
+    },
+    {
+      "lectura": 9614,
+      "fecha": "2026-07-27 14:33:30",
+      "tabla_bd_externa": "TOV452_66",
+      "created_date": "2026-07-27T20:40:03.211000",
+      "id": "6a67c223448cace1d3bd2a7c"
+    },
+    {
+      "lectura": 9615,
+      "fecha": "2026-07-27 14:40:09",
+      "tabla_bd_externa": "TOV452_66",
+      "created_date": "2026-07-27T20:46:03.418000",
+      "id": "6a67c38b36ae52348c431b5f"
+    },
+    {
+      "lectura": 9616,
+      "fecha": "2026-07-27 14:46:23",
+      "tabla_bd_externa": "TOV452_66",
+      "created_date": "2026-07-27T20:52:02.850000",
+      "id": "6a67c4f2719dd4e7584fc8b6"
+    },
+    {
+      "lectura": 9617,
+      "fecha": "2026-07-27 14:52:38",
+      "tabla_bd_externa": "TOV452_66",
+      "created_date": "2026-07-27T20:59:03.292000",
+      "id": "6a67c6970a37a05532248dd3"
+    },
+    {
+      "lectura": 9618,
+      "fecha": "2026-07-27 14:59:01",
+      "tabla_bd_externa": "TOV452_66",
+      "created_date": "2026-07-27T21:05:03.176000",
+      "id": "6a67c7ff961bda9025653ab6"
+    },
+    {
+      "lectura": 9619,
+      "fecha": "2026-07-27 15:05:15",
+      "tabla_bd_externa": "TOV452_66",
+      "created_date": "2026-07-27T21:12:06.565000",
+      "id": "6a67c9a6752b1489909a2daa"
+    },
+    {
+      "lectura": 9620,
+      "fecha": "2026-07-27 15:11:53",
+      "tabla_bd_externa": "TOV452_66",
+      "created_date": "2026-07-27T21:18:02.908000",
+      "id": "6a67cb0a70de01c09bb2ec59"
+    },
+    {
+      "lectura": 9621,
+      "fecha": "2026-07-27 15:18:31",
+      "tabla_bd_externa": "TOV452_66",
+      "created_date": "2026-07-27T21:25:03.148000",
+      "id": "6a67ccaf4e451f443d7aeb34"
+    },
+    {
+      "lectura": 9622,
+      "fecha": "2026-07-27 15:25:01",
+      "tabla_bd_externa": "TOV452_66",
+      "created_date": "2026-07-27T21:31:03.405000",
+      "id": "6a67ce17ff4b3ef4aa64dc99"
+    },
+    {
+      "lectura": 9623,
+      "fecha": "2026-07-27 15:31:15",
+      "tabla_bd_externa": "TOV452_66",
+      "created_date": "2026-07-27T21:38:02.724000",
+      "id": "6a67cfba50866d953aa809bf"
+    },
+    {
+      "lectura": 9624,
+      "fecha": "2026-07-27 15:38:02",
+      "tabla_bd_externa": "TOV452_66",
+      "created_date": "2026-07-27T21:44:02.959000",
+      "id": "6a67d122f48343a87618404a"
+    },
+    {
+      "lectura": 9625,
+      "fecha": "2026-07-27 15:44:17",
+      "tabla_bd_externa": "TOV452_66",
+      "created_date": "2026-07-27T21:51:03.321000",
+      "id": "6a67d2c7f713f77c6dae6c8f"
+    },
+    {
+      "lectura": 9626,
+      "fecha": "2026-07-27 15:50:55",
+      "tabla_bd_externa": "TOV452_66",
+      "created_date": "2026-07-27T21:57:03.119000",
+      "id": "6a67d42f0da42e3134a182dd"
+    },
+    {
+      "lectura": 9627,
+      "fecha": "2026-07-27 15:57:11",
+      "tabla_bd_externa": "TOV452_66",
+      "created_date": "2026-07-27T22:03:03.283000",
+      "id": "6a67d59760ac03e37aaadc46"
+    },
+    {
+      "lectura": 9628,
+      "fecha": "2026-07-27 16:03:25",
+      "tabla_bd_externa": "TOV452_66",
+      "created_date": "2026-07-27T22:09:03.294000",
+      "id": "6a67d6ff2f1232965be18560"
+    },
+    {
+      "lectura": 9629,
+      "fecha": "2026-07-27 16:09:40",
+      "tabla_bd_externa": "TOV452_66",
+      "created_date": "2026-07-27T22:16:02.836000",
+      "id": "6a67d8a2b8fad556f47563c8"
+    },
+    {
+      "lectura": 9630,
+      "fecha": "2026-07-27 16:16:02",
+      "tabla_bd_externa": "TOV452_66",
+      "created_date": "2026-07-27T22:22:02.922000",
+      "id": "6a67da0a7b0f6d00fb9836f6"
+    },
+    {
+      "lectura": 9631,
+      "fecha": "2026-07-27 16:22:17",
+      "tabla_bd_externa": "TOV452_66",
+      "created_date": "2026-07-27T22:28:03.004000",
+      "id": "6a67db73364166c419918af6"
+    },
+    {
+      "lectura": 9632,
+      "fecha": "2026-07-27 16:28:40",
+      "tabla_bd_externa": "TOV452_66",
+      "created_date": "2026-07-27T22:35:03.242000",
+      "id": "6a67dd17be2274b7cc956621"
+    },
+    {
+      "lectura": 9633,
+      "fecha": "2026-07-27 16:35:02",
+      "tabla_bd_externa": "TOV452_66",
+      "created_date": "2026-07-27T22:41:03.084000",
+      "id": "6a67de7f7bdb78c8a66dadc3"
+    },
+    {
+      "lectura": 9634,
+      "fecha": "2026-07-27 16:41:32",
+      "tabla_bd_externa": "TOV452_66",
+      "created_date": "2026-07-27T22:48:03",
+      "id": "6a67e02396d21c435550c94f"
+    },
+    {
+      "lectura": 9635,
+      "fecha": "2026-07-27 16:48:04",
+      "tabla_bd_externa": "TOV452_66",
+      "created_date": "2026-07-27T22:54:02.844000",
+      "id": "6a67e18af9d31d796a79056e"
+    },
+    {
+      "lectura": 9636,
+      "fecha": "2026-07-27 16:54:25",
+      "tabla_bd_externa": "TOV452_66",
+      "created_date": "2026-07-27T23:00:03.279000",
+      "id": "6a67e2f39bfe0d0e66246436"
+    },
+    {
+      "lectura": 9637,
+      "fecha": "2026-07-27 17:00:40",
+      "tabla_bd_externa": "TOV452_66",
+      "created_date": "2026-07-27T23:07:02.591000",
+      "id": "6a67e4968282d5374e76650d"
+    },
+    {
+      "lectura": 9638,
+      "fecha": "2026-07-27 17:07:02",
+      "tabla_bd_externa": "TOV452_66",
+      "created_date": "2026-07-27T23:13:02.589000",
+      "id": "6a67e5fe0ab26648848fc9fd"
+    },
+    {
+      "lectura": 9639,
+      "fecha": "2026-07-27 17:13:25",
+      "tabla_bd_externa": "TOV452_66",
+      "created_date": "2026-07-27T23:20:03.626000",
+      "id": "6a67e7a330e0fd6317814016"
+    },
+    {
+      "lectura": 9640,
+      "fecha": "2026-07-27 17:19:55",
+      "tabla_bd_externa": "TOV452_66",
+      "created_date": "2026-07-27T23:26:03.040000",
+      "id": "6a67e90be7bdc30791e2a7c7"
+    },
+    {
+      "lectura": 9641,
+      "fecha": "2026-07-27 17:26:09",
+      "tabla_bd_externa": "TOV452_66",
+      "created_date": "2026-07-27T23:32:03.110000",
+      "id": "6a67ea7384272e7d1f9d9de4"
+    },
+    {
+      "lectura": 9642,
+      "fecha": "2026-07-27 17:32:24",
+      "tabla_bd_externa": "TOV452_66",
+      "created_date": "2026-07-27T23:38:03.017000",
+      "id": "6a67ebdbb2cfabcbfa4d276c"
+    },
+    {
+      "lectura": 9646,
+      "fecha": "2026-07-27 17:57:47",
+      "tabla_bd_externa": "TOV452_66",
+      "created_date": "2026-07-28T00:07:29.850000",
+      "id": "6a67f2c15c334a65ff80aeb8"
+    },
+    {
+      "lectura": 9647,
+      "fecha": "2026-07-27 18:04:02",
+      "tabla_bd_externa": "TOV452_66",
+      "created_date": "2026-07-28T00:09:59.386000",
+      "id": "6a67f3578616750ffbf88ff8"
+    },
+    {
+      "lectura": 9648,
+      "fecha": "2026-07-27 18:10:39",
+      "tabla_bd_externa": "TOV452_66",
+      "created_date": "2026-07-28T00:16:14.182000",
+      "id": "6a67f4cec54a5fe4dadf860a"
+    },
+    {
+      "lectura": 9649,
+      "fecha": "2026-07-27 18:16:54",
+      "tabla_bd_externa": "TOV452_66",
+      "created_date": "2026-07-28T00:22:59.629000",
+      "id": "6a67f6632dfaac72513914f0"
+    },
+    {
+      "lectura": 9650,
+      "fecha": "2026-07-27 18:23:16",
+      "tabla_bd_externa": "TOV452_66",
+      "created_date": "2026-07-28T00:30:00.141000",
+      "id": "6a67f80877eb03eca9aaec81"
+    },
+    {
+      "lectura": 9651,
+      "fecha": "2026-07-27 18:29:46",
+      "tabla_bd_externa": "TOV452_66",
+      "created_date": "2026-07-28T00:36:01.692000",
+      "id": "6a67f971cf6c941a0ef498a9"
+    },
+    {
+      "lectura": 9652,
+      "fecha": "2026-07-27 18:36:16",
+      "tabla_bd_externa": "TOV452_66",
+      "created_date": "2026-07-28T00:43:01.897000",
+      "id": "6a67fb157b1041af43e2740d"
+    },
+    {
+      "lectura": 9653,
+      "fecha": "2026-07-27 18:42:47",
+      "tabla_bd_externa": "TOV452_66",
+      "created_date": "2026-07-28T00:48:35.759000",
+      "id": "6a67fc630f9a821c69f6317d"
+    },
+    {
+      "lectura": 9654,
+      "fecha": "2026-07-27 18:49:02",
+      "tabla_bd_externa": "TOV452_66",
+      "created_date": "2026-07-28T00:55:00.995000",
+      "id": "6a67fde49eaea08f5cd2fb3e"
+    },
+    {
+      "lectura": 9655,
+      "fecha": "2026-07-27 18:55:39",
+      "tabla_bd_externa": "TOV452_66",
+      "created_date": "2026-07-28T01:01:34.182000",
+      "id": "6a67ff6e192580af982bcdf7"
+    },
+    {
+      "lectura": 9656,
+      "fecha": "2026-07-27 19:01:54",
+      "tabla_bd_externa": "TOV452_66",
+      "created_date": "2026-07-28T01:07:33.938000",
+      "id": "6a6800d57c78d999c880bb33"
+    },
+    {
+      "lectura": 9811,
+      "fecha": "2026-07-28 11:29:24",
+      "tabla_bd_externa": "TOV452_66",
+      "created_date": "2026-07-28T17:37:33.633000",
+      "id": "6a68e8dd7fb42c76840773e1"
+    },
+    {
+      "lectura": 9812,
+      "fecha": "2026-07-28 11:35:55",
+      "tabla_bd_externa": "TOV452_66",
+      "created_date": "2026-07-28T17:41:35.353000",
+      "id": "6a68e9cf03df4f2bfc03e907"
+    },
+    {
+      "lectura": 9813,
+      "fecha": "2026-07-28 11:42:09",
+      "tabla_bd_externa": "TOV452_66",
+      "created_date": "2026-07-28T17:48:34.819000",
+      "id": "6a68eb722bc2bf7b3572086f"
+    },
+    {
+      "lectura": 9814,
+      "fecha": "2026-07-28 11:48:32",
+      "tabla_bd_externa": "TOV452_66",
+      "created_date": "2026-07-28T17:54:57.109000",
+      "id": "6a68ecf1d14e6e3c25ada6af"
+    },
+    {
+      "lectura": 9815,
+      "fecha": "2026-07-28 11:55:01",
+      "tabla_bd_externa": "TOV452_66",
+      "created_date": "2026-07-28T18:00:57.327000",
+      "id": "6a68ee59cd893f3695adc8fb"
+    },
+    {
+      "lectura": 9816,
+      "fecha": "2026-07-28 12:01:32",
+      "tabla_bd_externa": "TOV452_66",
+      "created_date": "2026-07-28T18:07:57.078000",
+      "id": "6a68effdf12dd29d36326e7b"
+    },
+    {
+      "lectura": 9817,
+      "fecha": "2026-07-28 12:07:47",
+      "tabla_bd_externa": "TOV452_66",
+      "created_date": "2026-07-28T18:14:57.247000",
+      "id": "6a68f1a169a87413d4fc05d6"
+    },
+    {
+      "lectura": 9818,
+      "fecha": "2026-07-28 12:14:39",
+      "tabla_bd_externa": "TOV452_66",
+      "created_date": "2026-07-28T18:20:57.278000",
+      "id": "6a68f309a6bc8bf340d8957d"
+    },
+    {
+      "lectura": 9819,
+      "fecha": "2026-07-28 12:20:54",
+      "tabla_bd_externa": "TOV452_66",
+      "created_date": "2026-07-28T18:26:57.106000",
+      "id": "6a68f471ac8c4a0c9910f8c7"
+    },
+    {
+      "lectura": 9820,
+      "fecha": "2026-07-28 12:27:17",
+      "tabla_bd_externa": "TOV452_66",
+      "created_date": "2026-07-28T18:33:58.623000",
+      "id": "6a68f61678e87777f12f7d54"
+    },
+    {
+      "lectura": 9821,
+      "fecha": "2026-07-28 12:33:48",
+      "tabla_bd_externa": "TOV452_66",
+      "created_date": "2026-07-28T18:39:59.967000",
+      "id": "6a68f77f291ee1e1e07c0073"
+    },
+    {
+      "lectura": 9822,
+      "fecha": "2026-07-28 12:40:03",
+      "tabla_bd_externa": "TOV452_66",
+      "created_date": "2026-07-28T18:45:57.296000",
+      "id": "6a68f8e55794227ac849779f"
+    },
+    {
+      "lectura": 9823,
+      "fecha": "2026-07-28 12:46:18",
+      "tabla_bd_externa": "TOV452_66",
+      "created_date": "2026-07-28T18:52:56.717000",
+      "id": "6a68fa88ea4c13ac5d7c40b5"
+    },
+    {
+      "lectura": 9824,
+      "fecha": "2026-07-28 12:52:48",
+      "tabla_bd_externa": "TOV452_66",
+      "created_date": "2026-07-28T18:58:57.278000",
+      "id": "6a68fbf13af8f5d8678a928e"
+    },
+    {
+      "lectura": 9825,
+      "fecha": "2026-07-28 12:59:35",
+      "tabla_bd_externa": "TOV452_66",
+      "created_date": "2026-07-28T19:05:57.298000",
+      "id": "6a68fd952e0ba50112c4eb08"
+    },
+    {
+      "lectura": 9826,
+      "fecha": "2026-07-28 13:05:50",
+      "tabla_bd_externa": "TOV452_66",
+      "created_date": "2026-07-28T19:11:57.149000",
+      "id": "6a68fefdff65bff7ca9f02aa"
+    },
+    {
+      "lectura": 9827,
+      "fecha": "2026-07-28 13:12:04",
+      "tabla_bd_externa": "TOV452_66",
+      "created_date": "2026-07-28T19:18:07.259000",
+      "id": "6a69006fed314ac286137b05"
+    },
+    {
+      "lectura": 9828,
+      "fecha": "2026-07-28 13:18:42",
+      "tabla_bd_externa": "TOV452_66",
+      "created_date": "2026-07-28T19:24:35.856000",
+      "id": "6a6901f3fe5475323faf60e4"
+    },
+    {
+      "lectura": 9829,
+      "fecha": "2026-07-28 13:24:57",
+      "tabla_bd_externa": "TOV452_66",
+      "created_date": "2026-07-28T19:30:35.462000",
+      "id": "6a69035b5614578264dbf59c"
+    },
+    {
+      "lectura": 9830,
+      "fecha": "2026-07-28 13:31:27",
+      "tabla_bd_externa": "TOV452_66",
+      "created_date": "2026-07-28T19:39:57.664000",
+      "id": "6a69058dcbf5456e870381fb"
+    },
+    {
+      "lectura": 9831,
+      "fecha": "2026-07-28 13:39:54",
+      "tabla_bd_externa": "TOV452_66",
+      "created_date": "2026-07-28T19:45:57.271000",
+      "id": "6a6906f5c290514aa25e6f05"
+    },
+    {
+      "lectura": 9832,
+      "fecha": "2026-07-28 13:46:16",
+      "tabla_bd_externa": "TOV452_66",
+      "created_date": "2026-07-28T19:52:57.737000",
+      "id": "6a6908994d6ecc64c61e2f03"
+    },
+    {
+      "lectura": 9833,
+      "fecha": "2026-07-28 13:52:47",
+      "tabla_bd_externa": "TOV452_66",
+      "created_date": "2026-07-28T19:58:57.039000",
+      "id": "6a690a0151e6fa08254ba21f"
+    },
+    {
+      "lectura": 9834,
+      "fecha": "2026-07-28 13:59:01",
+      "tabla_bd_externa": "TOV452_66",
+      "created_date": "2026-07-28T20:04:57.745000",
+      "id": "6a690b69d726e1f898bd49a1"
+    },
+    {
+      "lectura": 9835,
+      "fecha": "2026-07-28 14:05:16",
+      "tabla_bd_externa": "TOV452_66",
+      "created_date": "2026-07-28T20:10:57.409000",
+      "id": "6a690cd1aeb9c2a86db7664b"
+    },
+    {
+      "lectura": 9836,
+      "fecha": "2026-07-28 14:11:31",
+      "tabla_bd_externa": "TOV452_66",
+      "created_date": "2026-07-28T20:17:57.928000",
+      "id": "6a690e75684eb16e7170a829"
+    },
+    {
+      "lectura": 9837,
+      "fecha": "2026-07-28 14:18:08",
+      "tabla_bd_externa": "TOV452_66",
+      "created_date": "2026-07-28T20:23:57.158000",
+      "id": "6a690fdd1ebbc9f1ab8e72c3"
+    },
+    {
+      "lectura": 9838,
+      "fecha": "2026-07-28 14:24:31",
+      "tabla_bd_externa": "TOV452_66",
+      "created_date": "2026-07-28T20:30:57.480000",
+      "id": "6a691181e7950fb312a8eb48"
+    },
+    {
+      "lectura": 9839,
+      "fecha": "2026-07-28 14:31:16",
+      "tabla_bd_externa": "TOV452_66",
+      "created_date": "2026-07-28T20:37:56.744000",
+      "id": "6a69132415f4060b872b7ef4"
+    },
+    {
+      "lectura": 9840,
+      "fecha": "2026-07-28 14:37:39",
+      "tabla_bd_externa": "TOV452_66",
+      "created_date": "2026-07-28T20:43:57.357000",
+      "id": "6a69148d82f48d88d30db9fd"
+    },
+    {
+      "lectura": 9841,
+      "fecha": "2026-07-28 14:43:55",
+      "tabla_bd_externa": "TOV452_66",
+      "created_date": "2026-07-28T20:49:57.623000",
+      "id": "6a6915f598c135a042148e7e"
+    },
+    {
+      "lectura": 9842,
+      "fecha": "2026-07-28 14:50:16",
+      "tabla_bd_externa": "TOV452_66",
+      "created_date": "2026-07-28T20:56:57.235000",
+      "id": "6a6917998102fb7dff815d4b"
+    },
+    {
+      "lectura": 9843,
+      "fecha": "2026-07-28 14:56:47",
+      "tabla_bd_externa": "TOV452_66",
+      "created_date": "2026-07-28T21:02:59.331000",
+      "id": "6a69190367d292f39dfa7b79"
+    },
+    {
+      "lectura": 9844,
+      "fecha": "2026-07-28 15:03:16",
+      "tabla_bd_externa": "TOV452_66",
+      "created_date": "2026-07-28T21:08:56.915000",
+      "id": "6a691a682a4ad670e48c5ab2"
+    },
+    {
+      "lectura": 9845,
+      "fecha": "2026-07-28 15:09:31",
+      "tabla_bd_externa": "TOV452_66",
+      "created_date": "2026-07-28T21:15:56.603000",
+      "id": "6a691c0cafb051d949533ced"
+    },
+    {
+      "lectura": 9846,
+      "fecha": "2026-07-28 15:15:53",
+      "tabla_bd_externa": "TOV452_66",
+      "created_date": "2026-07-28T21:21:56.569000",
+      "id": "6a691d74c53905cc36ebf2df"
+    },
+    {
+      "lectura": 9847,
+      "fecha": "2026-07-28 15:22:08",
+      "tabla_bd_externa": "TOV452_66",
+      "created_date": "2026-07-28T21:27:56.651000",
+      "id": "6a691edc82cdeba21f23c1de"
+    },
+    {
+      "lectura": 9848,
+      "fecha": "2026-07-28 15:28:32",
+      "tabla_bd_externa": "TOV452_66",
+      "created_date": "2026-07-28T21:34:57.161000",
+      "id": "6a692081908aa1f0895fb4c4"
+    },
+    {
+      "lectura": 9849,
+      "fecha": "2026-07-28 15:34:54",
+      "tabla_bd_externa": "TOV452_66",
+      "created_date": "2026-07-28T21:40:57.136000",
+      "id": "6a6921e96144f83cfb303ffe"
+    },
+    {
+      "lectura": 9850,
+      "fecha": "2026-07-28 15:41:09",
+      "tabla_bd_externa": "TOV452_66",
+      "created_date": "2026-07-28T21:46:56.805000",
+      "id": "6a6923503dcdda9a3538d47d"
+    },
+    {
+      "lectura": 9851,
+      "fecha": "2026-07-28 15:47:24",
+      "tabla_bd_externa": "TOV452_66",
+      "created_date": "2026-07-28T21:53:57.127000",
+      "id": "6a6924f588abfcd66f4749cb"
+    },
+    {
+      "lectura": 9852,
+      "fecha": "2026-07-28 15:53:38",
+      "tabla_bd_externa": "TOV452_66",
+      "created_date": "2026-07-28T21:59:56.887000",
+      "id": "6a69265c4fcf08873992889d"
+    },
+    {
+      "lectura": 9853,
+      "fecha": "2026-07-28 16:00:08",
+      "tabla_bd_externa": "TOV452_66",
+      "created_date": "2026-07-28T22:05:57.104000",
+      "id": "6a6927c5ce85b36833a59c80"
+    },
+    {
+      "lectura": 9854,
+      "fecha": "2026-07-28 16:06:22",
+      "tabla_bd_externa": "TOV452_66",
+      "created_date": "2026-07-28T22:12:56.957000",
+      "id": "6a69296863b5c94f2b87cb7a"
+    },
+    {
+      "lectura": 9855,
+      "fecha": "2026-07-28 16:12:36",
+      "tabla_bd_externa": "TOV452_66",
+      "created_date": "2026-07-28T22:18:56.739000",
+      "id": "6a692ad069f96484cd1e164b"
+    },
+    {
+      "lectura": 9856,
+      "fecha": "2026-07-28 16:18:59",
+      "tabla_bd_externa": "TOV452_66",
+      "created_date": "2026-07-28T22:24:56.929000",
+      "id": "6a692c3810038dd4b183ad9c"
+    },
+    {
+      "lectura": 9857,
+      "fecha": "2026-07-28 16:25:14",
+      "tabla_bd_externa": "TOV452_66",
+      "created_date": "2026-07-28T22:31:56.988000",
+      "id": "6a692ddc730bf3eb8ca352ac"
+    },
+    {
+      "lectura": 9858,
+      "fecha": "2026-07-28 16:31:36",
+      "tabla_bd_externa": "TOV452_66",
+      "created_date": "2026-07-28T22:37:56.824000",
+      "id": "6a692f44fda1e50ab7c6ea30"
+    },
+    {
+      "lectura": 9859,
+      "fecha": "2026-07-28 16:38:06",
+      "tabla_bd_externa": "TOV452_66",
+      "created_date": "2026-07-28T22:43:59.135000",
+      "id": "6a6930af13783f121d0b6dc5"
+    },
+    {
+      "lectura": 9860,
+      "fecha": "2026-07-28 16:44:21",
+      "tabla_bd_externa": "TOV452_66",
+      "created_date": "2026-07-28T22:49:56.955000",
+      "id": "6a6932148fdf35d738cb0646"
+    },
+    {
+      "lectura": 9861,
+      "fecha": "2026-07-28 16:50:35",
+      "tabla_bd_externa": "TOV452_66",
+      "created_date": "2026-07-28T22:56:57.119000",
+      "id": "6a6933b9ca0039f45cf4f881"
+    },
+    {
+      "lectura": 9862,
+      "fecha": "2026-07-28 16:56:49",
+      "tabla_bd_externa": "TOV452_66",
+      "created_date": "2026-07-28T23:02:56.621000",
+      "id": "6a6935200cd4a045e7ffefad"
+    },
+    {
+      "lectura": 9863,
+      "fecha": "2026-07-28 17:03:12",
+      "tabla_bd_externa": "TOV452_66",
+      "created_date": "2026-07-28T23:08:56.628000",
+      "id": "6a6936881ec60e05d4d96dc5"
+    },
+    {
+      "lectura": 9864,
+      "fecha": "2026-07-28 17:09:35",
+      "tabla_bd_externa": "TOV452_66",
+      "created_date": "2026-07-28T23:15:56.981000",
+      "id": "6a69382cb8313a15a2439dd3"
+    },
+    {
+      "lectura": 9865,
+      "fecha": "2026-07-28 17:15:58",
+      "tabla_bd_externa": "TOV452_66",
+      "created_date": "2026-07-28T23:28:57.029000",
+      "id": "6a693b3928a328e845e4ca0f"
+    },
+    {
+      "lectura": 9866,
+      "fecha": "2026-07-28 17:28:46",
+      "tabla_bd_externa": "TOV452_66",
+      "created_date": "2026-07-28T23:34:56.545000",
+      "id": "6a693ca03a700c0cb8d054d0"
+    },
+    {
+      "lectura": 9867,
+      "fecha": "2026-07-28 17:35:08",
+      "tabla_bd_externa": "TOV452_66",
+      "created_date": "2026-07-28T23:40:44.673000",
+      "id": "6a693dfcf165f91dee14d606"
+    },
+    {
+      "lectura": 9868,
+      "fecha": "2026-07-28 17:41:23",
+      "tabla_bd_externa": "TOV452_66",
+      "created_date": "2026-07-28T23:47:35.375000",
+      "id": "6a693f9753c710af4ddec183"
+    },
+    {
+      "lectura": 9869,
+      "fecha": "2026-07-28 17:47:37",
+      "tabla_bd_externa": "TOV452_66",
+      "created_date": "2026-07-28T23:53:35.033000",
+      "id": "6a6940ff3c64e9d7c0f23a10"
+    },
+    {
+      "lectura": 9870,
+      "fecha": "2026-07-28 17:53:59",
+      "tabla_bd_externa": "TOV452_66",
+      "created_date": "2026-07-29T00:00:57.278000",
+      "id": "6a6942b935da7602faee7ac2"
+    },
+    {
+      "lectura": 9871,
+      "fecha": "2026-07-28 18:00:37",
+      "tabla_bd_externa": "TOV452_66",
+      "created_date": "2026-07-29T00:06:56.955000",
+      "id": "6a694420677237d45fdeab8e"
+    },
+    {
+      "lectura": 9872,
+      "fecha": "2026-07-28 18:06:52",
+      "tabla_bd_externa": "TOV452_66",
+      "created_date": "2026-07-29T00:12:56.750000",
+      "id": "6a694588dce626c6467171b0"
+    },
+    {
+      "lectura": 9873,
+      "fecha": "2026-07-28 18:13:14",
+      "tabla_bd_externa": "TOV452_66",
+      "created_date": "2026-07-29T00:18:57.053000",
+      "id": "6a6946f104cffcb201647304"
+    },
+    {
+      "lectura": 9874,
+      "fecha": "2026-07-28 18:19:36",
+      "tabla_bd_externa": "TOV452_66",
+      "created_date": "2026-07-29T00:25:58.789000",
+      "id": "6a694896a45c6f64d5e019c2"
+    },
+    {
+      "lectura": 9875,
+      "fecha": "2026-07-28 18:25:59",
+      "tabla_bd_externa": "TOV452_66",
+      "created_date": "2026-07-29T00:31:57.121000",
+      "id": "6a6949fd136cadc482f99d35"
+    },
+    {
+      "lectura": 9876,
+      "fecha": "2026-07-28 18:32:28",
+      "tabla_bd_externa": "TOV452_66",
+      "created_date": "2026-07-29T00:38:57.146000",
+      "id": "6a694ba1329a86699c44e157"
+    },
+    {
+      "lectura": 9877,
+      "fecha": "2026-07-28 18:38:59",
+      "tabla_bd_externa": "TOV452_66",
+      "created_date": "2026-07-29T00:44:57.413000",
+      "id": "6a694d0931d89241083b8f72"
+    },
+    {
+      "lectura": 9878,
+      "fecha": "2026-07-28 18:45:21",
+      "tabla_bd_externa": "TOV452_66",
+      "created_date": "2026-07-29T00:50:56.863000",
+      "id": "6a694e70c7b7f8051350d648"
+    },
+    {
+      "lectura": 9879,
+      "fecha": "2026-07-28 18:51:36",
+      "tabla_bd_externa": "TOV452_66",
+      "created_date": "2026-07-29T00:57:58.247000",
+      "id": "6a695016ca421ade9fea2463"
+    },
+    {
+      "lectura": 9880,
+      "fecha": "2026-07-28 18:57:59",
+      "tabla_bd_externa": "TOV452_66",
+      "created_date": "2026-07-29T01:03:57.216000",
+      "id": "6a69517debb88611017974b1"
+    },
+    {
+      "lectura": 9881,
+      "fecha": "2026-07-28 19:04:13",
+      "tabla_bd_externa": "TOV452_66",
+      "created_date": "2026-07-29T01:10:56.865000",
+      "id": "6a6953206e27bfa2d7586504"
+    },
+    {
+      "lectura": 9882,
+      "fecha": "2026-07-28 19:10:52",
+      "tabla_bd_externa": "TOV452_66",
+      "created_date": "2026-07-29T01:16:57.053000",
+      "id": "6a695489c25b49297cee6b03"
+    },
+    {
+      "lectura": 9922,
+      "fecha": "2026-07-28 23:25:50",
+      "tabla_bd_externa": "TOV452_66",
+      "created_date": "2026-07-29T05:34:24.541000",
+      "id": "6a6990e076f4e74fe50837f4"
+    },
+    {
+      "lectura": 10080,
+      "fecha": "2026-07-29 16:20:54",
+      "tabla_bd_externa": "TOV452_66",
+      "created_date": "2026-07-29T22:32:49.788000",
+      "id": "6a6a7f910484f5d37f720c9a"
+    },
+    {
+      "lectura": 10081,
+      "fecha": "2026-07-29 16:28:03",
+      "tabla_bd_externa": "TOV452_66",
+      "created_date": "2026-07-29T22:36:54.658000",
+      "id": "6a6a8086d3dc4b77813dabd9"
+    },
+    {
+      "lectura": 10082,
+      "fecha": "2026-07-29 16:35:03",
+      "tabla_bd_externa": "TOV452_66",
+      "created_date": "2026-07-29T22:41:54.368000",
+      "id": "6a6a81b2c378c2a3ecdf9217"
+    },
+    {
+      "lectura": 10083,
+      "fecha": "2026-07-29 16:41:42",
+      "tabla_bd_externa": "TOV452_66",
+      "created_date": "2026-07-29T22:47:54.407000",
+      "id": "6a6a831a3f9b597ba3504f78"
+    },
+    {
+      "lectura": 10084,
+      "fecha": "2026-07-29 16:48:11",
+      "tabla_bd_externa": "TOV452_66",
+      "created_date": "2026-07-29T22:55:56.399000",
+      "id": "6a6a84fc0e768c8baa99b59a"
+    },
+    {
+      "lectura": 10085,
+      "fecha": "2026-07-29 16:55:45",
+      "tabla_bd_externa": "TOV452_66",
+      "created_date": "2026-07-29T23:01:54.569000",
+      "id": "6a6a86627637a33c2d479826"
+    },
+    {
+      "lectura": 10086,
+      "fecha": "2026-07-29 17:02:15",
+      "tabla_bd_externa": "TOV452_66",
+      "created_date": "2026-07-29T23:08:54.402000",
+      "id": "6a6a88060803b7d68d3c583b"
+    },
+    {
+      "lectura": 10087,
+      "fecha": "2026-07-13 18:56:01",
+      "tabla_bd_externa": "TOV452_66",
+      "created_date": "2026-07-29T23:15:54.357000",
+      "id": "6a6a89aa7a8519dd175abdb2"
+    },
+    {
+      "lectura": 10088,
+      "fecha": "2026-07-29 17:15:38",
+      "tabla_bd_externa": "TOV452_66",
+      "created_date": "2026-07-29T23:21:54.332000",
+      "id": "6a6a8b12fe3b7cc1d1cd4b26"
+    },
+    {
+      "lectura": 10089,
+      "fecha": "2026-07-29 17:22:09",
+      "tabla_bd_externa": "TOV452_66",
+      "created_date": "2026-07-29T23:28:54.128000",
+      "id": "6a6a8cb69bb2bd819afd9de0"
+    },
+    {
+      "lectura": 10090,
+      "fecha": "2026-07-29 17:28:46",
+      "tabla_bd_externa": "TOV452_66",
+      "created_date": "2026-07-29T23:35:54.273000",
+      "id": "6a6a8e5a33bf19d8fab339dd"
+    },
+    {
+      "lectura": 10091,
+      "fecha": "2026-07-29 17:36:19",
+      "tabla_bd_externa": "TOV452_66",
+      "created_date": "2026-07-29T23:42:54.231000",
+      "id": "6a6a8ffebee8d5033c9f04d3"
+    },
+    {
+      "lectura": 10092,
+      "fecha": "2026-07-29 17:43:28",
+      "tabla_bd_externa": "TOV452_66",
+      "created_date": "2026-07-29T23:50:54.373000",
+      "id": "6a6a91defa3b3a28d73a3765"
+    },
+    {
+      "lectura": 10093,
+      "fecha": "2026-07-29 17:51:23",
+      "tabla_bd_externa": "TOV452_66",
+      "created_date": "2026-07-29T23:57:54.222000",
+      "id": "6a6a9382466c6c5a6025872e"
+    },
+    {
+      "lectura": 10094,
+      "fecha": "2026-07-29 17:58:17",
+      "tabla_bd_externa": "TOV452_66",
+      "created_date": "2026-07-30T00:04:55.086000",
+      "id": "6a6a952750c7bdc5eb4a289c"
+    },
+    {
+      "lectura": 10095,
+      "fecha": "2026-07-29 18:04:56",
+      "tabla_bd_externa": "TOV452_66",
+      "created_date": "2026-07-30T00:11:56.306000",
+      "id": "6a6a96cc7a8519dd175ae33a"
+    },
+    {
+      "lectura": 10096,
+      "fecha": "2026-07-29 18:12:05",
+      "tabla_bd_externa": "TOV452_66",
+      "created_date": "2026-07-30T00:18:54.172000",
+      "id": "6a6a986edd769532f2f68adc"
+    },
+    {
+      "lectura": 10097,
+      "fecha": "2026-07-29 18:19:21",
+      "tabla_bd_externa": "TOV452_66",
+      "created_date": "2026-07-30T00:26:54.674000",
+      "id": "6a6a9a4e80ea4e4adbcd02a1"
+    },
+    {
+      "lectura": 10098,
+      "fecha": "2026-07-29 18:26:46",
+      "tabla_bd_externa": "TOV452_66",
+      "created_date": "2026-07-30T00:32:54.643000",
+      "id": "6a6a9bb6cbe7d9aba7c991bb"
+    },
+    {
+      "lectura": 10099,
+      "fecha": "2026-07-29 18:33:32",
+      "tabla_bd_externa": "TOV452_66",
+      "created_date": "2026-07-30T00:39:54.486000",
+      "id": "6a6a9d5ad4694254fa1e8417"
+    },
+    {
+      "lectura": 10100,
+      "fecha": "2026-07-29 18:39:53",
+      "tabla_bd_externa": "TOV452_66",
+      "created_date": "2026-07-30T00:45:54.880000",
+      "id": "6a6a9ec228964292d89ddcf4"
+    },
+    {
+      "lectura": 10101,
+      "fecha": "2026-07-29 18:46:24",
+      "tabla_bd_externa": "TOV452_66",
+      "created_date": "2026-07-30T00:52:55.491000",
+      "id": "6a6aa0674651a0b4909a2b53"
+    },
+    {
+      "lectura": 10102,
+      "fecha": "2026-07-29 18:52:53",
+      "tabla_bd_externa": "TOV452_66",
+      "created_date": "2026-07-30T00:59:54.299000",
+      "id": "6a6aa20ab87b5335b9c8e4aa"
+    },
+    {
+      "lectura": 10245,
+      "fecha": "2026-07-30 10:14:41",
+      "tabla_bd_externa": "TOV452_66",
+      "created_date": "2026-07-30T16:25:53.268000",
+      "id": "6a6b7b1132b6467c8456b800"
+    },
+    {
+      "lectura": 10246,
+      "fecha": "2026-07-30 10:21:02",
+      "tabla_bd_externa": "TOV452_66",
+      "created_date": "2026-07-30T16:27:53.363000",
+      "id": "6a6b7b8999f6a4360ed4438c"
+    },
+    {
+      "lectura": 10247,
+      "fecha": "2026-07-30 10:27:33",
+      "tabla_bd_externa": "TOV452_66",
+      "created_date": "2026-07-30T16:33:52.281000",
+      "id": "6a6b7cf0e69bf0a48e5916ff"
+    },
+    {
+      "lectura": 10248,
+      "fecha": "2026-07-30 10:46:33",
+      "tabla_bd_externa": "TOV452_66",
+      "created_date": "2026-07-30T16:52:57.573000",
+      "id": "6a6b816993099d4dfccd1563"
+    },
+    {
+      "lectura": 10249,
+      "fecha": "2026-07-30 10:53:05",
+      "tabla_bd_externa": "TOV452_66",
+      "created_date": "2026-07-30T16:58:52.571000",
+      "id": "6a6b82ccdbeeb38f66813893"
+    },
+    {
+      "lectura": 10250,
+      "fecha": "2026-07-30 11:05:43",
+      "tabla_bd_externa": "TOV452_66",
+      "created_date": "2026-07-30T17:11:53.379000",
+      "id": "6a6b85d93b39b057e69ffcf9"
+    },
+    {
+      "lectura": 10251,
+      "fecha": "2026-07-30 11:12:04",
+      "tabla_bd_externa": "TOV452_66",
+      "created_date": "2026-07-30T17:18:56.086000",
+      "id": "6a6b878093076d9b8a27098d"
+    },
+    {
+      "lectura": 10252,
+      "fecha": "2026-07-30 11:18:35",
+      "tabla_bd_externa": "TOV452_66",
+      "created_date": "2026-07-30T17:25:16.222000",
+      "id": "6a6b88fc6978e716037cf579"
+    },
+    {
+      "lectura": 10253,
+      "fecha": "2026-07-30 11:24:50",
+      "tabla_bd_externa": "TOV452_66",
+      "created_date": "2026-07-30T17:30:53.204000",
+      "id": "6a6b8a4d385a9cec76f2ac5a"
+    },
+    {
+      "lectura": 10254,
+      "fecha": "2026-07-30 11:31:20",
+      "tabla_bd_externa": "TOV452_66",
+      "created_date": "2026-07-30T17:37:52.862000",
+      "id": "6a6b8bf0bdeec2f886ae13a9"
+    },
+    {
+      "lectura": 10255,
+      "fecha": "2026-07-30 11:37:59",
+      "tabla_bd_externa": "TOV452_66",
+      "created_date": "2026-07-30T17:43:52.590000",
+      "id": "6a6b8d585e8b8301633de916"
+    },
+    {
+      "lectura": 10256,
+      "fecha": "2026-07-30 11:44:13",
+      "tabla_bd_externa": "TOV452_66",
+      "created_date": "2026-07-30T17:50:52.534000",
+      "id": "6a6b8efcea3778fadfd85d22"
+    },
+    {
+      "lectura": 10257,
+      "fecha": "2026-07-30 11:50:35",
+      "tabla_bd_externa": "TOV452_66",
+      "created_date": "2026-07-30T17:56:52.762000",
+      "id": "6a6b9064996387d558d72a2c"
+    },
+    {
+      "lectura": 10258,
+      "fecha": "2026-07-30 11:56:57",
+      "tabla_bd_externa": "TOV452_66",
+      "created_date": "2026-07-30T18:03:52.639000",
+      "id": "6a6b92085519b4510bea9d79"
+    },
+    {
+      "lectura": 10259,
+      "fecha": "2026-07-30 12:03:36",
+      "tabla_bd_externa": "TOV452_66",
+      "created_date": "2026-07-30T18:09:52.327000",
+      "id": "6a6b9370dc7f3231cba7181d"
+    },
+    {
+      "lectura": 10260,
+      "fecha": "2026-07-30 12:10:07",
+      "tabla_bd_externa": "TOV452_66",
+      "created_date": "2026-07-30T18:16:52.631000",
+      "id": "6a6b95148b930452c31b2494"
+    },
+    {
+      "lectura": 10261,
+      "fecha": "2026-07-30 12:16:51",
+      "tabla_bd_externa": "TOV452_66",
+      "created_date": "2026-07-30T18:22:52.632000",
+      "id": "6a6b967caa76daf81e326438"
+    },
+    {
+      "lectura": 10262,
+      "fecha": "2026-07-30 12:23:14",
+      "tabla_bd_externa": "TOV452_66",
+      "created_date": "2026-07-30T18:28:55.127000",
+      "id": "6a6b97e7d9f5ce95776516cc"
+    },
+    {
+      "lectura": 10263,
+      "fecha": "2026-07-30 12:29:30",
+      "tabla_bd_externa": "TOV452_66",
+      "created_date": "2026-07-30T18:35:59.593000",
+      "id": "6a6b998fefc669030324da7a"
+    },
+    {
+      "lectura": 10264,
+      "fecha": "2026-07-30 12:35:45",
+      "tabla_bd_externa": "TOV452_66",
+      "created_date": "2026-07-30T18:41:56.178000",
+      "id": "6a6b9af4fce717e6af3a4710"
+    },
+    {
+      "lectura": 10265,
+      "fecha": "2026-07-30 12:42:22",
+      "tabla_bd_externa": "TOV452_66",
+      "created_date": "2026-07-30T18:48:53.016000",
+      "id": "6a6b9c95ecf55282b0c7e453"
+    },
+    {
+      "lectura": 10266,
+      "fecha": "2026-07-30 12:48:37",
+      "tabla_bd_externa": "TOV452_66",
+      "created_date": "2026-07-30T18:54:52.029000",
+      "id": "6a6b9dfc77d5b772acf240f0"
+    },
+    {
+      "lectura": 10267,
+      "fecha": "2026-07-30 12:54:52",
+      "tabla_bd_externa": "TOV452_66",
+      "created_date": "2026-07-30T19:00:52.717000",
+      "id": "6a6b9f64b49bee5fe55dc0b3"
+    },
+    {
+      "lectura": 10268,
+      "fecha": "2026-07-30 13:01:14",
+      "tabla_bd_externa": "TOV452_66",
+      "created_date": "2026-07-30T19:06:53.175000",
+      "id": "6a6ba0cdd26affe28f4879c3"
+    },
+    {
+      "lectura": 10269,
+      "fecha": "2026-07-30 13:07:29",
+      "tabla_bd_externa": "TOV452_66",
+      "created_date": "2026-07-30T19:13:54.818000",
+      "id": "6a6ba272a88d58a24276f65b"
+    },
+    {
+      "lectura": 10270,
+      "fecha": "2026-07-30 13:13:51",
+      "tabla_bd_externa": "TOV452_66",
+      "created_date": "2026-07-30T19:19:52.727000",
+      "id": "6a6ba3d856e54315d5444bb9"
+    },
+    {
+      "lectura": 10271,
+      "fecha": "2026-07-30 13:20:13",
+      "tabla_bd_externa": "TOV452_66",
+      "created_date": "2026-07-30T19:26:53",
+      "id": "6a6ba57db64d6d4c10e4ef13"
+    },
+    {
+      "lectura": 10272,
+      "fecha": "2026-07-30 13:26:37",
+      "tabla_bd_externa": "TOV452_66",
+      "created_date": "2026-07-30T19:32:52.641000",
+      "id": "6a6ba6e4f180660ee1a90bc7"
+    },
+    {
+      "lectura": 10273,
+      "fecha": "2026-07-30 13:32:59",
+      "tabla_bd_externa": "TOV452_66",
+      "created_date": "2026-07-30T19:38:56.352000",
+      "id": "6a6ba850a0332b36cad60fe2"
+    },
+    {
+      "lectura": 10477,
+      "fecha": "2026-07-31 11:39:35",
+      "tabla_bd_externa": "TOV452_66",
+      "created_date": "2026-07-31T17:47:57.148000",
+      "id": "6a6cdfcd7b60a7f2e9dcc782"
+    },
+    {
+      "lectura": 10478,
+      "fecha": "2026-07-31 11:46:12",
+      "tabla_bd_externa": "TOV452_66",
+      "created_date": "2026-07-31T17:52:49.469000",
+      "id": "6a6ce0f17814de1c2789855b"
+    },
+    {
+      "lectura": 10479,
+      "fecha": "2026-07-31 11:52:43",
+      "tabla_bd_externa": "TOV452_66",
+      "created_date": "2026-07-31T17:58:49.244000",
+      "id": "6a6ce2593740994161f42ba6"
+    },
+    {
+      "lectura": 10480,
+      "fecha": "2026-07-31 11:59:06",
+      "tabla_bd_externa": "TOV452_66",
+      "created_date": "2026-07-31T18:04:49.567000",
+      "id": "6a6ce3c1c74f59c70073e44f"
+    },
+    {
+      "lectura": 10481,
+      "fecha": "2026-07-31 12:05:27",
+      "tabla_bd_externa": "TOV452_66",
+      "created_date": "2026-07-31T18:15:49.277000",
+      "id": "6a6ce655ed9c70f4560585b7"
+    },
+    {
+      "lectura": 10482,
+      "fecha": "2026-07-31 12:16:05",
+      "tabla_bd_externa": "TOV452_66",
+      "created_date": "2026-07-31T18:22:51.480000",
+      "id": "6a6ce7fbb6c44a7656a50a2c"
+    },
+    {
+      "lectura": 10483,
+      "fecha": "2026-07-31 12:22:34",
+      "tabla_bd_externa": "TOV452_66",
+      "created_date": "2026-07-31T18:28:49.742000",
+      "id": "6a6ce961436980fd22831a7e"
+    },
+    {
+      "lectura": 10484,
+      "fecha": "2026-07-31 12:28:58",
+      "tabla_bd_externa": "TOV452_66",
+      "created_date": "2026-07-31T18:34:59.408000",
+      "id": "6a6cead3e0c71e431bfdf03b"
+    },
+    {
+      "lectura": 10492,
+      "fecha": "2026-07-31 13:20:06",
+      "tabla_bd_externa": "TOV452_66",
+      "created_date": "2026-07-31T19:26:08.773000",
+      "id": "6a6cf6d09ce93c9dfa886fb2"
+    },
+    {
+      "lectura": 10882,
+      "fecha": "2026-08-01 10:40:49",
+      "tabla_bd_externa": "TOV452_66",
+      "created_date": "2026-08-02T19:49:22.602000",
+      "id": "6a6f9f4267226cc9eaf4a780"
+    },
+    {
+      "lectura": 10883,
+      "fecha": "2026-08-01 00:14:17",
+      "tabla_bd_externa": "TOV452_66",
+      "created_date": "2026-08-02T19:50:55.729000",
+      "id": "6a6f9f9f7717853b7e284f74"
+    },
+    {
+      "lectura": 11063,
+      "fecha": "2026-08-01 05:30:42",
+      "tabla_bd_externa": "TOV452_66",
+      "created_date": "2026-08-03T14:57:19.117000",
+      "id": "6a70ac4f16c56d4fb928b00e"
+    },
+    {
+      "lectura": 11065,
+      "fecha": "2026-08-01 08:22:23",
+      "tabla_bd_externa": "TOV452_66",
+      "created_date": "2026-08-03T15:07:49.961000",
+      "id": "6a70aec59375e2b43549cc5e"
+    },
+    {
+      "lectura": 11066,
+      "fecha": "2026-08-01 12:47:38",
+      "tabla_bd_externa": "TOV452_66",
+      "created_date": "2026-08-03T15:14:49.340000",
+      "id": "6a70b069497e10512c32ad67"
+    },
+    {
+      "lectura": 11067,
+      "fecha": "2026-08-03 09:14:38",
+      "tabla_bd_externa": "TOV452_66",
+      "created_date": "2026-08-03T15:20:48.461000",
+      "id": "6a70b1d04c7a25cb8d6f388f"
+    },
+    {
+      "lectura": 11068,
+      "fecha": "2026-07-31 20:33:24",
+      "tabla_bd_externa": "TOV452_66",
+      "created_date": "2026-08-03T15:27:48.525000",
+      "id": "6a70b37486382cc897cc21b3"
+    },
+    {
+      "lectura": 11069,
+      "fecha": "2026-08-03 09:27:31",
+      "tabla_bd_externa": "TOV452_66",
+      "created_date": "2026-08-03T15:33:49.183000",
+      "id": "6a70b4ddc0ae74f7c139a87c"
+    },
+    {
+      "lectura": 11070,
+      "fecha": "2026-08-03 09:53:21",
+      "tabla_bd_externa": "TOV452_66",
+      "created_date": "2026-08-03T15:59:48.666000",
+      "id": "6a70baf4dd0943438c0b8791"
+    },
+    {
+      "lectura": 11071,
+      "fecha": "2026-08-03 09:59:31",
+      "tabla_bd_externa": "TOV452_66",
+      "created_date": "2026-08-03T16:05:48.251000",
+      "id": "6a70bc5c508669d915b037ba"
+    },
+    {
+      "lectura": 11072,
+      "fecha": "2026-08-03 10:06:02",
+      "tabla_bd_externa": "TOV452_66",
+      "created_date": "2026-08-03T16:12:48.993000",
+      "id": "6a70be00de1df85355000c36"
+    },
+    {
+      "lectura": 11073,
+      "fecha": "2026-08-03 10:12:31",
+      "tabla_bd_externa": "TOV452_66",
+      "created_date": "2026-08-03T16:18:48.825000",
+      "id": "6a70bf6820c17e6e8a46d01f"
+    },
+    {
+      "lectura": 11074,
+      "fecha": "2026-08-03 10:18:46",
+      "tabla_bd_externa": "TOV452_66",
+      "created_date": "2026-08-03T16:24:48.902000",
+      "id": "6a70c0d0fd87661ba70149b4"
+    },
+    {
+      "lectura": 11075,
+      "fecha": "2026-08-03 10:25:23",
+      "tabla_bd_externa": "TOV452_66",
+      "created_date": "2026-08-03T16:31:49.718000",
+      "id": "6a70c2753a37bab8513cae9e"
+    },
+    {
+      "lectura": 11076,
+      "fecha": "2026-08-03 10:31:38",
+      "tabla_bd_externa": "TOV452_66",
+      "created_date": "2026-08-03T16:37:48.617000",
+      "id": "6a70c3dcc94e9be95b78cccf"
+    },
+    {
+      "lectura": 11077,
+      "fecha": "2026-08-03 10:38:09",
+      "tabla_bd_externa": "TOV452_66",
+      "created_date": "2026-08-03T16:43:48.458000",
+      "id": "6a70c544ef30efea13af37d7"
+    },
+    {
+      "lectura": 11078,
+      "fecha": "2026-08-03 10:44:24",
+      "tabla_bd_externa": "TOV452_66",
+      "created_date": "2026-08-03T16:50:48.482000",
+      "id": "6a70c6e838e4c789b71324b0"
+    },
+    {
+      "lectura": 11079,
+      "fecha": "2026-08-03 10:50:46",
+      "tabla_bd_externa": "TOV452_66",
+      "created_date": "2026-08-03T16:56:48.609000",
+      "id": "6a70c850485c381e89440596"
+    },
+    {
+      "lectura": 11156,
+      "fecha": "2026-08-03 18:34:47",
+      "tabla_bd_externa": "TOV452_66",
+      "created_date": "2026-08-04T00:41:50.517000",
+      "id": "6a71354e96260eb872bd6b0e"
+    },
+    {
+      "lectura": 11797,
+      "fecha": "2026-08-07 08:57:23",
+      "tabla_bd_externa": "TOV452_66",
+      "created_date": "2026-08-07T17:43:25.634000",
+      "id": "6a76193dc8141a891473a6c0"
+    },
+    {
+      "lectura": 12098,
+      "fecha": "2026-09-02 18:23:47",
+      "tabla_bd_externa": "TOV452_66",
+      "created_date": "2026-09-03T16:54:50.106000",
+      "id": "6a99a65ad3939f879ff9f465"
+    },
+    {
+      "lectura": 12141,
+      "fecha": "2026-09-04 15:10:30",
+      "tabla_bd_externa": "TOV452_66",
+      "created_date": "2026-09-04T21:20:58.818000",
+      "id": "6a9b363a0b2ab7630a51a013"
+    },
+    {
+      "lectura": 12142,
+      "fecha": "2026-09-04 15:16:45",
+      "tabla_bd_externa": "TOV452_66",
+      "created_date": "2026-09-04T21:22:32.637000",
+      "id": "6a9b3698646f12de9e5c2d2d"
+    },
+    {
+      "lectura": 12143,
+      "fecha": "2026-09-04 15:23:06",
+      "tabla_bd_externa": "TOV452_66",
+      "created_date": "2026-09-04T21:28:56.564000",
+      "id": "6a9b38183d73ff3f384a40b8"
+    },
+    {
+      "lectura": 12144,
+      "fecha": "2026-09-04 15:29:29",
+      "tabla_bd_externa": "TOV452_66",
+      "created_date": "2026-09-04T21:35:56.253000",
+      "id": "6a9b39bc8394738172f557ba"
+    },
+    {
+      "lectura": 12145,
+      "fecha": "2026-09-04 15:35:59",
+      "tabla_bd_externa": "TOV452_66",
+      "created_date": "2026-09-04T21:41:41.984000",
+      "id": "6a9b3b158b5da0e577825f22"
+    },
+    {
+      "lectura": 12146,
+      "fecha": "2026-09-04 15:42:13",
+      "tabla_bd_externa": "TOV452_66",
+      "created_date": "2026-09-04T21:48:56.948000",
+      "id": "6a9b3cc8a183fd92ca469d4d"
+    },
+    {
+      "lectura": 12147,
+      "fecha": "2026-09-04 15:48:36",
+      "tabla_bd_externa": "TOV452_66",
+      "created_date": "2026-09-04T21:54:56.879000",
+      "id": "6a9b3e303ec3701788592546"
+    },
+    {
+      "lectura": 12148,
+      "fecha": "2026-09-04 15:54:51",
+      "tabla_bd_externa": "TOV452_66",
+      "created_date": "2026-09-04T22:00:57.371000",
+      "id": "6a9b3f99dba9806a0abd0d87"
+    },
+    {
+      "lectura": 12149,
+      "fecha": "2026-09-04 16:01:22",
+      "tabla_bd_externa": "TOV452_66",
+      "created_date": "2026-09-04T22:07:56.774000",
+      "id": "6a9b413c6e0e5237af0a9403"
+    },
+    {
+      "lectura": 12150,
+      "fecha": "2026-09-04 16:07:36",
+      "tabla_bd_externa": "TOV452_66",
+      "created_date": "2026-09-04T22:13:56.554000",
+      "id": "6a9b42a45d9e9ac77bd34f02"
+    },
+    {
+      "lectura": 12155,
+      "fecha": "2026-09-04 16:39:13",
+      "tabla_bd_externa": "TOV452_66",
+      "created_date": "2026-09-04T22:44:57.214000",
+      "id": "6a9b49e957ee7e4ad4843387"
+    },
+    {
+      "lectura": 12156,
+      "fecha": "2026-09-04 16:45:29",
+      "tabla_bd_externa": "TOV452_66",
+      "created_date": "2026-09-04T22:51:56.632000",
+      "id": "6a9b4b8c2da0355be27a68a6"
+    },
+    {
+      "lectura": 12250,
+      "fecha": "2026-09-05 02:40:51",
+      "tabla_bd_externa": "TOV452_66",
+      "created_date": "2026-09-05T08:52:38.369000",
+      "id": "6a9bd85672f13eab8805f6c1"
+    },
+    {
+      "lectura": 12251,
+      "fecha": "2026-09-05 02:47:21",
+      "tabla_bd_externa": "TOV452_66",
+      "created_date": "2026-09-05T08:54:26.269000",
+      "id": "6a9bd8c23b0b71c920b09b58"
+    },
+    {
+      "lectura": 12304,
+      "fecha": "2026-09-05 08:23:25",
+      "tabla_bd_externa": "TOV452_66",
+      "created_date": "2026-09-05T14:30:03.486000",
+      "id": "6a9c276b6f6e610aaee77b36"
+    },
+    {
+      "lectura": 12310,
+      "fecha": "2026-09-05 09:01:33",
+      "tabla_bd_externa": "TOV452_66",
+      "created_date": "2026-09-05T15:09:36.574000",
+      "id": "6a9c30b087e631a643c24964"
+    },
+    {
+      "lectura": 12311,
+      "fecha": "2026-09-05 09:07:49",
+      "tabla_bd_externa": "TOV452_66",
+      "created_date": "2026-09-05T15:19:40.784000",
+      "id": "6a9c330ccc5d8eb5050261eb"
+    },
+    {
+      "lectura": 12312,
+      "fecha": "2026-09-05 09:14:04",
+      "tabla_bd_externa": "TOV452_66",
+      "created_date": "2026-09-05T15:20:00.151000",
+      "id": "6a9c3320e0d7f35f15365f3c"
+    },
+    {
+      "lectura": 12313,
+      "fecha": "2026-09-05 09:20:26",
+      "tabla_bd_externa": "TOV452_66",
+      "created_date": "2026-09-05T15:26:19.115000",
+      "id": "6a9c349b8dea8971f9e46eed"
+    },
+    {
+      "lectura": 12399,
+      "fecha": "2026-09-05 19:17:36",
+      "tabla_bd_externa": "TOV452_66",
+      "created_date": "2026-09-06T01:27:19.337000",
+      "id": "6a9cc1774c20903c53c96906"
+    },
+    {
+      "lectura": 12400,
+      "fecha": "2026-09-05 19:24:07",
+      "tabla_bd_externa": "TOV452_66",
+      "created_date": "2026-09-06T01:30:31.726000",
+      "id": "6a9cc237718be0def3e14ab8"
+    },
+    {
+      "lectura": 12402,
+      "fecha": "2026-09-05 19:36:44",
+      "tabla_bd_externa": "TOV452_66",
+      "created_date": "2026-09-06T01:43:02.492000",
+      "id": "6a9cc526781d41f2b7fe4044"
+    },
+    {
+      "lectura": 12403,
+      "fecha": "2026-09-05 19:43:07",
+      "tabla_bd_externa": "TOV452_66",
+      "created_date": "2026-09-06T01:49:17.175000",
+      "id": "6a9cc69d60dfaf74cc800aa1"
+    },
+    {
+      "lectura": 12404,
+      "fecha": "2026-09-05 19:49:45",
+      "tabla_bd_externa": "TOV452_66",
+      "created_date": "2026-09-06T01:55:32.493000",
+      "id": "6a9cc81458ec888d0e800919"
+    },
+    {
+      "lectura": 12405,
+      "fecha": "2026-09-05 19:56:08",
+      "tabla_bd_externa": "TOV452_66",
+      "created_date": "2026-09-06T02:02:09.625000",
+      "id": "6a9cc9a18490e1486a6cf6d5"
+    },
+    {
+      "lectura": 12406,
+      "fecha": "2026-09-05 20:02:46",
+      "tabla_bd_externa": "TOV452_66",
+      "created_date": "2026-09-06T02:08:39.706000",
+      "id": "6a9ccb27186b53353202be82"
+    },
+    {
+      "lectura": 12407,
+      "fecha": "2026-09-05 20:09:16",
+      "tabla_bd_externa": "TOV452_66",
+      "created_date": "2026-09-06T02:15:09.400000",
+      "id": "6a9cccada1863a12eda031b1"
+    },
+    {
+      "lectura": 12408,
+      "fecha": "2026-09-05 20:15:39",
+      "tabla_bd_externa": "TOV452_66",
+      "created_date": "2026-09-06T02:21:24.228000",
+      "id": "6a9cce24555429ccdd495a74"
+    },
+    {
+      "lectura": 12409,
+      "fecha": "2026-09-05 20:21:53",
+      "tabla_bd_externa": "TOV452_66",
+      "created_date": "2026-09-06T02:27:39.196000",
+      "id": "6a9ccf9bb65c8c7bfbbf5a91"
+    },
+    {
+      "lectura": 12410,
+      "fecha": "2026-09-05 20:28:15",
+      "tabla_bd_externa": "TOV452_66",
+      "created_date": "2026-09-06T02:33:53.902000",
+      "id": "6a9cd1115c7c1a7e9a35a81c"
+    },
+    {
+      "lectura": 12411,
+      "fecha": "2026-09-05 20:34:29",
+      "tabla_bd_externa": "TOV452_66",
+      "created_date": "2026-09-06T02:40:24.284000",
+      "id": "6a9cd2985a102a3fbdd249d1"
+    },
+    {
+      "lectura": 12412,
+      "fecha": "2026-09-05 20:41:00",
+      "tabla_bd_externa": "TOV452_66",
+      "created_date": "2026-09-06T02:46:54.241000",
+      "id": "6a9cd41e3cff0070a70497c7"
+    },
+    {
+      "lectura": 12413,
+      "fecha": "2026-09-05 20:47:30",
+      "tabla_bd_externa": "TOV452_66",
+      "created_date": "2026-09-06T02:53:24.209000",
+      "id": "6a9cd5a43f109df7b01b1cc0"
+    },
+    {
+      "lectura": 12414,
+      "fecha": "2026-09-05 20:54:00",
+      "tabla_bd_externa": "TOV452_66",
+      "created_date": "2026-09-06T02:59:39.530000",
+      "id": "6a9cd71b7f82a1688b570379"
+    },
+    {
+      "lectura": 12421,
+      "fecha": "2026-09-05 21:38:21",
+      "tabla_bd_externa": "TOV452_66",
+      "created_date": "2026-09-06T03:49:32.529000",
+      "id": "6a9ce2ccdf9b41f7dca6d718"
+    },
+    {
+      "lectura": 12422,
+      "fecha": "2026-09-05 21:44:43",
+      "tabla_bd_externa": "TOV452_66",
+      "created_date": "2026-09-06T03:51:34.713000",
+      "id": "6a9ce346e4e95811df69fdc0"
+    },
+    {
+      "lectura": 12423,
+      "fecha": "2026-09-05 21:51:07",
+      "tabla_bd_externa": "TOV452_66",
+      "created_date": "2026-09-06T03:57:23.143000",
+      "id": "6a9ce4a368f7c1588f9652b0"
+    },
+    {
+      "lectura": 12424,
+      "fecha": "2026-09-05 21:57:38",
+      "tabla_bd_externa": "TOV452_66",
+      "created_date": "2026-09-06T04:03:53.819000",
+      "id": "6a9ce6290db48c6d89f35039"
+    },
+    {
+      "lectura": 12425,
+      "fecha": "2026-09-05 22:03:59",
+      "tabla_bd_externa": "TOV452_66",
+      "created_date": "2026-09-06T04:09:40.925000",
+      "id": "6a9ce784ee8ec9ceefa92a36"
+    },
+    {
+      "lectura": 12426,
+      "fecha": "2026-09-05 22:10:15",
+      "tabla_bd_externa": "TOV452_66",
+      "created_date": "2026-09-06T04:16:08.510000",
+      "id": "6a9ce90857bd2dfac994b892"
+    },
+    {
+      "lectura": 12427,
+      "fecha": "2026-09-05 22:16:39",
+      "tabla_bd_externa": "TOV452_66",
+      "created_date": "2026-09-06T04:22:56.742000",
+      "id": "6a9ceaa0c7b3074d9f2795f0"
+    },
+    {
+      "lectura": 12428,
+      "fecha": "2026-09-05 22:23:02",
+      "tabla_bd_externa": "TOV452_66",
+      "created_date": "2026-09-06T04:31:42.435000",
+      "id": "6a9cecae95b49ea420a7ce2b"
+    },
+    {
+      "lectura": 12434,
+      "fecha": "2026-09-05 23:01:16",
+      "tabla_bd_externa": "TOV452_66",
+      "created_date": "2026-09-06T05:12:58.576000",
+      "id": "6a9cf65a7afa0526efeba703"
+    },
+    {
+      "lectura": 12435,
+      "fecha": "2026-09-05 23:07:46",
+      "tabla_bd_externa": "TOV452_66",
+      "created_date": "2026-09-06T05:13:28.524000",
+      "id": "6a9cf67890d23f70693c06e8"
+    },
+    {
+      "lectura": 12436,
+      "fecha": "2026-09-05 23:14:01",
+      "tabla_bd_externa": "TOV452_66",
+      "created_date": "2026-09-06T05:19:53.923000",
+      "id": "6a9cf7f9a46c721887339b36"
+    },
+    {
+      "lectura": 12437,
+      "fecha": "2026-09-05 23:20:39",
+      "tabla_bd_externa": "TOV452_66",
+      "created_date": "2026-09-06T05:26:53.605000",
+      "id": "6a9cf99daba1eb1c39b32bf0"
+    },
+    {
+      "lectura": 12438,
+      "fecha": "2026-09-05 23:26:54",
+      "tabla_bd_externa": "TOV452_66",
+      "created_date": "2026-09-06T05:33:08.677000",
+      "id": "6a9cfb14f7093cb4e0b47870"
+    },
+    {
+      "lectura": 12439,
+      "fecha": "2026-09-05 23:33:16",
+      "tabla_bd_externa": "TOV452_66",
+      "created_date": "2026-09-06T05:38:58.906000",
+      "id": "6a9cfc72d4fc759bd6693401"
+    },
+    {
+      "lectura": 12440,
+      "fecha": "2026-09-05 23:39:31",
+      "tabla_bd_externa": "TOV452_66",
+      "created_date": "2026-09-06T05:45:10.088000",
+      "id": "6a9cfde6b42d5dced51eea91"
+    },
+    {
+      "lectura": 12443,
+      "fecha": "2026-09-05 23:58:47",
+      "tabla_bd_externa": "TOV452_66",
+      "created_date": "2026-09-06T06:04:55.004000",
+      "id": "6a9d02878f12a4ecd7df83f4"
+    },
+    {
+      "lectura": 12444,
+      "fecha": "2026-09-06 00:05:17",
+      "tabla_bd_externa": "TOV452_66",
+      "created_date": "2026-09-06T06:11:03.078000",
+      "id": "6a9d03f7f6e15cda47ec9f8d"
+    },
+    {
+      "lectura": 12459,
+      "fecha": "2026-09-02 18:30:10",
+      "tabla_bd_externa": "TOV452_66",
+      "created_date": "2026-09-06T07:46:34.171000",
+      "id": "6a9d1a5a7e04d50844bdda38"
+    },
+    {
+      "lectura": 12460,
+      "fecha": "2026-09-06 01:46:33",
+      "tabla_bd_externa": "TOV452_66",
+      "created_date": "2026-09-06T07:52:53.883000",
+      "id": "6a9d1bd556c6fefcdf61dad8"
+    },
+    {
+      "lectura": 12461,
+      "fecha": "2026-09-06 01:53:28",
+      "tabla_bd_externa": "TOV452_66",
+      "created_date": "2026-09-06T07:59:03.923000",
+      "id": "6a9d1d47c9f09be6d7758b06"
+    },
+    {
+      "lectura": 12462,
+      "fecha": "2026-09-06 01:59:51",
+      "tabla_bd_externa": "TOV452_66",
+      "created_date": "2026-09-06T08:05:35.324000",
+      "id": "6a9d1ecfbc154823d2a86a1f"
+    },
+    {
+      "lectura": 12463,
+      "fecha": "2026-09-06 02:06:05",
+      "tabla_bd_externa": "TOV452_66",
+      "created_date": "2026-09-06T08:11:54.035000",
+      "id": "6a9d204acca0761dde23b327"
+    },
+    {
+      "lectura": 12464,
+      "fecha": "2026-09-06 02:12:20",
+      "tabla_bd_externa": "TOV452_66",
+      "created_date": "2026-09-06T08:18:53.776000",
+      "id": "6a9d21ed628d3dfd367033fb"
+    },
+    {
+      "lectura": 12465,
+      "fecha": "2026-09-06 02:18:34",
+      "tabla_bd_externa": "TOV452_66",
+      "created_date": "2026-09-06T08:24:54.387000",
+      "id": "6a9d2356cd94cdbe75a8055b"
+    },
+    {
+      "lectura": 12466,
+      "fecha": "2026-09-06 02:24:49",
+      "tabla_bd_externa": "TOV452_66",
+      "created_date": "2026-09-06T08:32:45.745000",
+      "id": "6a9d252d604d952dc8104aa2"
+    },
+    {
+      "lectura": 12471,
+      "fecha": "2026-09-06 02:56:40",
+      "tabla_bd_externa": "TOV452_66",
+      "created_date": "2026-09-06T09:04:08.450000",
+      "id": "6a9d2c881dde886e336ea10b"
+    },
+    {
+      "lectura": 12472,
+      "fecha": "2026-09-06 03:03:01",
+      "tabla_bd_externa": "TOV452_66",
+      "created_date": "2026-09-06T09:09:43.099000",
+      "id": "6a9d2dd79baf070fd64abb96"
+    },
+    {
+      "lectura": 12473,
+      "fecha": "2026-09-06 03:09:16",
+      "tabla_bd_externa": "TOV452_66",
+      "created_date": "2026-09-06T09:15:13.696000",
+      "id": "6a9d2f21a189ac8012f4693a"
+    }
+  ],
+  "count": 374,
+  "entityName": "LecturaHistorica"
+}
