@@ -1,0 +1,25 @@
+{
+  // Automatizacion programada de Base44. Es lo que hace que el historico
+  // crezca SIN que nadie tenga TG One abierta — que era el problema de fondo:
+  // el archivado dependia del navegador y dejaba huecos permanentes.
+  //
+  // 5 minutos es el intervalo MINIMO que admite la plataforma. Conviene aqui:
+  // el TOV452_66 reporta cada ~6.4 min medidos, asi que a 5 min no se pierde
+  // ninguna lectura por muestreo. Y aunque se perdiera una corrida, no se
+  // pierde el dato: cada corrida compara el indice completo de la fuente
+  // contra lo ya guardado y recupera todo lo que falte.
+  "name": "archivarTelemetria",
+  "entry": "entry.ts",
+  "automations": [
+    {
+      "name": "Archivado de telemetria cada 5 minutos",
+      "description": "Recorre todos los equipos con tabla de telemetria, recupera del origen las lecturas que falten y las guarda. Aisla los errores por equipo y deja bitacora de cada corrida.",
+      "type": "scheduled",
+      "schedule_mode": "recurring",
+      "schedule_type": "cron",
+      "cron_expression": "*/5 * * * *",
+      "ends_type": "never",
+      "is_active": true
+    }
+  ]
+}

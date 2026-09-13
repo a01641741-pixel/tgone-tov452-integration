@@ -1,0 +1,119 @@
+{
+  "name": "LecturaHistorica",
+  "type": "object",
+  "description": "Snapshots reales de telemetría del medidor (persistidos con el tiempo para tener tendencias históricas genuinas, más allá de lo que guarda en vivo la tabla externa). Cada registro es una lectura real, nunca inventada — sembrada por un backfill inicial desde la tabla externa o guardada por la función guardarLecturaHistorica al detectar una lectura real nueva.",
+  "properties": {
+    "tabla_bd_externa": {
+      "type": "string",
+      "title": "Tabla en BD externa",
+      "description": "Nombre de la tabla de origen en tgv_dev (ej. TOV452_66)."
+    },
+    "dispositivo_id": {
+      "type": "string",
+      "title": "Dispositivo"
+    },
+    "lectura": {
+      "type": "number",
+      "title": "Lectura",
+      "description": "Consecutivo real de la medición en la tabla externa — clave de deduplicación junto con tabla_bd_externa."
+    },
+    "fecha": {
+      "type": "string",
+      "title": "Fecha real de la lectura"
+    },
+    "Frequency": {
+      "type": "number",
+      "title": "Frequency (crudo, ÷100 = Hz)"
+    },
+    "VFase1": {
+      "type": "number",
+      "title": "VFase1 (crudo, ÷10 = V)"
+    },
+    "VFase2": {
+      "type": "number",
+      "title": "VFase2 (crudo, ÷10 = V)"
+    },
+    "VFase3": {
+      "type": "number",
+      "title": "VFase3 (crudo, ÷10 = V)"
+    },
+    "IFase1": {
+      "type": "number",
+      "title": "IFase1 (crudo, ÷1000 = A)"
+    },
+    "IFase2": {
+      "type": "number",
+      "title": "IFase2 (crudo, ÷1000 = A)"
+    },
+    "IFase3": {
+      "type": "number",
+      "title": "IFase3 (crudo, ÷1000 = A)"
+    },
+    "PF1": {
+      "type": "number",
+      "title": "PF1 (crudo, ÷1000)"
+    },
+    "PF2": {
+      "type": "number",
+      "title": "PF2 (crudo, ÷1000)"
+    },
+    "PF3": {
+      "type": "number",
+      "title": "PF3 (crudo, ÷1000)"
+    },
+    "THD_VST1": {
+      "type": "number",
+      "title": "THD_VST1 (crudo, ÷10 = %)"
+    },
+    "THD_VST2": {
+      "type": "number",
+      "title": "THD_VST2 (crudo, ÷10 = %)"
+    },
+    "THD_VST3": {
+      "type": "number",
+      "title": "THD_VST3 (crudo, ÷10 = %)"
+    },
+    "THD_IST1": {
+      "type": "number",
+      "title": "THD_IST1 (crudo, ÷10 = %)"
+    },
+    "THD_IST2": {
+      "type": "number",
+      "title": "THD_IST2 (crudo, ÷10 = %)"
+    },
+    "THD_IST3": {
+      "type": "number",
+      "title": "THD_IST3 (crudo, ÷10 = %)"
+    },
+    "kWh": {
+      "type": "number",
+      "title": "kWh"
+    },
+    "rssi": {
+      "type": "number",
+      "title": "RSSI (dBm)"
+    }
+  },
+  "required": [
+    "tabla_bd_externa",
+    "lectura"
+  ],
+  "rls": {
+    "read": {},
+    "create": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "update": {
+      "user_condition": {
+        "role": "admin"
+      }
+    },
+    "delete": {
+      "user_condition": {
+        "role": "admin"
+      }
+    }
+  }
+}
