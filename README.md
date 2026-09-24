@@ -1,5 +1,15 @@
 # Integración de telemetría TOV452 — TG One
 
+> **Estado vigente (24/sep/2026):** TOV452-66 opera por la integración legacy `medicionesReales`
+> (endurecida: sesión, empresa y listas permitidas). La preparación de TG ONE CLOUD (fuentes legacy /
+> shadow / tg_api, Centro de Integraciones, TG AI con confirmación explícita, fechas sin desplazamiento)
+> está documentada en [`docs/tg-one-cloud/`](docs/tg-one-cloud/). Sin API real configurada, shadow y
+> tg_api están bloqueados y TG One muestra «API no configurada».
+>
+> Lo que sigue en este README es **histórico** (contrato V1/V2 y la función `tovLive`, que permanece
+> deshabilitada y no se usa). Las credenciales de ejemplo se retiraron del texto; siguen en el historial
+> de git y deben rotarse (ver `docs/tg-one-cloud/OPERATIONS.md`).
+
 Documentación técnica de la integración entre **TG One** (plataforma de Total Ground, construida en Base44) y el sistema de telemetría real del medidor **Total View TOV452**, que vive en un servidor MySQL propio del equipo y se expone vía un endpoint PHP.
 
 Este repo existe para que el contrato de la API quede escrito en un solo lugar — antes estaba repartido entre un pizarrón, capturas de Postman y una conversación de chat.
@@ -31,8 +41,8 @@ El diseño original exigía **método GET con un body JSON crudo**:
 {
   "servidor": "localhost",
   "base_de_datos": "tgv_dev",
-  "usuario": "root",
-  "password": "root",
+  "usuario": "<retirado: credencial legacy>",
+  "password": "<retirado: credencial legacy>",
   "tabla": "TOV452_66",
   "displayfields": ["lectura", "TOV452_ID"],
   "condiciones": { "lectura": 6937 }

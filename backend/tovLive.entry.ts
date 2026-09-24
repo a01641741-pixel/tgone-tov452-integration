@@ -36,8 +36,8 @@ const DB_HOST_URL = 'http://monitor02.redirectme.net:3030/tgcomm/dbcommapi0099.p
 const DB_CONFIG = {
   servidor: 'localhost',
   base_de_datos: 'tgv_dev',
-  usuario: 'root',
-  password: 'root',
+  usuario: '<retirado: usar secretos del servidor>',
+  password: '<retirado: usar secretos del servidor>',
 };
 
 async function getCachedSession(base44) {
