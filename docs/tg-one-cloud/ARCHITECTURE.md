@@ -19,8 +19,8 @@ La UI consume el modelo normalizado; no conoce la estructura física de ninguna 
 ## Modelo normalizado (base44/functions/telemetryGateway/model.js, reexportado en src/lib/telemetryModel.js)
 deviceId, deviceCode, source, readingId, measuredAt, receivedAt, frequency, v1..v3, i1..i3, pf1..pf3,
 thdV1..thdV3, thdI1..thdI3, kWh, rssi, metrics[{key,value,unit}] + alias transitorios fecha/lectura/dispositivoId.
-- Perfiles legacy: `tov452_crudo` (productivo, divisores confirmados) y `tov452_valores_finales`
-  (sin factores; columnas pendientes de verificar, bloqueado hasta entonces).
+- Perfiles legacy: `tov452_crudo` (activo; divisores fijos) y `tov452_valores_finales` (columnas finales
+  de Manuel sin factores; verificado con 7 524 filas reales; preparado, no activado). Ver LEGACY-API.md.
 - Ausente = null; cero real y negativos se conservan. normalizeApi nunca reescala.
 
 ## Fechas
@@ -30,8 +30,8 @@ zona explícita en el texto. Reglas (MEASUREMENT_TIMEZONE = America/Mexico_City)
   hora de pared en esa zona). `selloCompleto(texto)` formatea sin pasar por la zona del navegador.
 - Calcular: antigüedad ("hace X min"), filtros de historial en el servidor (UTC) y comparaciones
   shadow usan `measurementInstant`, no la zona del navegador ni la del servidor.
-- Límite conocido: rutas que aún pasan por `Date` (gráficas) pueden desplazar 1 h la hora inexistente
-  de un cambio de horario en navegadores fuera de México. México (Jalisco) no tiene horario de verano.
+- `parseFecha` devuelve el instante real (zona de medición) y ejes, tooltips y sellos usan
+  `formatoMedicion`/`horaMedicion`: se corrigió el salto de 1 h en cambios de horario (probado en 5 zonas).
 
 ## Datos y permisos
 Dispositivo: telemetria_fuente (legacy por omisión), telemetria_device_key, telemetria_migracion.

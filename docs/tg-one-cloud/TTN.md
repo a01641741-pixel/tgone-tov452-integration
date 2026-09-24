@@ -20,8 +20,8 @@ Esto evidencia fragmentos de una misma transmisión y una operación de cierre.
 - JSON real TTN: al menos un mensaje con decoded_payload y el de cierre Final:end.
 - PHP receptor actual DESPLEGADO (confirmar que commapi.php es la versión en uso).
 - Regla para reconocer una lectura completa (fragmentos, TOV452_END, idTrack).
-- Escala/unidad de kWh.
-- Esquema de tov452_66 y columnas finales (respaldo SQL; no llegó a la sesión). Ver LEGACY-API.md.
+- Escala/unidad de kWh y unidad de los armónicos THD_*_e.
+- Rutina TOV452_END (el respaldo del 17/sep está truncado y no la incluye). Esquema: ver LEGACY-API.md.
 - Mapeo dev_eui → TOV452-66 → empresa; reglas de retransmisión.
 - Configuración de aplicación, región/cluster y webhook TTN, sin pegar secretos.
 

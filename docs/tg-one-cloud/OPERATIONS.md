@@ -34,16 +34,17 @@ Una pregunta informativa nunca propone ni ejecuta cambios («¿qué pasa con…?
 Sin shell, SSH, SQL arbitrario, acceso directo a MySQL ni ejecución libre de texto.
 
 ## Qué está activo en Base44 (verificado el 24/sep/2026)
-- Entidades: los archivos base44/entities/*.jsonc se registran en la app. Comprobado:
-  ComparacionFuente responde (0 registros) y una entidad inexistente de control da error.
-- Funciones backend: el código está en el sandbox (commits automáticos). No se pudo comprobar si ya
-  atienden en producción: la API de plataforma rechaza el token MCP y el cortafuegos bloqueó la prueba
-  HTTP. Tratarlas como potencialmente activas.
-- Frontend publicado: requiere Publicar; no verificado por la misma razón.
+- Funciones backend: GUARDAR UNA FUNCIÓN LA DESPLIEGA. Comprobado: un guardado con un import roto
+  respondió «committed to git but failed to apply: Function failed to bundle». Activas: medicionesReales,
+  guardarLecturaHistorica, pruebaCrud, telemetryGateway, tgAiQuery. Por eso las pruebas locales se
+  ejecutan ANTES de guardar funciones.
+- Entidades: los .jsonc se registran al guardarse (ComparacionFuente y los campos nuevos de Dispositivo).
+- Interfaz: requiere Publicar; no publicada.
+- Datos: TOV452-66 en legacy, perfil crudo, sin tabla física; HYDRION sin cambios.
 - Datos: TOV452-66 sin cambios (legacy); HYDRION sin cambios por este trabajo.
 
 ## Verificación automatizada
-npm run test:tgcloud   (gateway, fase 2, sesión, medicionesReales, fechas en 5 zonas horarias)
+npm run test:tgcloud   (gateway, fase 2 con filas reales del respaldo, sesión, medicionesReales, fechas en 5 zonas)
 npm run lint · npm run check:funciones · npm run build · npm run test:hydrion · npm run test:frescura
 Las pruebas usan red y entidades simuladas: nunca escriben en producción ni contactan al servidor legacy.
 Banco visual del botón de confirmación: Playwright sobre el componente real (oscuro, claro, 390 px).
